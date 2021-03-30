@@ -1,0 +1,15 @@
+# Pyrogram implimantion 
+pyrogram 
+tgcrypto 
+
+# Database implimantion
+pymongo
+dnspython
+
+requests
+emojis
+stellagban
+pyromod
+pykeyboard 
+captcha
+apscheduler
