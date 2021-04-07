@@ -7,55 +7,41 @@ from pyrogram.types import Message
 from Stella import PREFIX, BOT_USERNAME
 
 # Global variables for dmins commands, connection admin commands & connection user commands 
-ADMIN_COMMANDS = []
-CONNECTIONS_ADMIN_COMMANDS = []
-CONNECTION_USER_COMMANDS = []
+DISABLE_COMMANDS = []
+COMMANDS_LIST = []
 
-def command_lister(commands, admin, connection_admin, connection_user) -> list:
+def command_lister(commands, disable) -> list:
     if isinstance(commands, str):
-        if admin:
-            ADMIN_COMMANDS.append(commands) 
-        if connection_admin:
-            CONNECTIONS_ADMIN_COMMANDS.append(commands)
-        if connection_user:
-            CONNECTION_USER_COMMANDS.append(commands)
+        if disable:
+            DISABLE_COMMANDS.append(commands)
 
     if isinstance(commands, list):
-        if admin:
-            ADMIN_COMMANDS.append(commands[0])
-        if connection_admin:
-            CONNECTIONS_ADMIN_COMMANDS.append(commands)
-        if connection_user:
-            CONNECTION_USER_COMMANDS.append(commands)
-    
-
+        if disable:
+            DISABLE_COMMANDS.append(commands[0])
 
 def commandsHelper(commands: Union[str, List[str]]) -> list:
-    commands_list = []
     if isinstance(commands, str):
         username_command = f"{commands}@{BOT_USERNAME}"
-        commands_list.append(commands)
-        commands_list.append(username_command)
+        COMMANDS_LIST.append(commands)
+        COMMANDS_LIST.append(username_command)
 
     if isinstance(commands, list):
         for command in commands:
             username_command = f"{command}@{BOT_USERNAME}"
-            commands_list.append(command)
-            commands_list.append(username_command)
+            COMMANDS_LIST.append(command)
+            COMMANDS_LIST.append(username_command)
     
-    return commands_list
+    return COMMANDS_LIST
 
 
 def command(
     commands: Union[str, List[str]],
-    prefixes=PREFIX,
+    prefixes: Union[str, List[str]] = PREFIX,
     case_sensitive: bool = False,
-    admin: bool = False,
-    connection_admin: bool = False,
-    connection_user: bool = False
+    disable: bool = True,
     ):
     
-    command_lister(commands, admin, connection_admin, connection_user)
+    command_lister(commands, disable)
     commands = commandsHelper(commands)
     
     command_re = re.compile(r"([\"'])(.*?)(?<!\\)\1|(\S+)")

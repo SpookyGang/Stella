@@ -4,7 +4,7 @@ from Stella import StellaCli
 
 from Stella.helper import custom_filter
 
-@StellaCli.on_message(custom_filter.command(commands=('adminlist')))
+@StellaCli.on_message(custom_filter.command(commands=('adminlist'), disable=True))
 async def admin_list(client, message):
     chat_title = message.chat.title 
     chat_id = message.chat.id 
@@ -14,7 +14,6 @@ async def admin_list(client, message):
         filter='administrators'
         )
     ADMINS_LIST = []
-    BOTS_LIST = []
     for user in data_list:
         if user.user.username is not None:
             ADMINS_LIST.append(f'- <a href=tg://user?id={user.user.username}>{user.user.first_name}</a> id `{user.user.id}`\n')

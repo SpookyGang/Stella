@@ -52,7 +52,7 @@ async def connectRedirect(message):
     await connect_button(message, chat_id)
 
 async def connect_button(message, chat_id):
-     
+    
     user_id = message.from_user.id
     if await isUserAdmin(message, chat_id, silent=True):
         keyboard = [[InlineKeyboardButton(text='Admin commands', callback_data='connect_admin')]]

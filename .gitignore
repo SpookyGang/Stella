@@ -133,3 +133,4 @@ StellaSession.session
 Stella/StellaSession.session
 test.py
 Stella/config.py 
+Stella/plugins/StellaGban.py

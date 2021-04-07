@@ -99,10 +99,3 @@ async def set_warn_mode(client, message):
         await message.reply(
             "You need to specify an action to take upon too many warns. Current modes are: ban/kick/mute/tban/tmute"
         )
-
-
-
-            
-
-            
-

@@ -32,13 +32,13 @@ async def Gban(client, message):
             )
             if GetData['can_restrict_members']:
                 try:
-                  if await StellaCli.kick_chat_member(
+                    if await StellaCli.kick_chat_member(
                         chat_id,
                         GbannedUser
                     ):
                         BannedChats.append(chat_id)
                 except:
-                  continue
+                    continue
             else:
                 continue
         
