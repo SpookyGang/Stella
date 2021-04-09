@@ -4,8 +4,10 @@ from Stella.helper import custom_filter
 from Stella.plugins.connection.connection import connection
 from Stella.database.notes_mongo import NoteList
 from Stella.helper.get_data import GetChat
+from Stella.helper.disable import disable
 
-@StellaCli.on_message(custom_filter.command(commands=(['notes', 'saved'])))
+@StellaCli.on_message(custom_filter.command(commands=(['notes', 'saved']), disable=True))
+@disable
 async def Notes(client, message):
     if await connection(message) is not None:
         chat_id = await connection(message)

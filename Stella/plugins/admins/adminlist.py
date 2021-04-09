@@ -3,8 +3,10 @@ import html
 from Stella import StellaCli
 
 from Stella.helper import custom_filter
+from Stella.helper.disable import disable
 
 @StellaCli.on_message(custom_filter.command(commands=('adminlist'), disable=True))
+@disable
 async def admin_list(client, message):
     chat_title = message.chat.title 
     chat_id = message.chat.id 

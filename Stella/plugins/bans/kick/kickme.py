@@ -7,9 +7,10 @@ from Stella import StellaCli, BOT_ID
 from Stella.helper import custom_filter
 from Stella.helper.chat_status import isBotCan, isUserAdmin, can_restrict_member
 from Stella.helper.get_user import get_user_id, get_text
+from Stella.helper.disable import disable
 
-
-@StellaCli.on_message(custom_filter.command(commands=('kickme')))
+@StellaCli.on_message(custom_filter.command(commands=('kickme'), disable=True))
+@disable
 async def kick(client, message):
         
     chat_id = message.chat.id 

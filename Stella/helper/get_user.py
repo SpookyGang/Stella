@@ -5,8 +5,17 @@ async def get_user_id(message):
         message.reply_to_message
         and not message.forward_from
     ):
-        user_info = message.reply_to_message.from_user
-        return user_info 
+        if (
+            len(message.command) >= 2
+        ):
+            user = message.command[1]
+            user_info = await StellaCli.get_users(
+                user_ids=user
+            )
+            return user_info
+        else:
+            user_info = message.reply_to_message.from_user
+            return user_info 
 
     elif (
         message.forward_from
@@ -18,6 +27,12 @@ async def get_user_id(message):
         message.reply_to_message
         or message.forward_from
     ):
+        if (
+            len(message.command) == 1
+        ):
+            user_info = message.from_user
+            return user_info
+
         if not (
             len(message.command) >= 2
         ):

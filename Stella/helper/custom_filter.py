@@ -10,14 +10,15 @@ from Stella import PREFIX, BOT_USERNAME
 DISABLE_COMMANDS = []
 COMMANDS_LIST = []
 
-def command_lister(commands, disable) -> list:
+def command_lister(commands: Union[str, List[str]], disable: bool = False) -> list:
     if isinstance(commands, str):
         if disable:
             DISABLE_COMMANDS.append(commands)
 
     if isinstance(commands, list):
         if disable:
-            DISABLE_COMMANDS.append(commands[0])
+            for command in commands:
+                DISABLE_COMMANDS.append(command)
 
 def commandsHelper(commands: Union[str, List[str]]) -> list:
     if isinstance(commands, str):
@@ -38,7 +39,7 @@ def command(
     commands: Union[str, List[str]],
     prefixes: Union[str, List[str]] = PREFIX,
     case_sensitive: bool = False,
-    disable: bool = True,
+    disable: bool = False,
     ):
     
     command_lister(commands, disable)

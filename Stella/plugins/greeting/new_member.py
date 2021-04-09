@@ -40,7 +40,7 @@ async def NewMemeber(client, message):
     fed_id = get_fed_from_chat(chat_id)
 
     # Check if bot is admin to delete services messages 
-    if await isBotCan(message, permissions='can_delete_messages'):
+    if await isBotCan(message, permissions='can_delete_messages', silent=True):
         if GetCleanService(chat_id):
             await message.delete()
     else:

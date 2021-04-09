@@ -24,7 +24,7 @@ async def goodbye_member(client, message):
     message_id = message.message_id
 
     # Check if bot is admin to delete services messages 
-    if await isBotCan(message, permissions='can_delete_messages'):
+    if await isBotCan(message, permissions='can_delete_messages', silent=True):
         if GetCleanService(chat_id):
             await message.delete()
     else:

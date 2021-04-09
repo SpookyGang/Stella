@@ -29,7 +29,7 @@ async def set_warn_mode(client, message):
         )
         return
     
-    if not await isBotAdmin(message):
+    if not await isBotAdmin(message, silent=True):
         await message.reply(
             f"I am not admin in {html.escape(chat_title)}!\n"
             "you want me to set different warn modes, I need to be admin."

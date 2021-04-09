@@ -8,6 +8,7 @@ from Stella.helper import custom_filter
 from Stella.helper.get_data import GetChat
 from Stella.helper.button_gen import button_markdown_parser
 from Stella.helper.note_helper.note_fillings import NoteFillings as rules_filler
+from Stella.helper.disable import disable
 
 from Stella.database.rules_mongo import (
     get_rules,
@@ -15,7 +16,8 @@ from Stella.database.rules_mongo import (
     get_private_note
 )
 
-@StellaCli.on_message(custom_filter.command(commands=('rules')))
+@StellaCli.on_message(custom_filter.command(commands=('rules'), disable=True))
+@disable
 async def rules(client, message):
 
     chat_id = message.chat.id 

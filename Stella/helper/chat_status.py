@@ -39,16 +39,21 @@ USERS_PERMISSIONS_STRINGS = {
     "can_send_polls": "You're not allowed to send polls."
 }
 
-async def isBotAdmin(message, chat_id=None) -> bool:
+async def isBotAdmin(message, chat_id=None, silent=False) -> bool:
 
     if chat_id is None:
         chat_id = message.chat.id
+    
     GetData  = await StellaCli.get_chat_member(
         chat_id=chat_id,
         user_id=BOT_ID
     )
     
     if GetData.status not in ADMIN_STRINGS:
+        if not silent:
+            await message.reply(
+            "I'm not admin here to do that."
+            )
         return False
     else:
         return True
@@ -159,20 +164,15 @@ async def isUserCreator(message, chat_id=None, user_id=None) -> bool:
     )
 
     if GetData.status == 'creator':
-       return True
+        return True
     else:
         return False
 
 async def isBotCan(message, chat_id=None, permissions=None, silent=False) -> bool:
-    user_id = message.from_user.id 
-    if GetConnectedChat(user_id) is not None:
-        chat_id = GetConnectedChat(user_id)
-
-    elif chat_id is not None:
-        chat_id = chat_id
-
-    else: 
-        chat_id = message.chat.id 
+    
+    if chat_id is None:
+        chat_id = message.chat.id
+    
     GetData = await StellaCli.get_chat_member(
         chat_id=chat_id,
         user_id=BOT_ID
@@ -246,7 +246,7 @@ async def CheckAllAdminsStuffs(message, permissions=None, silent=False) -> bool:
                 )
                 return False
 
-    if not await isBotAdmin(message, chat_id):
+    if not await isBotAdmin(message, chat_id, silent):
         return False
     
     if not await isUserAdmin(message, chat_id, silent):
@@ -284,13 +284,13 @@ async def CheckAdmins(message) -> bool:
                 )
                 return
 
-    if (
-        await isBotAdmin(message, chat_id)
-        and await isUserAdmin(message, chat_id)
-    ):
-        return True
-    else:
+    if not await isBotAdmin(message, chat_id):
         return False
+    
+    if not await isUserAdmin(message, chat_id):
+        return False
+    
+    return True
 
 async def isUserBanned(chat_id, user_id) -> bool:
     data_list = await StellaCli.get_chat_members(
@@ -301,3 +301,21 @@ async def isUserBanned(chat_id, user_id) -> bool:
         if user_id == user.user.id:
             return True
     
+
+async def check_user(message, permissions=None, silent=False):
+    if not await isUserAdmin(message, silent=silent):
+        return False
+    
+    if not await isUserCan(message, permissions=permissions, silent=silent):
+        return False
+    
+    return True
+
+async def check_bot(message, permissions=None, silent=False):
+    if not await isBotAdmin(message, silent=silent):
+        return False
+    
+    if not await isBotCan(message, permissions=permissions, silent=silent):
+        return False
+    
+    return True

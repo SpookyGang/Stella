@@ -3,6 +3,7 @@ from Stella import StellaCli
 
 from Stella.helper import custom_filter
 from Stella.helper.chat_status import isUserAdmin
+from Stella.helper.disable import disable
 
 from Stella.database.warnings_mongo import (
     warn_limit,
@@ -15,7 +16,8 @@ def warn_mode_map(warn_mode_in):
     warn_mode_out = warn_mode_raw.name 
     return warn_mode_out
 
-@StellaCli.on_message(custom_filter.command(commands=('warnings')))
+@StellaCli.on_message(custom_filter.command(commands=('warnings'), disable=True))
+@disable
 async def warnings(client, message):
 
     chat_id = message.chat.id 

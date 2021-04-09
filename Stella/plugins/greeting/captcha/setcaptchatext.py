@@ -25,7 +25,7 @@ async def SetCaptchatext(client, message):
     if not await isUserCan(message, permissions='can_change_info'):
         return
 
-    if not await  isBotAdmin(message):
+    if not await  isBotAdmin(message, silent=True):
         await message.reply(
             "I need to be admin with the right to restrict to enable CAPTCHAs.",
             quote=True

@@ -28,9 +28,6 @@ async def ban(client, message):
     chat_title = message.chat.title
 
     if not await isBotAdmin(message):
-        await message.reply(
-            "I'm not admin here to do that."
-        )
         return
 
     if not await isUserAdmin(message):

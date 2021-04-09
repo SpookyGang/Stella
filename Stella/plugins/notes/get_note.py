@@ -27,7 +27,7 @@ async def getNote(client, message):
     
 
 @StellaCli.on_message(filters.regex(pattern=(r"^#[^\s]+")))
-async def save(client, message):
+async def regex_get_note(client, message):
     if message.from_user:
         NoteName = message.text.split()[0].replace('#', '')
         await send_note(message, NoteName)
