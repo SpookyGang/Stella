@@ -8,11 +8,24 @@ async def get_user_id(message):
         if (
             len(message.command) >= 2
         ):
-            user = message.command[1]
-            user_info = await StellaCli.get_users(
-                user_ids=user
-            )
-            return user_info
+            args = message.command[1]
+            if (
+                args.startswith('@')
+                or (
+                    args.isdigit()
+                    and (
+                        len(args) >= 5
+                        or len(args) <=15
+                    )
+                )
+            ):
+                user_info = await StellaCli.get_users(
+                    user_ids=args
+                )
+                return user_info
+            else:
+                user_info = message.reply_to_message.from_user
+                return user_info
         else:
             user_info = message.reply_to_message.from_user
             return user_info 
@@ -27,12 +40,6 @@ async def get_user_id(message):
         message.reply_to_message
         or message.forward_from
     ):
-        if (
-            len(message.command) == 1
-        ):
-            user_info = message.from_user
-            return user_info
-
         if not (
             len(message.command) >= 2
         ):
@@ -52,7 +59,22 @@ def get_text(message):
     if( 
         message.reply_to_message
     ):
-        text = ' '.join(message.command[1:])
+        if (
+            len(message.command) >= 2
+            and (
+                message.command[1].startswith('@')
+                or (
+                        message.command[1].isdigit()
+                        and (
+                            len(message.command[1]) >= 5
+                            or len(message.command[1]) <=15
+                        )
+                )
+            )
+        ):
+            text = ' '.join(message.command[2:])
+        else:
+            text = ' '.join(message.command[1:])
     
     elif (
         not message.reply_to_message

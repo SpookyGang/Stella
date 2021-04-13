@@ -43,7 +43,6 @@ try:
 except:
     sys.exit(f"{BOT_NAME}'s database is not running!")
 
-
 TELEGRAM_SERVICES_IDs = (
     [
         777000, # Telegram Service Notifications

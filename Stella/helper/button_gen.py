@@ -7,29 +7,10 @@ from pyrogram.types import (
 )
 from Stella.database.notes_mongo import isNoteExist
 
-# NOTE: the url \ escape may cause double escapes
-# match * (bold) (don't escape if in url)
-# match _ (italics) (don't escape if in url)
-# match ` (code)
-# match []() (markdown link)
-# else, escape *, _, `, and [
-
-MATCH_MD = re.compile(
-    r'\*(.*?)\*|'
-    r'_(.*?)_|'
-    r'`(.*?)`|'
-    r'(?<!\\)(\[.*?\])(\(.*?\))|'
-    r'(?P<esc>[*_`\[])'
-    )
-
-# regex to find []() links -> hyperlinks/buttons
-LINK_REGEX = re.compile(r'(?<!\\)\[.+?\]\((.*?)\)')
 
 BTN_URL_REGEX = re.compile(
     r"(\[([^\[]+?)\]\(buttonurl:(?:/{0,2})(.+?)(:same)?\))"
 )
-
-
 
 def button_markdown_parser(text):
     

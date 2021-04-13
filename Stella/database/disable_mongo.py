@@ -20,19 +20,17 @@ def disable_db(chat_id, disable_arg):
             }
         )
     else:
-        disabled_list = get_disabled(chat_id)
-        if disable_arg not in disabled_list:
-            disable.update_one(
-                {
-                    'chat_id': chat_id
-                },
-                {
-                    '$push': {
-                        'disabled_items': disable_arg
-                    }
-                },
-                upsert=True
-            )
+        disable.update_one(
+            {
+                'chat_id': chat_id
+            },
+            {
+                '$addToSet': {
+                    'disabled_items': disable_arg
+                }
+            },
+            upsert=True
+        )
 
 def enable_db(chat_id, enable_arg):
     disable_data = disable.find_one(

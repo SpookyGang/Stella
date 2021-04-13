@@ -1,10 +1,17 @@
 import re 
+from urlextract import URLExtract
+
+from pyrogram import filters
+
+from Stella import StellaCli
 
 from Stella.helper.chat_status import isUserAdmin
 from Stella.database.blocklists_mongo import get_blocklist
 from Stella.plugins.blocklists.checker import blocklist_action
 
-async def blocklist_checker(message):
+@StellaCli.on_message(filters.all & filters.group, group=3)
+async def blocklist_checker(client, message):
+    
     chat_id = message.chat.id 
 
     if await isUserAdmin(message, silent=True):
@@ -28,7 +35,8 @@ async def blocklist_checker(message):
             star_position = blitmes.index('*')
             if blitmes[star_position-1] == '/':
                 block_char = blitmes[:star_position]
-                URLS = extact_url(message_text)
+                extractor = URLExtract()
+                URLS = extractor.find_urls(message_text)
                 for url in URLS:    
                     if block_char in url:
                         await blocklist_action(message, f'{block_char}*')
@@ -64,11 +72,3 @@ def extract_text(message) -> str:
         or message.caption
         or (message.sticker.emoji if message.sticker else None)
     )
-
-def extact_url(message_text):
-  
-    # findall() has been used 
-    # with valid conditions for urls in message_text
-    regex = r"(?i)\b((?:https?://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'\".,<>?«»“”‘’]))"
-    url = re.findall(regex, message_text)      
-    return [x[0] for x in url] 

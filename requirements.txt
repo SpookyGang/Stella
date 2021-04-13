@@ -6,6 +6,8 @@ tgcrypto
 pymongo
 dnspython
 
+langdetect
+urlextract
 requests
 emojis
 stellagban

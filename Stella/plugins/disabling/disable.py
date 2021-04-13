@@ -18,26 +18,36 @@ async def disable(client, message):
     ):
         await message.reply(
             "You haven't specified a command to disable."
-        )
+            )
         return
     
     disable_args = message.command[1:]
 
     DISABLE_ITMES = []
+    INCORRECT_ITEMS = []
+    
     for disable_arg in disable_args:
         if (
             disable_arg not in DISABLE_COMMANDS
         ):
-            await message.reply(
-                (
-                    f"Unknown command to disable:\n- {disable_arg}\n"
-                    "Check /disableable!"
-                )
-            )
-            return
+            INCORRECT_ITEMS.append(disable_arg)
         else:
             DISABLE_ITMES.append(disable_arg)
 
+    if (
+        len(INCORRECT_ITEMS) != 0
+    ):
+        text = (
+            "Unknown command to disable:\n"
+        )
+        for item in INCORRECT_ITEMS:
+            text += f'- `{item}`\n'
+        text += "Check /disableable!"
+        await message.reply(
+                text
+            )
+        return
+            
     for items in DISABLE_ITMES:
         disable_db(chat_id, items)
 
@@ -47,7 +57,7 @@ async def disable(client, message):
             text += f'- `{disable_arg}`\n'
         else:
             text = (
-                f"Disable `{disable_arg}`"
+                f"Disable `{disable_arg}`."
             )
     
     await message.reply(

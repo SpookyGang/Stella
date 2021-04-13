@@ -1,3 +1,5 @@
+from typing import List , Union
+
 from Stella import (
     StellaCli, 
     TELEGRAM_SERVICES_IDs,
@@ -15,7 +17,7 @@ ADMIN_STRINGS = [
 
 BOT_PERMISSIONS_STRINGS = {
     "can_delete_messages": "Looks like I haven't got the right to delete messages; mind promoting me? Thanks!",
-    "can_restrict_members": "I don't have permission to restrict, ban or unban chat members.",
+    "can_restrict_members": "could not set telegram chat permissions, so locks have all been unlocked: unable to setChatPermissions: Bad Request: not enough rights to change chat permissions",
     "can_promote_members": "I don't have permission to promote or demote someone in this chat!",
     "can_change_info": "I don't have permission to change the chat title, photo and other settings.",
     "can_pin_messages": "I don't have permission to pin messages in this chat.",
@@ -168,7 +170,7 @@ async def isUserCreator(message, chat_id=None, user_id=None) -> bool:
     else:
         return False
 
-async def isBotCan(message, chat_id=None, permissions=None, silent=False) -> bool:
+async def isBotCan(message, chat_id: int = None, permissions: str = None, silent: bool = False) -> bool:
     
     if chat_id is None:
         chat_id = message.chat.id
@@ -298,6 +300,7 @@ async def isUserBanned(chat_id, user_id) -> bool:
         filter='kicked'
         )
     for user in data_list:
+        print(user)
         if user_id == user.user.id:
             return True
     
@@ -311,11 +314,16 @@ async def check_user(message, permissions=None, silent=False):
     
     return True
 
-async def check_bot(message, permissions=None, silent=False):
+async def check_bot(message, permissions: Union[str, List[str]] = None, silent: bool = False):
     if not await isBotAdmin(message, silent=silent):
         return False
     
-    if not await isBotCan(message, permissions=permissions, silent=silent):
-        return False
+    if isinstance(permissions, list):
+        for permission in permissions:
+            if not await isBotCan(message, permissions=permission, silent=silent):
+                return False
+    else:        
+        if not await isBotCan(message, permissions=permissions, silent=silent):
+            return False
     
     return True

@@ -24,19 +24,29 @@ async def enable(client, message):
     enable_args = message.command[1:]
 
     ENABLE_ITMES = []
+    INCORRECT_ITEMS = []
+    
     for enable_arg in enable_args:
         if (
             enable_arg not in DISABLE_COMMANDS
         ):
-            await message.reply(
-                (
-                    f"Unknown command to reenable:\n- {enable_arg}\n"
-                    "Check /disableable!"
-                )
-            )
-            return
+            INCORRECT_ITEMS.append(enable_arg)
         else:
             ENABLE_ITMES.append(enable_arg)
+
+    if (
+        len(INCORRECT_ITEMS) != 0
+    ):
+        text = (
+            "Unknown command to enable:\n"
+        )
+        for item in INCORRECT_ITEMS:
+            text += f'- `{item}`\n'
+        text += "Check /disableable!"
+        await message.reply(
+                text
+            )
+        return
 
     for items in ENABLE_ITMES:
         enable_db(chat_id, items)

@@ -43,37 +43,36 @@ async def send_note(message, NoteName):
     else:
         chat_id = message.chat.id
 
-    Content, Text, DataType = GetNote(chat_id, NoteName)
+    if isNoteExist(chat_id, NoteName):
+        Content, Text, DataType = GetNote(chat_id, NoteName)
+    else:
+        await message.reply(
+            "Note not found."
+        )
+        return
 
     PRIVATE_NOTE, ALLOW = await private_note_and_admin_checker(message, Text)
     
-    if ALLOW:    
-        if isNoteExist(chat_id, NoteName):
-            chat_id = message.chat.id
+    if ALLOW: 
+        if PRIVATE_NOTE == None:
+            if is_pnote_on(chat_id):
+                await PrivateNoteButton(message, chat_id, NoteName)
+            else:
+                await exceNoteMessageSender(message, NoteName)
             
-            if PRIVATE_NOTE == None:
-                if is_pnote_on(chat_id):
+            return
+        
+        elif PRIVATE_NOTE is not None:
+            if (
+                is_pnote_on(chat_id)
+            ):
+                if PRIVATE_NOTE:
                     await PrivateNoteButton(message, chat_id, NoteName)
                 else:
                     await exceNoteMessageSender(message, NoteName)
-                
-                return
-            
-            elif PRIVATE_NOTE is not None:
-                if (
-                    is_pnote_on(chat_id)
-                ):
-                    if PRIVATE_NOTE:
-                        await PrivateNoteButton(message, chat_id, NoteName)
-                    else:
-                        await exceNoteMessageSender(message, NoteName)
-                else: 
-                    if PRIVATE_NOTE:
-                        await PrivateNoteButton(message, chat_id, NoteName)
-                    else:
-                        await exceNoteMessageSender(message, NoteName)
-        else:
-            await message.reply(
-                "Note not found."
-            )
+            else: 
+                if PRIVATE_NOTE:
+                    await PrivateNoteButton(message, chat_id, NoteName)
+                else:
+                    await exceNoteMessageSender(message, NoteName)
 

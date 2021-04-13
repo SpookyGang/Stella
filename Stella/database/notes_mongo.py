@@ -117,7 +117,7 @@ def GetNote(chat_id, note_name):
                     data_type
                 )
     else:
-      return None 
+        return None 
 
 def isNoteExist(chat_id, note_name) -> bool:
     GetNoteData = notes.find_one(

@@ -1,4 +1,5 @@
 import html
+import re 
 
 from pyrogram.types import InlineKeyboardMarkup
 
@@ -37,16 +38,19 @@ async def SendNoteMessage(message, note_name, from_chat_id):
     
     
     Text, Buttons = button_markdown_parser(Text)
-
     preview, Text = preview_text_replace(Text)
 
-    
     Text = NoteFillings(message, Text)
 
-    if not Text:
-        Text = note_name
-    
     Text = html.escape(Text)
+    
+    # Check if string is empty or contain spaces only
+    if (
+        not Text
+        or re.search("^\s*$", Text)
+    ):
+        Text = note_name
+
     reply_markup = None
     if len(Buttons) > 0:
         reply_markup = InlineKeyboardMarkup(Buttons)

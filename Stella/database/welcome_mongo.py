@@ -300,7 +300,6 @@ def SetCleanService(chat_id, clean_service):
             }
         )
 
-  
 def GetCleanService(chat_id) -> bool:
     GetWelcomeData = welcome.find_one(
         {
@@ -710,7 +709,7 @@ def GetUserCaptchaMessageIDs(chat_id, user_id):
         
 def DeleteUsercaptchaData(chat_id, user_id):
     welcome.update(
-         {
+        {
             'chat_id': chat_id,
             'captcha.users_welcomeIDs.user_id' : user_id 
         },
