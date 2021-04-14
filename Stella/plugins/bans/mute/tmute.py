@@ -57,7 +57,7 @@ async def tmute(client, message):
             ChatPermissions(
             can_send_messages=False
             ),
-            until_date=until_time
+            until_date=int(time.time()) + int(until_time)
         )
         
 

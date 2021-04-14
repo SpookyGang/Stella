@@ -1,6 +1,6 @@
 import math
 
-def convert_time(given_time, time_format):
+def convert_time(given_time: int, time_format: str):
     week = 518400 # 518400 seconds in a week
     day = 86400 # 86400 seconds in a day
     hour = 3600 # 3600 seconds in a hour

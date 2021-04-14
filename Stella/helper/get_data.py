@@ -1,8 +1,18 @@
+from pyrogram.types import Message
+
 from emojis import decode
 from Stella import StellaCli
 from Stella.database.users_mongo import GetChatName
 
-async def GetChat(chat_id):
+async def GetChat(chat_id: int):
+    """This function return chat_title of the given chat_id from the database of the bot.
+
+    Args:
+        chat_id (int): chat_id: message.chat.id
+
+    Returns:
+        [type]: chat's title
+    """
     if GetChatName(chat_id) is not None:
         chat_title = GetChatName(chat_id)
         return chat_title
@@ -15,7 +25,15 @@ async def GetChat(chat_id):
         )
         return
 
-def get_text_reason(message):
+def get_text_reason(message: Message) -> str:
+    """This function returns text, and the reason of the user's arguments
+
+    Args:
+        message (Message): Message
+
+    Returns:
+        [str]: text, reason
+    """
     text = decode(message.text)
     index_finder = [x for x in range(len(text)) if text[x] == '"']
     if len(index_finder) >= 2:

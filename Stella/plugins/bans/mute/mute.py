@@ -13,8 +13,6 @@ MUTE_PERMISSIONS = ChatPermissions(
     can_send_messages=False
 )
 
-
-
 @StellaCli.on_message(custom_filter.command(commands=['mute', 'dmute', 'smute']))
 @anonadmin_checker
 async def mute(client, message):

@@ -11,13 +11,13 @@ from Stella.helper.convert import convert_time
 from Stella.database.blocklists_mongo import setblocklistmode, getblocklistmode
 
 class BlocklistModeMap(Enum):
-    nothing = auto() # 1
-    ban = auto()     # 2
-    mute = auto()    # 3
-    kick = auto()    # 4
-    warn = auto()    # 5
-    tban = auto()    # 6
-    tmute = auto()   # 7
+    nothing = auto() 
+    ban = auto()    
+    mute = auto()   
+    kick = auto()    
+    warn = auto()    
+    tban = auto()    
+    tmute = auto()  
 
 
 @StellaCli.on_message(custom_filter.command(commands=('blocklistmode')))

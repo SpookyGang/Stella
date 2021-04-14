@@ -16,7 +16,11 @@ from Stella.helper.chat_status import anon_admin_checker
 from Stella.database.chats_settings_mongo import get_anon_setting
 
 def anonadmin_checker(func):
+    """Generates a verification button for the anon admin in the if /anonadmin is off
 
+    Args:
+        func ([type]): pass client: StellaCli, message: Message
+    """
     async def wrap(client, message: Message):
         if not get_anon_setting(message.chat.id):
             message_id = message.message_id
