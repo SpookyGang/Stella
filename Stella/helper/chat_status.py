@@ -39,7 +39,7 @@ USERS_PERMISSIONS_STRINGS = {
     "can_send_animations": "You're not allowed to send animations (GIFs), implies can_send_media_messages.",
     "can_send_games": "You're not allowed to send games, implies can_send_media_messages.",
     "can_use_inline_bots": "You're not allowed to use inline bots, implies can_send_media_messages.",
-    "can_add_web_page_previews": "You're not allowed to add web page previews to their messages.",
+    "can_add_web_page_previews": "You'rWe not allowed to add web page previews to their messages.",
     "can_send_polls": "You're not allowed to send polls."
 }
 
@@ -71,7 +71,7 @@ async def isBotAdmin(message: Message, chat_id=None, silent=False) -> bool:
     else:
         return True
 
-async def isUserAdmin(message: Message, chat_id: int = None, silent: bool = False) -> bool:
+async def isUserAdmin(message: Message, user_id: int = None, chat_id: int = None, silent: bool = False) -> bool:
     """ This function returns users chat status in the chat.
 
     Args:
@@ -82,32 +82,25 @@ async def isUserAdmin(message: Message, chat_id: int = None, silent: bool = Fals
     Returns:
         bool: True when user has chat status is admin | creator of the chat.
     """
-    if message.from_user:
-        user_id = message.from_user.id 
-    elif message.sender_chat:
-        user_id = message.sender_chat.id
-        chat_id = message.chat.id
+    if user_id is None:
+        if message.from_user:
+            user_id = message.from_user.id 
+        elif message.sender_chat:
+            user_id = message.sender_chat.id
+            chat_id = message.chat.id
+            
+            if user_id == chat_id:
+                return True
+            else:
+                return False    
+
+    chat_id = message.chat.id 
         
-        if user_id == chat_id:
-            return True
-        else:
-            return False    
+    if (
+        message.chat.type == 'private'
+    ):
+        return True  
 
-    if GetConnectedChat(user_id) is not None:
-        chat_id = GetConnectedChat(user_id)
-
-    elif chat_id is not None:
-        chat_id = chat_id
-
-    else: 
-        chat_id = message.chat.id 
-        
-        if (
-            message.chat.type == 'private'
-            or user_id in SUDO_USERS
-        ):
-            return True
-    
     GetData = await StellaCli.get_chat_member(
         chat_id=chat_id,
         user_id=user_id
@@ -115,7 +108,6 @@ async def isUserAdmin(message: Message, chat_id: int = None, silent: bool = Fals
     
     if (
         GetData.status in ADMIN_STRINGS
-        or user_id in SUDO_USERS
     ):
         return True
     else:
@@ -232,22 +224,24 @@ async def isBotCan(message: Message, chat_id: int = None, permissions: str = 'ca
             )
         return False
 
-async def isUserCan(message, chat_id=None, permissions: str = None, silent: bool = False) -> bool:
+async def isUserCan(message, user_id: int = None, chat_id: int = None, permissions: str = None, silent: bool = False) -> bool:
     """This function returns permissions of the user in the chat.
 
     Returns:
         bool: True when user has permission of given permission in the chat.
     """
-    if message.sender_chat:
-        user_id = message.sender_chat.id
-        chat_id = message.chat.id
-        
-        if user_id == chat_id:
-            return True
-        else:
-            return False   
+    if user_id is None:
+        if message.sender_chat:
+            user_id = message.sender_chat.id
+            chat_id = message.chat.id
+            
+            if user_id == chat_id:
+                return True
+            else:
+                return False   
 
-    user_id = message.from_user.id 
+        user_id = message.from_user.id
+
     if GetConnectedChat(user_id) is not None:
         chat_id = GetConnectedChat(user_id)
         
@@ -307,25 +301,25 @@ async def CheckAllAdminsStuffs(message: Message, permissions: Union[str, List[st
                 )
                 return False
 
-    if not await isBotAdmin(message, chat_id, silent):
+    if not await isBotAdmin(message, chat_id=chat_id, silent=silent):
         return False
     
-    if not await isUserAdmin(message, chat_id, silent):
+    if not await isUserAdmin(message, chat_id=chat_id, silent=silent):
         return False
 
     if isinstance(permissions, list):
         for permission in permissions:
-            if not await isBotCan(message, chat_id, permissions=permission, silent=silent):
+            if not await isBotCan(message, chat_id=chat_id, permissions=permission, silent=silent):
                 return False
         
-            if not await isUserCan(message, chat_id, permissions=permission, silent=silent):
+            if not await isUserCan(message, chat_id=chat_id, permissions=permission, silent=silent):
                 return False
 
     elif isinstance(permissions, str):
-        if not await isBotCan(message, chat_id, permissions, silent=silent):
+        if not await isBotCan(message, chat_id=chat_id, permissions=permissions, silent=silent):
             return False
     
-        if not await isUserCan(message, chat_id, permissions, silent=silent):
+        if not await isUserCan(message, chat_id=chat_id, permissions=permissions, silent=silent):
             return False
     return True
 
@@ -361,10 +355,10 @@ async def CheckAdmins(message: Message) -> bool:
                 )
                 return
 
-    if not await isBotAdmin(message, chat_id):
+    if not await isBotAdmin(message, chat_id=chat_id):
         return False
     
-    if not await isUserAdmin(message, chat_id):
+    if not await isUserAdmin(message, chat_id=chat_id):
         return False
     
     return True

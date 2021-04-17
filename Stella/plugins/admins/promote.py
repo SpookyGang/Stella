@@ -1,7 +1,7 @@
 from Stella import StellaCli, BOT_ID, SUDO_USERS
 
 from Stella.helper import custom_filter
-from Stella.helper.chat_status import CheckAllAdminsStuffs, can_restrict_member
+from Stella.helper.chat_status import CheckAllAdminsStuffs, isUserAdmin
 from Stella.helper.get_user import get_user_id
 from Stella.helper.anon_admin import anonadmin_checker
 
@@ -22,13 +22,13 @@ async def promote(client, message):
             "Pffff, I wish I could just promote myself."
         )
         return
-    
-    if user_id not in SUDO_USERS:
-        if not await can_restrict_member(message, user_id):
-            await message.reply(
-                "How I suppose to promote a admin again?"
-            )
-            return
+
+    print(user_id)
+    if await isUserAdmin(message, user_id=user_id, silent=True):
+        await message.reply(
+            "What are you trying to do? Promote someone who's already an admin?"
+        )
+        return
 
     await StellaCli.promote_chat_member(
         chat_id=chat_id,
@@ -39,6 +39,3 @@ async def promote(client, message):
     await message.reply(
         f"{user_info.mention} has been promoted!"
     )
-    
-
-

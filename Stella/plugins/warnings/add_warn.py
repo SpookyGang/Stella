@@ -33,7 +33,7 @@ async def addwarn(client, message):
     elif message.command[0].find('swarn') >= 0:
         message_id = message.message_id  
 
-    if not message.command[0].find('swarn') >= 0:
+    if message.command[0].find('swarn') >= 0:
         silent=True
 
     warn_r = await warn(message, reason, silent, warn_user=None)

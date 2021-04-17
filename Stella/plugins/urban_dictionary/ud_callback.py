@@ -8,7 +8,7 @@ from Stella.plugins.urban_dictionary.get_data import getData
 
 @StellaCli.on_callback_query(filters.create(lambda _, __, query: 'pagination_keyboard#' in query.data))
 async def ud_callback(client: StellaCli, callback_query: CallbackQuery):
-     
+    
     message_id = callback_query.message.message_id
     chat_id = callback_query.message.chat.id 
     CurrentPage = int(callback_query.data.split('#')[1]) 

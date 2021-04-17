@@ -15,12 +15,13 @@ from Stella.database.antiflood_mongo import (
 
 from . import floodmode_action
 
+
 class FloodControl:
     FLOOD_COUNT = dict() 
     PREV_MSG_USER_ID = dict()
 
 
-@StellaCli.on_message(filters.group & ~filters.edited, group=4)
+@StellaCli.on_message(filters.group & ~filters.edited, group=5)
 async def FloodWatcher(client, message):
     if not message.from_user:
         return

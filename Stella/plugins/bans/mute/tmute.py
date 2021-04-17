@@ -12,7 +12,7 @@ from Stella.helper.chat_status import (
     can_restrict_member
 )
 from Stella.helper.get_user import get_user_id, get_text
-from Stella.helper.time_checker import get_time
+from Stella.helper.time_checker import get_time, time_string_helper
 from Stella.helper.convert import convert_time
 from Stella.helper.anon_admin import anonadmin_checker
 
@@ -57,7 +57,7 @@ async def tmute(client, message):
             ChatPermissions(
             can_send_messages=False
             ),
-            until_date=int(time.time()) + int(until_time)
+            until_date=until_time
         )
         
 

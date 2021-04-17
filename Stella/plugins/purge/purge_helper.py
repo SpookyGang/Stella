@@ -21,6 +21,4 @@ def PurgeDictDataUpdater(chat_id, purge_from=None, purge_to=None, first_messageI
     
 
 class PurgeDictData:
-    PurgeDict = {
-
-    }
+    PurgeDict = dict()

@@ -1,5 +1,7 @@
 from pyrogram.types import (
-    InlineKeyboardButton, InlineKeyboardMarkup
+    InlineKeyboardButton,
+    InlineKeyboardMarkup,
+    Message
 )
 
 from Stella import BOT_ID
@@ -20,7 +22,6 @@ async def warn(message, reason, silent=False, warn_user=None):
     if warn_user is None:
         user_info = await get_user_id(message)
         user_id = user_info.id
-
         if user_id == BOT_ID:
             await message.reply(
                 "I'm not gonna warn myself!"
@@ -55,7 +56,7 @@ async def warn(message, reason, silent=False, warn_user=None):
 
     button = [[InlineKeyboardButton(text='Remove warn (admin only)', callback_data=f'warn_{user_id}_{countuser_warn}')]]
 
-    if silent is not True:    
+    if not silent:    
         await message.reply(
             text=warn_text,
             reply_markup=InlineKeyboardMarkup(button)

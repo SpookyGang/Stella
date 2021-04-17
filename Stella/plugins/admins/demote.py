@@ -23,7 +23,13 @@ async def promote(client, message):
             "I'm not gonna demote myself."
         )
         return
-        
+    
+    if not await isUserAdmin(message, user_id=user_id, silent=True):
+        await message.reply(
+            "Are you like crazy? How am I supposed to demote someone who was never promoted?"
+        )
+        return
+
     try:
         await StellaCli.restrict_chat_member(
             chat_id=chat_id,
