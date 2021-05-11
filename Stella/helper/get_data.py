@@ -38,7 +38,7 @@ def get_text_reason(message: Message) -> str:
     index_finder = [x for x in range(len(text)) if text[x] == '"']
     if len(index_finder) >= 2:
         text = text[index_finder[0]+1: index_finder[1]]
-        reason = text[:index_finder[1] + 2]
+        reason = text[index_finder[1] + 2:]
         if not reason:
             reason = None
     else:

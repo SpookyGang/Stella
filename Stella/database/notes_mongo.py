@@ -125,7 +125,10 @@ def isNoteExist(chat_id, note_name) -> bool:
                 'chat_id': chat_id
             }
         )
-    if 'notes' in GetNoteData:
+    if (
+        GetNoteData is not None
+        and 'notes' in GetNoteData
+    ):
         gnotes = GetNoteData['notes']
         notes_list = []
         for Getnotes in gnotes:

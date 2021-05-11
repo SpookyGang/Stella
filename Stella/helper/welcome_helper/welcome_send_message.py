@@ -3,92 +3,102 @@ from pyrogram.types import InlineKeyboardMarkup
 from Stella import StellaCli
 from Stella.helper.welcome_helper.welcome_fillings import Welcomefillings
 
-async def SendWelcomeMessage(message, NewUserJson, Content, Text, DataType, reply_markup):
+async def SendWelcomeMessage(message, NewUserJson, content, text, data_type, reply_markup):
     message_id = message.message_id
     chat_id = message.chat.id
-    Text = Welcomefillings(message, Text, NewUserJson)
+    text = Welcomefillings(message, text, NewUserJson)
 
     if (
-        DataType == 'TEXT'
+        data_type == 1
     ):
         SentMessage = await StellaCli.send_message(
             chat_id=chat_id,
-            text=Text,
+            text=text,
             reply_to_message_id=message_id,
             reply_markup=reply_markup
         )
     
     elif (
-        DataType == 'STICKER'
+        data_type == 2
     ):
         SentMessage = await StellaCli.send_sticker(
             chat_id=chat_id,
-            sticker=Content,
+            sticker=content,
+            reply_to_message_id=message_id,
+            reply_markup=reply_markup
+        )
+    
+    elif (
+        data_type == 3
+    ):
+        SentMessage = await StellaCli.send_animation(
+            chat_id=chat_id,
+            animation=content,
             reply_to_message_id=message_id,
             reply_markup=reply_markup
         )
 
     elif (
-        DataType == 'DOCUMENTS'
+        data_type == 4
     ):
         
         SentMessage = await StellaCli.send_document(
             chat_id=chat_id,
-            document=Content,
-            caption=Text,
+            document=content,
+            caption=text,
             reply_to_message_id=message_id,
             reply_markup=reply_markup
         )
 
     elif (
-        DataType == 'PHOTO'
+        data_type == 5
     ):
         SentMessage = await StellaCli.send_photo(
           chat_id=chat_id,
-          photo=Content,
-          caption=Text,
+          photo=content,
+          caption=text,
           reply_to_message_id=message_id,
           reply_markup=reply_markup
       )  
     
     elif (
-        DataType == 'AUDIO'
+        data_type == 6
     ):
         SentMessage = await StellaCli.send_audio(
             chat_id=chat_id,
-            audio=Content,
-            caption=Text,
+            audio=content,
+            caption=text,
             reply_to_message_id=message_id,
             reply_markup=reply_markup
         )
     elif (
-        DataType == 'VOICE'
+        data_type == 7
     ):
         SentMessage = await StellaCli.send_voice(
             chat_id=chat_id,
-            voice=Content,
-            caption=Text,
+            voice=content,
+            caption=text,
             reply_to_message_id=message_id,
             reply_markup=reply_markup
         )
     
     elif (
-        DataType == 'VIDEO'
+        data_type == 8
     ):
         SentMessage = await StellaCli.send_video(
             chat_id=chat_id,
-            video=Content,
-            caption=Text,
+            video=content,
+            caption=text,
             reply_to_message_id=message_id,
             reply_markup=reply_markup
         )
     
     elif (
-        DataType == 'VIDEO_NOTE'
+        data_type == 9
     ):
         SentMessage = await StellaCli.send_video_note(
             chat_id=chat_id,
-            video_note=Content,
+            video_note=content,
             reply_to_message_id=message_id,
             reply_markup=reply_markup
         )
