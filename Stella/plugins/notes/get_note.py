@@ -14,6 +14,8 @@ from Stella.plugins.connection.connection import connection
 
 @StellaCli.on_message(custom_filter.command(commands=('get')))
 async def getNote(client, message):
+
+    chat_id = message.chat.id
     if not (
         len(message.command) >= 2
     ):
@@ -23,14 +25,22 @@ async def getNote(client, message):
         return  
 
     NoteName = message.command[1]
+    if not isNoteExist(chat_id, NoteName):
+        await message.reply(
+            'Note not found!'
+        )
+        return
+        
     await send_note(message, NoteName)
     
 
 @StellaCli.on_message(filters.regex(pattern=(r"^#[^\s]+")))
 async def regex_get_note(client, message):
+    chat_id = message.chat.id
     if message.from_user:
         NoteName = message.text.split()[0].replace('#', '')
-        await send_note(message, NoteName)
+        if isNoteExist(chat_id, NoteName):
+            await send_note(message, NoteName)
 
 
 async def send_note(message, NoteName):
@@ -43,14 +53,8 @@ async def send_note(message, NoteName):
     else:
         chat_id = message.chat.id
 
-    if isNoteExist(chat_id, NoteName):
-        Content, Text, DataType = GetNote(chat_id, NoteName)
-    else:
-        await message.reply(
-            "Note not found."
-        )
-        return
-
+    Content, Text, DataType = GetNote(chat_id, NoteName)
+    
     PRIVATE_NOTE, ALLOW = await private_note_and_admin_checker(message, Text)
     
     if ALLOW: 

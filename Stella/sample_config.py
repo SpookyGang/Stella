@@ -6,7 +6,7 @@ class Config:
         []
     )
     
-    BOT_FATHER = None
+    BOT_TOKEN = None
     BOT_NAME = ''
     BOT_USERNAME= 'mikoRobot'
     BOT_ID = 1302770491
