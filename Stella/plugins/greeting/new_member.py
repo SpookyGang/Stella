@@ -11,6 +11,7 @@ from Stella.helper.chat_status import isBotCan, isUserAdmin
 from Stella.database.welcome_mongo import (
     GetWelcome,
     isWelcome,
+    isReCaptcha,
     GetCleanService,
     GetCleanWelcome,
     GetCleanWelcomeMessage,
@@ -29,25 +30,28 @@ from Stella.database.federation_mongo import (
     get_fed_reason
 )
 
-from Stella.plugins.greeting.captcha import button_captcha
-from Stella.plugins.greeting.captcha import text_captcha
+from Stella.plugins.greeting.captcha import (
+    button_captcha,
+    text_captcha
+)
 
 @StellaCli.on_message(filters.new_chat_members)
 async def NewMemeber(client, message):
+    
     chat_id = message.chat.id
     chat_title = html.escape(message.chat.title)
     message_id = message.message_id
     fed_id = get_fed_from_chat(chat_id)
 
     # Check if bot is admin to delete services messages 
-    if await isBotCan(message, permissions='can_delete_messages', silent=True):
-        if GetCleanService(chat_id):
+    if GetCleanService(chat_id):
+        if await isBotCan(message, permissions='can_delete_messages', silent=True):
             await message.delete()
-    else:
-        await message.reply(
-            "I dont have much permssion in this chat to clean service messages."
-        )
-    
+        else:
+            await message.reply(
+                "I dont have much permssion in this chat to clean service messages."
+            )
+        
     if GetCleanWelcome(chat_id):
         CleanWelcomeMessageID = GetCleanWelcomeMessage(chat_id)
         if not CleanWelcomeMessageID == None:
@@ -55,6 +59,7 @@ async def NewMemeber(client, message):
                     chat_id=chat_id,
                     message_ids=CleanWelcomeMessageID
                 )
+                
     for NewUserJson in message.new_chat_members:
         user_id = NewUserJson.id
 
@@ -112,18 +117,28 @@ async def NewMemeber(client, message):
         if isGetCaptcha(chat_id):
             if await isBotCan(message, permissions='can_restrict_members'):
                 
-                # Already Verified users and Group Admins 
-                if not (
-                    isUserVerified(chat_id, user_id)
-                    or  await isUserAdmin(message, chat_id=chat_id)
-                ):
-                    await StellaCli.restrict_chat_member(
-                            chat_id,
-                            user_id,
-                            ChatPermissions(
-                                can_send_messages=False
+                if not isReCaptcha(chat_id):
+                    # Already Verified users  
+                    if not (
+                        isUserVerified(chat_id, user_id)
+                        or await isUserAdmin(message, chat_id=chat_id, silent=True)
+                    ):
+                        await StellaCli.restrict_chat_member(
+                                chat_id,
+                                user_id,
+                                ChatPermissions(
+                                    can_send_messages=False
+                                )
                             )
-                        )
+                else:
+                    if not await isUserAdmin(message, chat_id=chat_id, silent=True):
+                        await StellaCli.restrict_chat_member(
+                                chat_id,
+                                user_id,
+                                ChatPermissions(
+                                    can_send_messages=False
+                                )
+                            )
             else:
                 await message.reply(
                     "I haven't got the rights to mute people."
@@ -158,12 +173,13 @@ async def NewMemeber(client, message):
                     if not CaptchaButton == None:
                         reply_markup = InlineKeyboardMarkup(buttons + CaptchaButton)
                         # Already Verified users
-                        if isUserVerified(chat_id, user_id):
-                            reply_markup = InlineKeyboardMarkup(buttons)
+                        if not isReCaptcha(chat_id):
+                            if isUserVerified(chat_id, user_id):
+                                reply_markup = InlineKeyboardMarkup(buttons)
 
                         # Admins captcha message
-                        if await isUserAdmin(message, chat_id=chat_id):
-                            reply_markup = InlineKeyboardMarkup(buttons )
+                        if await isUserAdmin(message, chat_id=chat_id, silent=True):
+                            reply_markup = InlineKeyboardMarkup(buttons)
                     else:
                         reply_markup = InlineKeyboardMarkup(buttons)
                 else:
@@ -171,11 +187,14 @@ async def NewMemeber(client, message):
                     if not CaptchaButton == None:
                         reply_markup = InlineKeyboardMarkup(CaptchaButton)
                         # Already Verified users
-                        if isUserVerified(chat_id, user_id):
-                            reply_markup = None
-
+                        if not isReCaptcha(chat_id):
+                            if isUserVerified(chat_id, user_id):
+                                reply_markup = None
+                        else:
+                            reply_markup = InlineKeyboardMarkup(CaptchaButton)
+                            
                         # Admins captcha message
-                        if await isUserAdmin(message, chat_id=chat_id):
+                        if await isUserAdmin(message, chat_id=chat_id, silent=True):
                             reply_markup = None
 
                 WelcomeSentMessage = await SendWelcomeMessage(message, NewUserJson, Content, Text, DataType, reply_markup=reply_markup)

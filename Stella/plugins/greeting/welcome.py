@@ -5,7 +5,6 @@ from Stella.helper.chat_status import CheckAdmins
 from Stella.helper.welcome_helper.welcome_send_message import SendWelcomeMessage
 from Stella.helper.welcome_helper.welcome_fillings import Welcomefillings
 from Stella.helper.button_gen import button_markdown_parser
-from Stella.helper.anon_admin import anonadmin_checker
 
 from Stella.database.welcome_mongo import (
     GetWelcome,

@@ -51,6 +51,7 @@ coverage.xml
 .hypothesis/
 .pytest_cache/
 
+Stella_Backup.json
 # Translations
 *.mo
 *.pot

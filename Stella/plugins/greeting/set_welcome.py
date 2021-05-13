@@ -38,6 +38,7 @@ async def set_welcome(client, message):
         return
 
     CONTENT, TEXT, DATATYPE = GetWelcomeMessage(message)
+    print(CONTENT, TEXT, DATATYPE)
     SetWelcome(
         ChatID,
         CONTENT,

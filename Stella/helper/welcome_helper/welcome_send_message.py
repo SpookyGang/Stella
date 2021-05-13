@@ -7,7 +7,8 @@ async def SendWelcomeMessage(message, NewUserJson, content, text, data_type, rep
     message_id = message.message_id
     chat_id = message.chat.id
     text = Welcomefillings(message, text, NewUserJson)
-
+    SentMessage = None
+    
     if (
         data_type == 1
     ):

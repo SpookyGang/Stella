@@ -1,33 +1,33 @@
+import os
 import random
 import string
-import os
 
 from pyrogram import filters
-from pyrogram.types import ChatPermissions
 from pyrogram.types import (
-    InlineKeyboardButton,
+    CallbackQuery,
+    InlineKeyboardButton, 
     InlineKeyboardMarkup,
-    CallbackQuery
-)
-from captcha.image import ImageCaptcha
+    ChatPermissions
+    )
 
-from Stella import StellaCli, BOT_USERNAME
+from Stella import BOT_USERNAME, StellaCli
+
+from Stella.database.welcome_mongo import (
+    AppendVerifiedUsers,
+    CaptchaChanceUpdater,
+    DeleteUsercaptchaData,
+    GetCaptchaSettings, GetChance,
+    GetUserCaptchaMessageIDs,
+    GetWelcome,
+    SetCaptchaTextandChances,
+    isReCaptcha, isUserVerified,
+    isWelcome
+    )
+
 from Stella.helper.button_gen import button_markdown_parser
 from Stella.helper.chat_status import isUserAdmin
 
-from Stella.database.welcome_mongo import (
-    GetWelcome,
-    GetCaptchaSettings,
-    CaptchaChanceUpdater,
-    GetChance,
-    DeleteUsercaptchaData,
-    AppendVerifiedUsers,
-    isWelcome,
-    SetCaptchaTextandChances,
-    GetUserCaptchaMessageIDs,
-    isUserVerified
-)
-
+from captcha.image import ImageCaptcha
 
 CAPTCHA_START_STRINGS = [
 (
@@ -58,6 +58,7 @@ async def textCaptcha(chat_id, user_id):
 
 async def textCaptchaRedirect(message):
     user_id = message.from_user.id 
+    chat_id = message.chat.id
     if message.command[1].split('_')[1] == 'text':
         New_user_id = int(message.command[1].split('_')[2])
         New_chat_id = int(message.command[1].split('_')[3])
@@ -65,36 +66,44 @@ async def textCaptchaRedirect(message):
     if New_user_id == user_id:
 
         # Already Verified users
-        if isUserVerified(New_chat_id, New_user_id):
-            await message.reply(
-                "You already passed the CAPTCHA, You don't need to verify yourself again.",
-                quote=True
-            )
-            return
+        if not isReCaptcha(chat_id=New_chat_id):
+            if isUserVerified(New_chat_id, New_user_id):
+                await message.reply(
+                    "You already passed the CAPTCHA, You don't need to verify yourself again.",
+                    quote=True
+                )
+                return
 
         # Admins captcha message
-        if await isUserAdmin(message, chat_id=New_chat_id):
+        if await isUserAdmin(message, pm_mode=True, chat_id=New_chat_id, user_id=New_user_id, silent=True):
             await message.reply(
                 "You are admin, You don't have to complete CAPTCHA.",
                 quote=True
             )
             return
 
-        # Captcha stuffs 
+        # Captcha generating 
         CaptchaStringList = RandomStringGen()
         CaptchaString = random.choice(CaptchaStringList)
 
         CaptchaLoc = f"Stella/plugins/greeting/captcha/CaptchaDump/StellaCaptcha_text_{New_user_id}_{New_chat_id}.png"
-        image = ImageCaptcha(width=1240, height=900, fonts=['path/font_03.ttf'], font_sizes=(240, 240))
+        image = ImageCaptcha(width=270, height=90, fonts=['path/font_03.ttf'], font_sizes=(50, 50))
         image.generate(CaptchaString)
         image.write(CaptchaString, CaptchaLoc)
 
         chance = GetChance(New_chat_id, New_user_id)
-        if (
-            chance == 0 
-            or chance == None
-        ):
-            chance = 0 
+        
+        if chance is None:
+            chance = 0
+
+        if chance >= 3:
+            message_id, correct_captcha, chances, captcha_list = GetUserCaptchaMessageIDs(chat_id=New_chat_id, user_id=New_user_id)
+            await failedAction(message=message, user_id=New_user_id, chat_id=New_chat_id, message_id=message_id)
+            await message.reply(
+                'You have lost your\'ll 3 CAPTCHA\'s chances'
+            )
+            return
+
 
         SetCaptchaTextandChances(New_chat_id, New_user_id, CaptchaString, chance, CaptchaStringList)
         keyboard = ButtonGen(CaptchaStringList, New_chat_id)
@@ -109,7 +118,7 @@ async def textCaptchaRedirect(message):
 
     else:
         # Admins captcha message
-        if await isUserAdmin(message, chat_id=New_chat_id, silent=True):
+        if await isUserAdmin(message, pm_mode=True, chat_id=New_chat_id, user_id=New_user_id, silent=True):
             await message.reply(
                 "You are admin, You don't have to complete CAPTCHA.",
                 quote=True
@@ -130,8 +139,18 @@ async def textCaptchaCallBack(client: StellaCli, callback_query: CallbackQuery):
     user_id = callback_query.from_user.id
     user_mention = callback_query.from_user.mention
     message_id, correct_captcha, chances, captcha_list = GetUserCaptchaMessageIDs(chat_id, user_id)
-
-    if not RandomString == correct_captcha:
+    
+    # if chances is 3 reached 
+    if chances >= 2:
+        await callback_query.edit_message_caption(
+            caption="You failed this captcha"
+        )
+        await failedAction(message=callback_query, user_id=user_id, chat_id=chat_id, message_id=message_id)
+        
+    # When user clicked on wrong button
+    elif (
+        RandomString != correct_captcha
+    ):
         chances += 1
         CaptchaChanceUpdater(chat_id, user_id, chances)
         
@@ -141,24 +160,15 @@ async def textCaptchaCallBack(client: StellaCli, callback_query: CallbackQuery):
             caption=CAPTCHA_START_STRINGS[chances],
             reply_markup=InlineKeyboardMarkup(ButtonGen(captcha_list, chat_id))
         )
-    if chances == 3:
-        await callback_query.edit_message_caption(
-            caption="You failed this captcha"
-        )
-        await StellaCli.kick_chat_member(
-                            chat_id=chat_id,
-                            user_id=user_id
-                        )
-        
-        await StellaCli.edit_message_text(
-            chat_id=chat_id,
-            message_id=message_id,
+
+        await callback_query.answer(
             text=(
-                f"User {user_mention} has failed the CAPTCHAs!"
+                'You have clicked on wrong CAPTCHA button.'
             )
         )
 
-    if RandomString == correct_captcha:
+    # When use click on correct CAPTCHA button
+    elif RandomString == correct_captcha:
         str_chat_id = str(chat_id).replace('-100', '')
         PassedButton = InlineKeyboardMarkup(
                 [
@@ -178,18 +188,18 @@ async def textCaptchaCallBack(client: StellaCli, callback_query: CallbackQuery):
             reply_markup=PassedButton
         )
 
+        await callback_query.answer(
+            text=(
+                'You  have passed the CAPTCHA.'
+            )
+        )
+
         await StellaCli.restrict_chat_member(
                 chat_id,
                 user_id,
                 ChatPermissions(
                     can_send_messages=True,
-                    can_send_media_messages=True,
-                    can_send_stickers=True,
-                    can_send_animations=True,
-                    can_send_games=True,
-                    can_use_inline_bots=True,
-                    can_add_web_page_previews=True,
-                    can_send_polls=True
+                    can_add_web_page_previews=True
                 )
             )
         
@@ -208,8 +218,21 @@ async def textCaptchaCallBack(client: StellaCli, callback_query: CallbackQuery):
             reply_markup=reply_markup
         )
 
+async def failedAction(message, user_id: int, chat_id: int, message_id: int):
+    await StellaCli.kick_chat_member(
+                            chat_id=chat_id,
+                            user_id=user_id
+                        )
+        
+    await StellaCli.edit_message_text(
+        chat_id=chat_id,
+        message_id=message_id,
+        text=(
+            f"User {message.from_user.mention} has failed the CAPTCHAs!"
+        )
+    )
 
-def ButtonGen(CaptchaStringList, New_chat_id):
+def ButtonGen(CaptchaStringList: list, New_chat_id: int):
     keyboard = ([[
         InlineKeyboardButton(text=CaptchaStringList[0], callback_data=f"textc_{CaptchaStringList[0]}_{New_chat_id}"),
         InlineKeyboardButton(text=CaptchaStringList[1], callback_data=f"textc_{CaptchaStringList[1]}_{New_chat_id}"),

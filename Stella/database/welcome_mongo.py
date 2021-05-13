@@ -755,3 +755,47 @@ def isUserVerified(chat_id, user_id) -> bool:
         return True 
     else:
         return False
+
+def setReCaptcha(chat_id: int, reCaptcha: bool):
+    getWelcomeData = welcome.find_one(
+        {
+            'chat_id': chat_id
+        }
+    )
+    
+    if getWelcomeData is None:
+        _id = welcome.count_documents({}) + 1
+        welcome.insert_one(
+            {
+                '_id': _id,
+                'chat_id': chat_id,
+                'reCaptcha': reCaptcha
+            }
+        )
+    else:
+        welcome.update(
+            {
+                'chat_id': chat_id
+            },
+            {
+                '$set': {
+                    'reCaptcha': reCaptcha
+                }
+            },
+            upsert=True
+        )
+
+def isReCaptcha(chat_id: int) -> bool:
+    getWelcomeData = welcome.find_one(
+        {
+            'chat_id': chat_id
+        }
+    )
+
+    if (
+        getWelcomeData is not None
+        and 'reCaptcha' in getWelcomeData
+    ):
+        return getWelcomeData['reCaptcha']
+    else:
+        return False

@@ -71,7 +71,7 @@ async def isBotAdmin(message: Message, chat_id=None, silent=False) -> bool:
     else:
         return True
 
-async def isUserAdmin(message: Message, user_id: int = None, chat_id: int = None, silent: bool = False) -> bool:
+async def isUserAdmin(message: Message, pm_mode: bool = False, user_id: int = None, chat_id: int = None, silent: bool = False) -> bool:
     """ This function returns users chat status in the chat.
 
     Args:
@@ -83,24 +83,16 @@ async def isUserAdmin(message: Message, user_id: int = None, chat_id: int = None
         bool: True when user has chat status is admin | creator of the chat.
     """
     if user_id is None:
-        if message.from_user:
-            user_id = message.from_user.id 
-        elif message.sender_chat:
-            user_id = message.sender_chat.id
-            chat_id = message.chat.id
-            
-            if user_id == chat_id:
-                return True
-            else:
-                return False    
+        user_id = message.from_user.id
 
-    chat_id = message.chat.id 
-        
-    if (
-        message.chat.type == 'private'
-    ):
-        return True  
+    if chat_id is None:
+        chat_id = message.chat.id 
 
+    if not pm_mode: 
+        if message.chat.type == 'private':
+            return True  
+
+    print(chat_id, user_id, silent)
     GetData = await StellaCli.get_chat_member(
         chat_id=chat_id,
         user_id=user_id
@@ -111,7 +103,7 @@ async def isUserAdmin(message: Message, user_id: int = None, chat_id: int = None
     ):
         return True
     else:
-        if silent == False:
+        if not silent:
             await message.reply(
                 "Only admins can execute this command!"
             )
