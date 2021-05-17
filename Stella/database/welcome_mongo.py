@@ -468,9 +468,12 @@ def GetCaptchaSettings(chat_id):
             captcha_text = GetCaptchaData['captcha']['captcha_text']
             captcha_kick_time = GetCaptchaData['captcha']['captcha_kick_time']
             
-            if captcha_text == None:
+            if captcha_text is None:
                 captcha_text = captcha_text_de
 
+            if captcha_mode is None:
+                captcha_mode = 'button'
+                
             return (
                 captcha_mode,
                 captcha_text,
@@ -478,13 +481,13 @@ def GetCaptchaSettings(chat_id):
             )
         else:
             return (
-                None,
+                'button',
                 captcha_text_de,
                 None
             )
     else:
         return (
-            None,
+            'button',
             captcha_text_de,
             None
         )
@@ -649,8 +652,7 @@ def SetCaptchaTextandChances(chat_id, user_id, captcha_text, chances, captcha_li
                 'captcha.users_welcomeIDs.$.captcha_list': captcha_list
                 }
         },
-        False,
-        True
+        upsert=True
     )
 
 def CaptchaChanceUpdater(chat_id, user_id, chances):
@@ -682,7 +684,7 @@ def GetChance(chat_id, user_id):
         if userID == user_id:
             return chances
 
-def GetUserCaptchaMessageIDs(chat_id, user_id):
+def GetUserCaptchaMessageIDs(chat_id: int, user_id: int):
     GetCaptchaData = welcome.find_one(
         {
             'chat_id': chat_id
@@ -797,5 +799,49 @@ def isReCaptcha(chat_id: int) -> bool:
         and 'reCaptcha' in getWelcomeData
     ):
         return getWelcomeData['reCaptcha']
+    else:
+        return False
+    
+def setRuleCaptcha(chat_id: int, rule_captcha: bool):
+    getWelcomeData = welcome.find_one(
+        {
+            'chat_id': chat_id
+        }
+    )
+    
+    if getWelcomeData is None:
+        _id = welcome.count_documents({}) + 1
+        welcome.insert_one(
+            {
+                '_id': _id,
+                'chat_id': chat_id,
+                'rule_captcha': rule_captcha
+            }
+        )
+    else:
+        welcome.update(
+            {
+                'chat_id': chat_id
+            },
+            {
+                '$set': {
+                    'rule_captcha': rule_captcha
+                }
+            },
+            upsert=True
+        )
+
+def isRuleCaptcha(chat_id: int) -> bool:
+    getWelcomeData = welcome.find_one(
+        {
+            'chat_id': chat_id
+        }
+    )
+
+    if (
+        getWelcomeData is not None
+        and 'rule_captcha' in getWelcomeData
+    ):
+        return getWelcomeData['rule_captcha']
     else:
         return False

@@ -3,6 +3,7 @@ from Stella import StellaCli
 
 from Stella.plugins.connection.connect import connectRedirect
 from Stella.plugins.greeting.captcha.text_captcha import textCaptchaRedirect
+from Stella.plugins.greeting.captcha.button_captcha import buttonCaptchaRedirect
 from Stella.plugins.notes.private_notes import note_redirect
 from Stella.plugins.rules.rules import rulesRedirect
 
@@ -44,6 +45,7 @@ async def start(client, message):
     ):
         # Captcha Redirect Implementation 
         if startCheckQuery(message, StartQuery='captcha'):
+            await buttonCaptchaRedirect(message)
             await textCaptchaRedirect(message)
 
         # Private Notes Redirect Implementation 

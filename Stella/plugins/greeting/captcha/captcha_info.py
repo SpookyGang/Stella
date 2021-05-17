@@ -13,6 +13,7 @@ Admin commands:
 - /captchakicktime `<Xw/d/h/m>`: Set the time after which to kick CAPTCHA'd users.
 - /setcaptchatext `<text>`: Customise the CAPTCHA button.
 - /resetcaptchatext: Reset the CAPTCHA button to the default text.
+- /recaptcha `<yes/no/on/off>`: Stella will ask the CAPTCHA to every new user, be it someone who has joined before and verified already
 
 Examples:
 - Enable CAPTCHAs

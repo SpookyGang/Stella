@@ -104,9 +104,11 @@ async def NewMemeber(client, message):
                         f"User: {NewUserJson.mention} (`{NewUserJson.id}`)\n"
                         f"Reason: `{fed_reason}`"
                     )
+
                 if await isBotCan(message, permissions='can_restrict_members'):
                     if await StellaCli.kick_chat_member(chat_id, user_id): 
                         text += '\nAction: `Banned`'
+                        
                 await message.reply(
                     text
                 )
@@ -217,17 +219,22 @@ async def NewMemeber(client, message):
                 reply_to_message_id=message_id,
                 reply_markup=reply_markup
                 )
+
             message_id = WelcomeSentMessage.message_id
             SetNewMemMessageIDs(chat_id, user_id, message_id)
 
 def SetNewMemMessageIDs(chat_id, user_id, message_id):
+    print(isGetCaptcha(chat_id))
     if isGetCaptcha(chat_id):
-                captcha_mode, captcha_text, captcha_kick_time = GetCaptchaSettings(chat_id)
-                if (
-                    captcha_mode == 'text'
-                    or captcha_mode == 'math'
-                ):
-                    SetUserCaptchaMessageIDs(chat_id, user_id, message_id)
+        captcha_mode, captcha_text, captcha_kick_time = GetCaptchaSettings(chat_id)
+        if (
+            captcha_mode in [
+                'text',
+                'button',
+                'math'
+            ]
+        ):
+            SetUserCaptchaMessageIDs(chat_id, user_id, message_id)
 
     if GetCleanWelcome(chat_id):
         SetCleanWelcomeMessage(chat_id, message_id)

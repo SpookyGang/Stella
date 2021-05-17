@@ -1,8 +1,10 @@
 from Stella import StellaCli
 from Stella.helper import custom_filter
 from Stella.helper.chat_status import (
-    CheckAdmins
+    isBotCan,
+    isUserCan
     )
+    
 from Stella.database.welcome_mongo import (
     SetCaptcha,
     isGetCaptcha
@@ -20,9 +22,16 @@ async def Captcha(client, message):
     else:
         chat_id = message.chat.id
 
-    if not await  CheckAdmins(message):
+    if not await  isBotCan(message, permissions='can_restrict_members', silent=True):
         await message.reply(
             "I need to be admin with the right to restrict to enable CAPTCHAs.",
+            quote=True
+        )
+        return 
+    
+    if not isUserCan(message, permissions='can_restrict_members', silent=True):
+        await message.reply(
+            "You need to be admin with the right to restrict to enable CAPTCHAs.",
             quote=True
         )
         return 

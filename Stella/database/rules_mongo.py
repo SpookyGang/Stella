@@ -33,7 +33,7 @@ def set_rules_db(chat_id, chat_rules):
             upsert=True
         )
 
-def get_rules(chat_id):
+def get_rules(chat_id: int):
     rule_data = rules.find_one(
         {
             'chat_id': chat_id

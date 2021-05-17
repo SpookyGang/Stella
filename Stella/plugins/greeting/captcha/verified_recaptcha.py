@@ -14,6 +14,10 @@ RECAPTCHA_FALSE = ['off', 'no']
 async def reCaptcha(client, message):
 
     chat_id = message.chat.id 
+
+    if not await isUserAdmin(message):
+        return
+        
     if (
         len(message.command) >= 2
     ):
@@ -24,15 +28,15 @@ async def reCaptcha(client, message):
         ):
             setReCaptcha(chat_id=chat_id, reCaptcha=True)
             await message.reply(
-                'From now I\'ll ask captcha to every user even verifed users.'
+                "From now on, I'll ask the CAPTCHA to every new user; regardless of whether they'd joined the chat before and verified themselves."    
             )
-        
+            
         elif (
             command_arg in RECAPTCHA_FALSE
         ):
             setReCaptcha(chat_id=chat_id, reCaptcha=False)
             await message.reply(
-                'I\'ll not ask captcha again to who have already completed CAPTCHA.'
+                "I won't ask the CAPTCHA to users that have joined the chat before and already verified themselves."
             )
         
         else:
@@ -43,11 +47,11 @@ async def reCaptcha(client, message):
     else:
         if isReCaptcha(chat_id=chat_id):
             await message.reply(
-                'reCaptcha: **enable**; I\'ll ask captcha to every users even veried users.\n\n'
-                'To chnage this setting, try this command again followed by one of yes/no/on/off'
+                "reCAPTCHA: **enabled**; I'm asking the CAPTCHA to every new user, be it someone who has joined before and verified already - they'll have to pass the CAPTCHA again.\n\n"
+                "To chnage this setting, try this command again followed by one of yes/no/on/off"
             )
         else:
             await message.reply(
-                'reCaptcha: **disable**; I\'ll not ask captcha again to who have already completed CAPTCHA.\n\n'
-                'To chnage this setting, try this command again followed by one of yes/no/on/off'
+                "reCAPTCHA: **disabled**; I'm not asking the CAPTCHA to people who have joined before and verified themselves.\n\n"
+                "To chnage this setting, try this command again followed by one of yes/no/on/off"
             )    
