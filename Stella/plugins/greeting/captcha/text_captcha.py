@@ -3,40 +3,27 @@ import random
 import string
 
 from pyrogram import filters
-from pyrogram.types import (
-    CallbackQuery,
-    InlineKeyboardButton, 
-    InlineKeyboardMarkup,
-    ChatPermissions
-    )
-
-from captcha.image import ImageCaptcha
-
+from pyrogram.types import (CallbackQuery, ChatPermissions,
+                            InlineKeyboardButton, InlineKeyboardMarkup)
 from Stella import BOT_USERNAME, StellaCli
-
-from Stella.database.welcome_mongo import (
-    AppendVerifiedUsers,
-    CaptchaChanceUpdater,
-    DeleteUsercaptchaData,
-    GetCaptchaSettings,
-    GetChance,
-    GetUserCaptchaMessageIDs,
-    GetWelcome,
-    SetCaptchaTextandChances,
-    isReCaptcha,
-    isUserVerified,
-    isWelcome,
-    isRuleCaptcha
-    )
-
+from Stella.database.welcome_mongo import (AppendVerifiedUsers,
+                                           CaptchaChanceUpdater,
+                                           DeleteUsercaptchaData,
+                                           GetCaptchaSettings, GetChance,
+                                           GetUserCaptchaMessageIDs,
+                                           GetWelcome,
+                                           SetCaptchaTextandChances,
+                                           isReCaptcha, isRuleCaptcha,
+                                           isUserVerified, isWelcome)
 from Stella.helper.button_gen import button_markdown_parser
 from Stella.helper.chat_status import isUserAdmin
 
-from . captcharules_button import ruleCaptchaButton
-from .. utils.actions import passedAction, failedAction
-from .. utils.captcha_text_gen import ButtonGen
-from .. utils.random_string_gen import RandomStringGen
+from captcha.image import ImageCaptcha
 
+from ..utils.actions import failedAction, passedAction
+from ..utils.captcha_text_gen import ButtonGen
+from ..utils.random_string_gen import RandomStringGen
+from .captcharules_button import ruleCaptchaButton
 
 CAPTCHA_START_STRINGS = [
 (

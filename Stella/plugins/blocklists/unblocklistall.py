@@ -1,19 +1,14 @@
 import html
 
 from pyrogram import filters
-from pyrogram.types import (
-    InlineKeyboardButton,
-    InlineKeyboardMarkup,
-    CallbackQuery
-)
-
+from pyrogram.types import (CallbackQuery, InlineKeyboardButton,
+                            InlineKeyboardMarkup)
 from Stella import StellaCli
-
+from Stella.database.blocklists_mongo import get_blocklist, unblocklistall_db
 from Stella.helper import custom_filter
 from Stella.helper.chat_status import isUserCreator
 from Stella.helper.get_data import get_text_reason
 
-from Stella.database.blocklists_mongo import unblocklistall_db, get_blocklist
 
 @StellaCli.on_message(custom_filter.command(commands=['unblocklistall', 'unblacklistall']))
 async def removeblocklistall(client, message):

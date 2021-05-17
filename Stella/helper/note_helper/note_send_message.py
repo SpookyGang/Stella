@@ -1,15 +1,14 @@
 import html
-import re 
+import re
 
 from pyrogram.types import InlineKeyboardMarkup
-
 from Stella import StellaCli
 from Stella.database.notes_mongo import GetNote
-from Stella.helper.note_helper.note_fillings import NoteFillings
 from Stella.helper.button_gen import button_markdown_parser
+from Stella.helper.note_helper.note_fillings import NoteFillings
 from Stella.helper.note_helper.note_misc_helper import preview_text_replace
-
 from Stella.plugins.connection.connection import connection
+
 
 async def SendNoteMessage(message, note_name, from_chat_id):
     user_id = message.from_user.id

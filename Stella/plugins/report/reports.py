@@ -1,11 +1,7 @@
 from Stella import StellaCli
+from Stella.database.report_mongo import get_report, reports_db
 from Stella.helper import custom_filter
-
-from Stella.helper.chat_status import isUserCan, isUserAdmin
-from Stella.database.report_mongo import (
-    reports_db,
-    get_report
-)
+from Stella.helper.chat_status import isUserAdmin, isUserCan
 
 REPORTS_TRUE = ['yes', 'on']
 REPORTS_FALSE = ['no', 'off']

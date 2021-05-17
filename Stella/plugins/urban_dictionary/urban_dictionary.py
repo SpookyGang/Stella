@@ -1,8 +1,8 @@
-from Stella.helper import custom_filter
-from Stella import StellaCli
 from pykeyboard import InlineKeyboard
-
+from Stella import StellaCli
+from Stella.helper import custom_filter
 from Stella.plugins.urban_dictionary.get_data import getData
+
 
 @StellaCli.on_message(custom_filter.command(commands=('ud')))
 async def urbanDictionary(client, message):

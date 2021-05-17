@@ -1,11 +1,10 @@
 import html
 
 from Stella import StellaCli
-
-from Stella.helper import custom_filter
-from Stella.helper.chat_status import isBotAdmin, CheckAllAdminsStuffs
-
 from Stella.database.antiflood_mongo import setflood_db
+from Stella.helper import custom_filter
+from Stella.helper.chat_status import CheckAllAdminsStuffs, isBotAdmin
+
 
 @StellaCli.on_message(custom_filter.command(commands=('setflood')))
 async def setflood(client, message):

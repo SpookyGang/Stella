@@ -2,10 +2,8 @@ import importlib
 from os.path import dirname
 from sys import platform
 
-from Stella import StellaCli
-from Stella import scheduler
+from Stella import StellaCli, scheduler
 from Stella.plugins import ALL_MODULES
-
 
 IMPORTED = {}
 HELPABLE = {}

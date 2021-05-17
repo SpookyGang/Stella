@@ -1,11 +1,10 @@
 import time
 import uuid
 
-from Stella import StellaCli
-from Stella.helper import custom_filter
-from Stella import TELEGRAM_SERVICES_IDs, LOG_CHANNEL
-
+from Stella import LOG_CHANNEL, StellaCli, TELEGRAM_SERVICES_IDs
 from Stella.database.federation_mongo import new_fed_db
+from Stella.helper import custom_filter
+
 
 @StellaCli.on_message(custom_filter.command(commands=('newfed')))
 async def NewFed(client, message):

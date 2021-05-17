@@ -1,24 +1,16 @@
+import re
 import time
-import re 
-from urlextract import URLExtract
 
 from langdetect import detect
 from pyrogram import filters
-
 from Stella import StellaCli
-from Stella.helper.chat_status import (
-    isUserAdmin,
-    check_bot
-)
-
-from Stella.database.locks_mongo import (
-    get_locks,
-    lockwarns_db,
-    get_allowlist
-)
+from Stella.database.locks_mongo import get_allowlist, get_locks, lockwarns_db
+from Stella.helper.chat_status import check_bot, isUserAdmin
 from Stella.plugins.warnings.warn import warn
+from urlextract import URLExtract
 
 from . import lock_map
+
 
 @StellaCli.on_message(filters.all & (filters.group | filters.channel) | filters.new_chat_members, group=4)
 async def locks_checker(client, message):

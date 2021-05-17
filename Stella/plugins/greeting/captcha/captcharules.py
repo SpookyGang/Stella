@@ -1,12 +1,7 @@
 from Stella import StellaCli
-
+from Stella.database.welcome_mongo import isRuleCaptcha, setRuleCaptcha
 from Stella.helper import custom_filter
 from Stella.helper.chat_status import isUserAdmin
-
-from Stella.database.welcome_mongo import (
-    setRuleCaptcha,
-    isRuleCaptcha
-)
 
 CAPTCHARULE_TRUE = ['on', 'yes']
 CAPTCHARULE_FALSE = ['off', 'no']

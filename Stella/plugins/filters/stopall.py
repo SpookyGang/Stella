@@ -1,15 +1,13 @@
 import html
-from pyrogram import filters
-from pyrogram.types import (
-    InlineKeyboardMarkup,
-    InlineKeyboardButton,
-    CallbackQuery
-)
 
+from pyrogram import filters
+from pyrogram.types import (CallbackQuery, InlineKeyboardButton,
+                            InlineKeyboardMarkup)
 from Stella import StellaCli
+from Stella.database.filters_mongo import stop_all_db
 from Stella.helper import custom_filter
 from Stella.helper.chat_status import isUserCreator
-from Stella.database.filters_mongo import stop_all_db
+
 
 @StellaCli.on_message(custom_filter.command('stopall'))
 async def stopall(client, message):

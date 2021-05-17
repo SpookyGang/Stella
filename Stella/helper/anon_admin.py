@@ -1,19 +1,10 @@
 from pyrogram import filters
-from pyrogram.types import (
-    InlineKeyboardButton,
-    InlineKeyboardMarkup,
-    CallbackQuery,
-    Message
-)
-
-from Stella import (
-    StellaCli,
-    GROUP_ANONYMOUS_BOT
-)
-
+from pyrogram.types import (CallbackQuery, InlineKeyboardButton,
+                            InlineKeyboardMarkup, Message)
+from Stella import GROUP_ANONYMOUS_BOT, StellaCli
+from Stella.database.chats_settings_mongo import get_anon_setting
 from Stella.helper.chat_status import anon_admin_checker
 
-from Stella.database.chats_settings_mongo import get_anon_setting
 
 def anonadmin_checker(func):
     """Generates a verification button for the anon admin in the if /anonadmin is off

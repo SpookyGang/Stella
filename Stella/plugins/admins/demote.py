@@ -1,11 +1,11 @@
-from Stella import StellaCli, BOT_ID
-
 from pyrogram.types import ChatPermissions
-
+from Stella import BOT_ID, StellaCli
 from Stella.helper import custom_filter
-from Stella.helper.chat_status import CheckAllAdminsStuffs, isUserAdmin, can_restrict_member
-from Stella.helper.get_user import get_user_id
 from Stella.helper.anon_admin import anonadmin_checker
+from Stella.helper.chat_status import (CheckAllAdminsStuffs,
+                                       can_restrict_member, isUserAdmin)
+from Stella.helper.get_user import get_user_id
+
 
 @StellaCli.on_message(custom_filter.command(commands=('demote')))
 @anonadmin_checker

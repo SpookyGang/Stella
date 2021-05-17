@@ -1,12 +1,7 @@
 from Stella import StellaCli
-
-from Stella.helper import custom_filter
-from Stella.helper.chat_status import (
-    check_user,
-    check_bot
-)
-
 from Stella.database.disable_mongo import disabledel_db
+from Stella.helper import custom_filter
+from Stella.helper.chat_status import check_bot, check_user
 
 DISABLEDEL_TRUE = ['on', 'yes']
 DISABLEDEL_FALSE = ['off', 'no']

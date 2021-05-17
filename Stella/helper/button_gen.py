@@ -1,12 +1,8 @@
 import re
-from Stella import BOT_USERNAME
-from pyrogram.types import (
-    Message,
-    InlineKeyboardButton,
-    InlineKeyboardMarkup
-)
-from Stella.database.notes_mongo import isNoteExist
 
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
+from Stella import BOT_USERNAME
+from Stella.database.notes_mongo import isNoteExist
 
 BTN_URL_REGEX = re.compile(
     r"(\[([^\[]+?)\]\(buttonurl:(?:/{0,2})(.+?)(:same)?\))"

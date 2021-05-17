@@ -1,11 +1,7 @@
 from pyrogram import filters
-
 from Stella import StellaCli
+from Stella.database.users_mongo import add_chat, add_user
 
-from Stella.database.users_mongo import (
-    add_user,
-    add_chat
-)
 
 @StellaCli.on_message(filters.all & filters.group, group=1)
 async def logger(client, message):

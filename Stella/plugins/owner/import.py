@@ -1,13 +1,7 @@
 import json
 
-from Stella import StellaDB
+from Stella import OWNER_ID, SUDO_USERS, StellaCli, StellaDB
 from Stella.helper import custom_filter
-from Stella import (
-    StellaCli,
-    StellaDB,
-    OWNER_ID,
-    SUDO_USERS
-)
 
 COLLECTIONS_DATAS = StellaDB.list_collection_names()
 

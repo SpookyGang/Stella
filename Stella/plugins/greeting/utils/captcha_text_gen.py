@@ -1,7 +1,5 @@
-from pyrogram.types import (
-    InlineKeyboardMarkup,
-    InlineKeyboardButton
-)
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+
 
 def ButtonGen(CaptchaStringList: list, new_chat_id: int):
     keyboard = ([[

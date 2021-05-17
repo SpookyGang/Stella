@@ -1,15 +1,9 @@
 from pyrogram import filters
-
 from Stella import StellaCli
-
+from Stella.database.federation_mongo import (get_fed_from_chat,
+                                              get_fed_reason, is_user_fban)
 from Stella.helper.chat_status import isBotCan
 
-from Stella.database.federation_mongo import (
-    is_user_fban,
-    get_fed_from_chat,
-    get_fed_reason,
-    get_fed_from_chat
-)
 
 @StellaCli.on_message(filters.all & filters.group, group=2)
 async def fed_checker(client, message):

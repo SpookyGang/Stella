@@ -1,10 +1,9 @@
-from pyrogram import filters
-from Stella import StellaCli
-from pyrogram.types import (
-    CallbackQuery
-)
 from pykeyboard import InlineKeyboard
+from pyrogram import filters
+from pyrogram.types import CallbackQuery
+from Stella import StellaCli
 from Stella.plugins.urban_dictionary.get_data import getData
+
 
 @StellaCli.on_callback_query(filters.create(lambda _, __, query: 'pagination_keyboard#' in query.data))
 async def ud_callback(client: StellaCli, callback_query: CallbackQuery):

@@ -1,20 +1,16 @@
 import html
 
-from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-
-from Stella import StellaCli, BOT_USERNAME
-
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+from Stella import BOT_USERNAME, StellaCli
+from Stella.database.rules_mongo import (get_private_note, get_rules,
+                                         get_rules_button)
 from Stella.helper import custom_filter
-from Stella.helper.get_data import GetChat
 from Stella.helper.button_gen import button_markdown_parser
-from Stella.helper.note_helper.note_fillings import NoteFillings as rules_filler
 from Stella.helper.disable import disable
+from Stella.helper.get_data import GetChat
+from Stella.helper.note_helper.note_fillings import \
+    NoteFillings as rules_filler
 
-from Stella.database.rules_mongo import (
-    get_rules,
-    get_rules_button,
-    get_private_note
-)
 
 @StellaCli.on_message(custom_filter.command(commands=('rules'), disable=True))
 @disable

@@ -2,21 +2,15 @@ import html
 from typing import Union
 
 from pyrogram import filters
-from pyrogram.types import (
-    InlineKeyboardButton,
-    InlineKeyboardMarkup,
-    CallbackQuery,
-    Message
-)
-
+from pyrogram.types import (CallbackQuery, InlineKeyboardButton,
+                            InlineKeyboardMarkup, Message)
 from Stella import StellaCli
-
+from Stella.database.rules_mongo import get_rules
+from Stella.database.welcome_mongo import isRuleCaptcha
 from Stella.helper.get_data import GetChat
 
-from Stella.database.rules_mongo import get_rules
-from Stella.database.welcome_mongo import isRuleCaptcha 
+from ..utils.actions import passedAction
 
-from .. utils.actions import passedAction
 
 async def ruleCaptchaButton(message: Union[Message, CallbackQuery], chat_id: int, message_id: int) -> bool:
     

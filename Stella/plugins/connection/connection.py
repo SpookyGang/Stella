@@ -1,12 +1,12 @@
 import html
+
 from Stella import StellaCli
-
+from Stella.database.connection_mongo import (GetConnectedChat,
+                                              get_allow_connection,
+                                              isChatConnected)
 from Stella.helper import custom_filter
-from Stella.helper.chat_status import isUserBanned, isUserAdmin
-
+from Stella.helper.chat_status import isUserAdmin, isUserBanned
 from Stella.plugins.connection.connect import connect_button
-
-from Stella.database.connection_mongo import GetConnectedChat, isChatConnected, get_allow_connection
 
 
 @StellaCli.on_message(custom_filter.command(commands=('connection')))

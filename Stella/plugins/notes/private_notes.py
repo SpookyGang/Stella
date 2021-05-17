@@ -1,6 +1,7 @@
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from Stella import BOT_USERNAME
-from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from Stella.helper.note_helper.note_send_message import exceNoteMessageSender
+
 
 async def note_redirect(message):
     chat_id = int(message.command[1].split('_')[1])

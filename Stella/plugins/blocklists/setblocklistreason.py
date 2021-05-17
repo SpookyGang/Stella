@@ -1,9 +1,9 @@
 from Stella import StellaCli
-
+from Stella.database.blocklists_mongo import (getblocklistmode,
+                                              setblocklistreason_db)
 from Stella.helper import custom_filter
 from Stella.helper.chat_status import isUserCan
 
-from Stella.database.blocklists_mongo import setblocklistreason_db, getblocklistmode
 
 @StellaCli.on_message(custom_filter.command(commands=('setblocklistreason')))
 async def setblocklistreason(client, message):

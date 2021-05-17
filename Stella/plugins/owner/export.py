@@ -1,15 +1,9 @@
-import json
 import datetime
+import json
 
-from Stella import StellaDB
+from Stella import (BACKUP_CHAT, OWNER_ID, SUDO_USERS, StellaCli, StellaDB,
+                    scheduler)
 from Stella.helper import custom_filter
-from Stella import (
-    StellaCli,
-    scheduler,
-    OWNER_ID,
-    SUDO_USERS,
-    BACKUP_CHAT
-)
 
 COLLECTIONS_NAMES = StellaDB.list_collection_names()
 

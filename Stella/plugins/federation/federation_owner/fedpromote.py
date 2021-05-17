@@ -1,19 +1,14 @@
 from pyrogram import filters
-from pyrogram.types import (
-    InlineKeyboardMarkup,
-    InlineKeyboardButton,
-    CallbackQuery
-)
-
+from pyrogram.types import (CallbackQuery, InlineKeyboardButton,
+                            InlineKeyboardMarkup)
 from Stella import StellaCli
+from Stella.database.federation_mongo import (fed_promote,
+                                              get_fed_from_ownerid,
+                                              get_fed_name, is_user_fban)
 from Stella.helper import custom_filter
 from Stella.helper.get_user import get_user_id
-from Stella.database.federation_mongo import (
-    get_fed_from_ownerid,
-    get_fed_name,
-    is_user_fban,
-    fed_promote
-)
+
+
 @StellaCli.on_message(custom_filter.command(commands=('fedpromote')))
 async def FedPromote(client, message):
     user_info = await get_user_id(message)

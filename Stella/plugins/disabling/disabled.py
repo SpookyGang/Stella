@@ -1,9 +1,8 @@
 from Stella import StellaCli
-
+from Stella.database.disable_mongo import get_disabled
 from Stella.helper import custom_filter
 from Stella.helper.chat_status import isUserAdmin
 
-from Stella.database.disable_mongo import get_disabled
 
 @StellaCli.on_message(custom_filter.command(commands=('disabled')))
 async def disable(client, message):

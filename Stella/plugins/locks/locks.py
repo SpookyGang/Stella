@@ -1,11 +1,10 @@
 from Stella import StellaCli
-
+from Stella.database.locks_mongo import get_locks
 from Stella.helper import custom_filter
 from Stella.helper.chat_status import isUserAdmin
 
-from Stella.database.locks_mongo import get_locks
-
 from . import lock_map
+
 
 @StellaCli.on_message(custom_filter.command(commands=('locks')))
 async def locks(client, message):

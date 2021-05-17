@@ -1,10 +1,6 @@
-from Stella import (
-    StellaCli,
-    StellaDB,
-    OWNER_ID
-)
-
+from Stella import OWNER_ID, StellaCli, StellaDB
 from Stella.helper import custom_filter
+
 
 @StellaCli.on_message(custom_filter.command('mongo'))
 async def mongoViewer(client, message):

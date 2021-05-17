@@ -1,13 +1,9 @@
 import html
-from Stella import StellaCli
 
+from Stella import StellaCli
+from Stella.database.locks_mongo import lockwarns_db, set_lockwarn_db
 from Stella.helper import custom_filter
 from Stella.helper.chat_status import check_user
-
-from Stella.database.locks_mongo import (
-    set_lockwarn_db,
-    lockwarns_db
-)
 
 LOCKWARN_TRUE = ['on', 'yes']
 LOCKWARN_FALSE = ['off', 'no']

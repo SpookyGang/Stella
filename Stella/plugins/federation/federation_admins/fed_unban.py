@@ -1,16 +1,11 @@
-from Stella import StellaCli, BOT_ID
-
+from Stella import BOT_ID, StellaCli
+from Stella.database.federation_mongo import (get_connected_chats,
+                                              get_fed_admins,
+                                              get_fed_from_chat, get_fed_name,
+                                              is_user_fban, user_unfban)
 from Stella.helper import custom_filter
 from Stella.helper.get_user import get_user_id
 
-from Stella.database.federation_mongo import (
-    get_fed_from_chat,
-    get_fed_name,
-    is_user_fban,
-    user_unfban,
-    get_connected_chats,
-    get_fed_admins
-)
 
 @StellaCli.on_message(custom_filter.command(commands=('unfban')))
 async def unfed_ban(client, message):

@@ -2,6 +2,7 @@ from Stella import StellaCli
 from Stella.helper import custom_filter
 from Stella.helper.chat_status import isUserAdmin
 
+
 @StellaCli.on_message(custom_filter.command(commands=('pininfo')))
 async def pininfo(client, message):
 

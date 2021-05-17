@@ -1,9 +1,6 @@
-from Stella.helper import custom_filter
 from Stella import StellaCli
-
-from Stella.helper.chat_status import (
-    CheckAllAdminsStuffs
-)
+from Stella.helper import custom_filter
+from Stella.helper.chat_status import CheckAllAdminsStuffs
 
 
 @StellaCli.on_message(custom_filter.command(commands=['purge', 'spurge']))

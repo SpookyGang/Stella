@@ -1,12 +1,10 @@
 from Stella import StellaCli
+from Stella.database.federation_mongo import (fed_rename_db,
+                                              get_connected_chats,
+                                              get_fed_from_ownerid,
+                                              get_fed_name)
 from Stella.helper import custom_filter
 
-from Stella.database.federation_mongo import (
-    fed_rename_db,
-    get_fed_name,
-    get_fed_from_ownerid,
-    get_connected_chats
-)
 
 @StellaCli.on_message(custom_filter.command(commands=('renamefed')))
 async def Rename_fed(client, message):

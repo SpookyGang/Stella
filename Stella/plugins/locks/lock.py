@@ -1,17 +1,12 @@
-from pyrogram.types import ChatPermissions
 from pyrogram.errors import BadRequest
-
+from pyrogram.types import ChatPermissions
 from Stella import StellaCli
-
-from Stella.helper import custom_filter
-from Stella.helper.chat_status import (
-    check_user,
-    check_bot
-)
-
 from Stella.database.locks_mongo import lock_db
+from Stella.helper import custom_filter
+from Stella.helper.chat_status import check_bot, check_user
 
 from . import lock_map
+
 
 @StellaCli.on_message(custom_filter.command(commands=('lock')))
 async def lock(client, message):

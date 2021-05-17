@@ -1,11 +1,7 @@
 from Stella import StellaCli
-
+from Stella.database.welcome_mongo import isReCaptcha, setReCaptcha
 from Stella.helper import custom_filter
 from Stella.helper.chat_status import isUserAdmin
-from Stella.database.welcome_mongo import (
-    setReCaptcha,
-    isReCaptcha
-)
 
 RECAPTCHA_TRUE = ['on', 'yes']
 RECAPTCHA_FALSE = ['off', 'no']

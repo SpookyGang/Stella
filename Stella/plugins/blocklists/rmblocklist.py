@@ -1,10 +1,9 @@
 from Stella import StellaCli
-
+from Stella.database.blocklists_mongo import get_blocklist, rmblocklist_db
 from Stella.helper import custom_filter
 from Stella.helper.chat_status import isUserAdmin
 from Stella.helper.get_data import get_text_reason
 
-from Stella.database.blocklists_mongo import rmblocklist_db, get_blocklist
 
 @StellaCli.on_message(custom_filter.command(commands=['rmblocklist', 'rmblacklist']))
 async def add_blocklist(client, message):

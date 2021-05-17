@@ -1,8 +1,8 @@
-from pyrogram.types import Message
-
 from emojis import decode
+from pyrogram.types import Message
 from Stella import StellaCli
 from Stella.database.users_mongo import GetChatName
+
 
 async def GetChat(chat_id: int):
     """This function return chat_title of the given chat_id from the database of the bot.

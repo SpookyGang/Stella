@@ -1,5 +1,7 @@
-import requests
 import html
+
+import requests
+
 
 class StellaClient:
 

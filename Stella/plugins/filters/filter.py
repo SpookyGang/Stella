@@ -1,10 +1,9 @@
 from Stella import StellaCli
+from Stella.database.filters_mongo import add_filter_db
 from Stella.helper import custom_filter
-
 from Stella.helper.filters_helper.get_filters_message import GetFIlterMessage
 from Stella.helper.get_data import get_text_reason
 
-from Stella.database.filters_mongo import add_filter_db
 
 @StellaCli.on_message(custom_filter.command(commands=('filter')))
 async def filter(client, message):

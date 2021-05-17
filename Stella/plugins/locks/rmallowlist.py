@@ -1,12 +1,8 @@
 from Stella import StellaCli
-
+from Stella.database.locks_mongo import get_allowlist, rmallow_db
 from Stella.helper import custom_filter
 from Stella.helper.chat_status import check_user
 
-from Stella.database.locks_mongo import (
-    rmallow_db,
-    get_allowlist
-)
 
 @StellaCli.on_message(custom_filter.command(commands=('rmallowlist')))
 async def rmallow(client, message):

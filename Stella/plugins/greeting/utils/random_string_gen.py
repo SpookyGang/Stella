@@ -1,5 +1,6 @@
 import random
-import string 
+import string
+
 
 def RandomStringGen() -> list:
     CaptchaStringList = []

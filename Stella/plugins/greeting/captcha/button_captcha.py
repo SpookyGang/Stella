@@ -1,28 +1,18 @@
 from pyrogram import filters
-from pyrogram.types import (
-    InlineKeyboardMarkup,
-    InlineKeyboardButton,
-    CallbackQuery,
-    ChatPermissions
-)
-
-from Stella import StellaCli, BOT_USERNAME
-from Stella.database.welcome_mongo import (
-    GetCaptchaSettings,
-    GetWelcome,
-    isWelcome,
-    isReCaptcha,
-    isRuleCaptcha,
-    isUserVerified,
-    GetUserCaptchaMessageIDs
-)
+from pyrogram.types import (CallbackQuery, ChatPermissions,
+                            InlineKeyboardButton, InlineKeyboardMarkup)
+from Stella import BOT_USERNAME, StellaCli
 from Stella.database.rules_mongo import get_rules
-
-from Stella.helper.chat_status import isUserAdmin
+from Stella.database.welcome_mongo import (GetCaptchaSettings,
+                                           GetUserCaptchaMessageIDs,
+                                           GetWelcome, isReCaptcha,
+                                           isRuleCaptcha, isUserVerified,
+                                           isWelcome)
 from Stella.helper.button_gen import button_markdown_parser
-from Stella.database.rules_mongo import get_rules
+from Stella.helper.chat_status import isUserAdmin
 
-from . captcharules_button import ruleCaptchaButton
+from .captcharules_button import ruleCaptchaButton
+
 
 async def CaptchaButton(chat_id, user_id):
 

@@ -1,13 +1,10 @@
 from pyrogram.types import ChatPermissions
-
-from Stella import StellaCli 
-from Stella.database.welcome_mongo import (
-    isWelcome,
-    GetWelcome,
-    DeleteUsercaptchaData,
-    AppendVerifiedUsers
-)
+from Stella import StellaCli
+from Stella.database.welcome_mongo import (AppendVerifiedUsers,
+                                           DeleteUsercaptchaData, GetWelcome,
+                                           isWelcome)
 from Stella.helper.button_gen import button_markdown_parser
+
 
 async def passedAction(chat_id: int, user_id: int, message_id: int):
     await StellaCli.restrict_chat_member(

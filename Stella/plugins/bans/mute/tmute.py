@@ -1,20 +1,15 @@
-import html 
+import html
 import time
 
 from pyrogram.types import ChatPermissions
-
-from Stella import StellaCli, BOT_ID
-
+from Stella import BOT_ID, StellaCli
 from Stella.helper import custom_filter
-from Stella.helper.chat_status import (
-    isBotAdmin,
-    isUserAdmin,
-    can_restrict_member
-)
-from Stella.helper.get_user import get_user_id, get_text
-from Stella.helper.time_checker import get_time, time_string_helper
-from Stella.helper.convert import convert_time
 from Stella.helper.anon_admin import anonadmin_checker
+from Stella.helper.chat_status import (can_restrict_member, isBotAdmin,
+                                       isUserAdmin)
+from Stella.helper.convert import convert_time
+from Stella.helper.get_user import get_text, get_user_id
+from Stella.helper.time_checker import get_time, time_string_helper
 
 
 @StellaCli.on_message(custom_filter.command(commands=('tmute')))

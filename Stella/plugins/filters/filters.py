@@ -1,8 +1,9 @@
 import html
 
 from Stella import StellaCli
-from Stella.helper import custom_filter
 from Stella.database.filters_mongo import get_filters_list
+from Stella.helper import custom_filter
+
 
 @StellaCli.on_message(custom_filter.command('filters'))
 async def filters(client, message):

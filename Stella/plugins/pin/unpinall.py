@@ -1,17 +1,10 @@
 from pyrogram import filters
-from pyrogram.types import (
-    InlineKeyboardButton,
-    InlineKeyboardMarkup,
-    CallbackQuery
-)
-
+from pyrogram.types import (CallbackQuery, InlineKeyboardButton,
+                            InlineKeyboardMarkup)
 from Stella import StellaCli
-
 from Stella.helper import custom_filter
-from Stella.helper.chat_status import (
-    CheckAllAdminsStuffs,
-    isUserCan
-)
+from Stella.helper.chat_status import CheckAllAdminsStuffs, isUserCan
+
 
 @StellaCli.on_message(custom_filter.command(commands=('unpinall')))
 async def unpinall(client, message):

@@ -1,7 +1,8 @@
 from Stella import StellaCli
+from Stella.database.connection_mongo import disconnectChat
 from Stella.helper import custom_filter
 from Stella.plugins.connection.connection import connection
-from Stella.database.connection_mongo import disconnectChat
+
 
 @StellaCli.on_message(custom_filter.command(commands=('disconnect')))
 async def diconnectChat(client, message):

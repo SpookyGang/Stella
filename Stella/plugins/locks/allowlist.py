@@ -1,15 +1,11 @@
 import html
-from urlextract import URLExtract
 
 from Stella import StellaCli
-
+from Stella.database.locks_mongo import allowlist_db, get_allowlist
 from Stella.helper import custom_filter
 from Stella.helper.chat_status import check_user
+from urlextract import URLExtract
 
-from Stella.database.locks_mongo import (
-    allowlist_db,
-    get_allowlist
-)
 
 @StellaCli.on_message(custom_filter.command(commands=('allowlist')))
 async def allowlist(client, message):

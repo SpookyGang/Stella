@@ -1,10 +1,10 @@
-import re
 import html
-from Stella.__main__ import HELPABLE
+import re
+
 from pyrogram import filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
-
-from Stella import StellaCli, BOT_USERNAME
+from Stella import BOT_USERNAME, StellaCli
+from Stella.__main__ import HELPABLE
 from Stella.helper import custom_filter
 from Stella.helper.pagination_buttons import paginate_modules
 

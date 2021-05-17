@@ -1,8 +1,9 @@
-from Stella import StellaCli, StellaAPI
+from pyrogram import filters
+from pyrogram.types import (CallbackQuery, InlineKeyboardButton,
+                            InlineKeyboardMarkup)
+from Stella import StellaAPI, StellaCli
 from Stella.helper import custom_filter
 
-from pyrogram import filters
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery
 
 @StellaCli.on_message(custom_filter.command(commands=('getapi')))
 async def generate_api(client, message):

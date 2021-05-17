@@ -1,13 +1,11 @@
-import html 
-from Stella import StellaCli
-from Stella.helper import custom_filter
+import html
 
+from Stella import StellaCli
+from Stella.database.federation_mongo import (get_fed_name, is_fed_exist,
+                                              join_fed_db)
+from Stella.helper import custom_filter
 from Stella.helper.chat_status import isUserCreator
-from Stella.database.federation_mongo import (
-    is_fed_exist,
-    join_fed_db,
-    get_fed_name
-)
+
 
 @StellaCli.on_message(custom_filter.command(commands=('joinfed')))
 async def JoinFeb(client, message):

@@ -1,6 +1,8 @@
 import asyncio
+
 from requests import get
 from Stella import StellaCli
+
 
 async def getData(chat_id, message_id, GetWord, CurrentPage):
     UDJson = get(

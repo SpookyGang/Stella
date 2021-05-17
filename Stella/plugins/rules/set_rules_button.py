@@ -1,12 +1,11 @@
 import html
 
 from Stella import StellaCli
-
-from Stella.helper import custom_filter 
+from Stella.database.rules_mongo import get_rules_button, set_rule_button
+from Stella.helper import custom_filter
+from Stella.helper.anon_admin import anonadmin_checker
 from Stella.helper.chat_status import isUserCan
 
-from Stella.database.rules_mongo import set_rule_button, get_rules_button
-from Stella.helper.anon_admin import anonadmin_checker
 
 @StellaCli.on_message(custom_filter.command(commands=('setrulesbutton')))
 @anonadmin_checker

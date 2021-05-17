@@ -1,15 +1,8 @@
 from Stella import StellaCli
+from Stella.database.welcome_mongo import GetCaptchaSettings, SetCaptchaText
 from Stella.helper import custom_filter
-from Stella.helper.chat_status import (
-    isUserCan, isBotAdmin
-    )
 from Stella.helper.anon_admin import anonadmin_checker
-
-from Stella.database.welcome_mongo import (
-    SetCaptchaText,
-    GetCaptchaSettings
-)
-
+from Stella.helper.chat_status import isBotAdmin, isUserCan
 from Stella.plugins.connection.connection import connection
 
 

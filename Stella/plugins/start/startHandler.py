@@ -1,13 +1,12 @@
-from Stella.helper import custom_filter
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from Stella import StellaCli
-
+from Stella.helper import custom_filter
 from Stella.plugins.connection.connect import connectRedirect
+from Stella.plugins.greeting.captcha.button_captcha import \
+    buttonCaptchaRedirect
 from Stella.plugins.greeting.captcha.text_captcha import textCaptchaRedirect
-from Stella.plugins.greeting.captcha.button_captcha import buttonCaptchaRedirect
 from Stella.plugins.notes.private_notes import note_redirect
 from Stella.plugins.rules.rules import rulesRedirect
-
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
 START_TEXT = (
     "Konnichiwa {mention}! I am Stella - the first telegram group management bot to be built in `Pyrogram` with the support of `MongoDB`, this also means I am faster than others in terms of processing and giving outputs. I have a large set of modular features to offer that'll help you manage your chats in an efficient way. \n\n"

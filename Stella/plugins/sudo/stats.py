@@ -1,7 +1,8 @@
-from Stella import StellaCli, SUDO_USERS, OWNER_ID, StellaDB
+from Stella import OWNER_ID, SUDO_USERS, StellaCli, StellaDB
 from Stella.__main__ import STATS
 from Stella.helper import custom_filter
 from Stella.helper.convert import convert_size
+
 
 @StellaCli.on_message(custom_filter.command(commands=('stats')))
 async def stats(client, message):

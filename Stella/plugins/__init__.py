@@ -1,5 +1,5 @@
-import os 
-from os.path import dirname, isfile, basename
+import os
+from os.path import basename, dirname, isfile
 
 
 def getListOfFiles(dirName):

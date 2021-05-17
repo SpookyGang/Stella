@@ -1,11 +1,8 @@
 from Stella import StellaCli
-
+from Stella.database.filters_mongo import get_filters_list, stop_db
 from Stella.helper import custom_filter
 from Stella.helper.chat_status import isUserAdmin
-from Stella.database.filters_mongo import (
-    stop_db,
-    get_filters_list
-)
+
 
 @StellaCli.on_message(custom_filter.command('stop'))
 async def stop(client, message):

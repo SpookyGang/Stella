@@ -13,14 +13,14 @@ class Config:
     PREFIX = ['/', '!']
 
     DATABASE_URI = ''
-    BACKUP_CHAT = 
+    BACKUP_CHAT = -100
 
-    LOG_CHANNEL = 
+    LOG_CHANNEL = -100
 
     SUDO_USERS = (
         []
     )
 
     # APIs 
-    StellaGbanAPI = 
+    StellaGbanAPI = None
     

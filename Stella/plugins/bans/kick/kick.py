@@ -1,13 +1,13 @@
-import html 
-import time 
 import asyncio
+import html
+import time
 
-from Stella import StellaCli, BOT_ID
-
+from Stella import BOT_ID, StellaCli
 from Stella.helper import custom_filter
-from Stella.helper.chat_status import isBotCan, isUserAdmin, can_restrict_member
-from Stella.helper.get_user import get_user_id, get_text
 from Stella.helper.anon_admin import anonadmin_checker
+from Stella.helper.chat_status import (can_restrict_member, isBotCan,
+                                       isUserAdmin)
+from Stella.helper.get_user import get_text, get_user_id
 
 
 @StellaCli.on_message(custom_filter.command(commands=['kick', 'dkick', 'skick']))

@@ -2,12 +2,11 @@ import html
 from enum import Enum, auto
 
 from Stella import StellaCli
-
+from Stella.database.antiflood_mongo import set_antiflood_mode
 from Stella.helper import custom_filter
 from Stella.helper.chat_status import CheckAllAdminsStuffs
 from Stella.helper.time_checker import get_time, time_string_helper
 
-from Stella.database.antiflood_mongo import set_antiflood_mode
 
 class FloodModeMap(Enum):
     ban = auto()  

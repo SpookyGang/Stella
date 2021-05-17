@@ -1,14 +1,7 @@
 from Stella import StellaCli
+from Stella.database.welcome_mongo import SetCaptcha, isGetCaptcha
 from Stella.helper import custom_filter
-from Stella.helper.chat_status import (
-    isBotCan,
-    isUserCan
-    )
-    
-from Stella.database.welcome_mongo import (
-    SetCaptcha,
-    isGetCaptcha
-)
+from Stella.helper.chat_status import isBotCan, isUserCan
 from Stella.plugins.connection.connection import connection
 
 CAPTCHA_WELCOME_TRUE = ['on', 'yes']
