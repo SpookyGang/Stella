@@ -30,7 +30,7 @@ async def Notes(client, message):
         len(Notes_list) != 0
     ): 
         for notes in Notes_list:
-            NoteName = f" • #{notes}\n"
+            NoteName = f" • `#{notes}`\n"
             NoteHeader += NoteName
         await message.reply(
             (

@@ -140,7 +140,10 @@ async def NewMemeber(client, message):
             ):
                 CaptchaButton = await button_captcha.CaptchaButton(chat_id, user_id)
             
-            elif captcha_mode == 'text':
+            elif captcha_mode in [
+                'text',
+                'math'
+            ]:
                 CaptchaButton = await text_captcha.textCaptcha(chat_id, user_id)
             
         else:

@@ -22,29 +22,32 @@ from captcha.image import ImageCaptcha
 
 from ..utils.actions import failedAction, passedAction
 from ..utils.captcha_text_gen import ButtonGen
-from ..utils.random_string_gen import RandomStringGen
+from ..utils.random_string_gen import RandomStringGen, mathCaptchaGen
 from .captcharules_button import ruleCaptchaButton
 
 CAPTCHA_START_STRINGS = [
-(
-    "Please complete the above CAPTCHA!\n\n"
-    "You will be given `3` tries in order to get yourself verified and gain access to the chat."
-),
-(
-    "CAPTCHA is not matched -  you've `2` tries left."
-),
-(
-    "AGAIN incorrect - you now only have `1` try left.\n\n"
-)
+    (
+        "Please complete the above CAPTCHA!\n\n"
+        "You will be given `3` tries in order to get yourself verified and gain access to the chat."
+    ),
+    (
+        "CAPTCHA is not matched -  you've `2` tries left."
+    ),
+    (
+        "AGAIN incorrect - you now only have `1` try left.\n\n"
+    )
 ]
 
 async def textCaptcha(chat_id, user_id):
     captcha_mode, captcha_text, captcha_kick_time = GetCaptchaSettings(chat_id)
-    if captcha_mode == 'text':
+    if captcha_mode in [
+        'text',
+        'math'
+    ]:
         Captcha_button = (
             [
                 [
-                    InlineKeyboardButton(text=captcha_text, url=f'http://t.me/{BOT_USERNAME}?start=captcha_text_{user_id}_{chat_id}')
+                    InlineKeyboardButton(text=captcha_text, url=f'http://t.me/{BOT_USERNAME}?start=captcha_{captcha_mode}_{user_id}_{chat_id}')
                 ]
             ]
         )
@@ -55,7 +58,12 @@ async def textCaptcha(chat_id, user_id):
 async def textCaptchaRedirect(message):
     user_id = message.from_user.id 
     chat_id = message.chat.id
-    if message.command[1].split('_')[1] == 'text':
+    _match = message.command[1].split('_')[1]
+
+    if _match in [
+        'text',
+        'math'
+    ]:
         new_user_id = int(message.command[1].split('_')[2])
         new_chat_id = int(message.command[1].split('_')[3])
     
@@ -78,9 +86,17 @@ async def textCaptchaRedirect(message):
                 )
                 return
 
+            
             # Captcha generating 
-            CaptchaStringList = RandomStringGen()
-            CaptchaString = random.choice(CaptchaStringList)
+            if _match == 'text':
+                CaptchaStringList = RandomStringGen()
+                CaptchaString = random.choice(CaptchaStringList)
+
+            elif _match == 'math':
+                answer_dict, CaptchaStringList = mathCaptchaGen()
+                print(answer_dict)
+                CaptchaString = f"{answer_dict.get('num01')} + {answer_dict.get('num02')} = ?"
+            
 
             CaptchaLoc = f"Stella/plugins/greeting/captcha/CaptchaDump/StellaCaptcha_text_{new_user_id}_{new_chat_id}.png"
             image = ImageCaptcha(width=270, height=90, fonts=['path/font_03.ttf'], font_sizes=(50, 50))
@@ -100,8 +116,10 @@ async def textCaptchaRedirect(message):
                 )
                 return
 
+            if _match == 'math':
+                CaptchaString = answer_dict.get('answer')
 
-            SetCaptchaTextandChances(new_chat_id, new_user_id, CaptchaString, chance, CaptchaStringList)
+            SetCaptchaTextandChances(new_chat_id, new_user_id, str(CaptchaString), chance, CaptchaStringList)
             keyboard = ButtonGen(CaptchaStringList, new_chat_id)
             
             await StellaCli.send_photo(
@@ -154,7 +172,7 @@ async def textCaptchaCallBack(client: StellaCli, callback_query: CallbackQuery):
         return
     
     message_id, correct_captcha, chances, captcha_list = GetUserCaptchaMessageIDs(chat_id, user_id)
-
+    
     # if chances is 3 reached 
     if chances >= 2:
         await callback_query.edit_message_caption(
