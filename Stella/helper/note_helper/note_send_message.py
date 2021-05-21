@@ -1,7 +1,7 @@
 import html
 import re
 
-from pyrogram.types import InlineKeyboardMarkup
+from pyrogram.types import InlineKeyboardMarkup, Message
 from Stella import StellaCli
 from Stella.database.notes_mongo import GetNote
 from Stella.helper.button_gen import button_markdown_parser
@@ -10,20 +10,21 @@ from Stella.helper.note_helper.note_misc_helper import preview_text_replace
 from Stella.plugins.connection.connection import connection
 
 
-async def SendNoteMessage(message, note_name, from_chat_id):
+async def SendNoteMessage(message: Message, note_name: str, from_chat_id: int):
+    
     user_id = message.from_user.id
     if await connection(message) is not None:
         from_chat_id = await connection(message)
         message_id = message.message_id
-        Content, Text, DataType = GetNote(from_chat_id, note_name)
+        content, text, data_type = GetNote(from_chat_id, note_name)
         chat_id = message.from_user.id 
     else:
         # if /privatenotes on
-        if not from_chat_id == None:
+        if from_chat_id is not None:
             message_id = message.message_id
             chat_id = message.from_user.id
-            Content, text, DataType = GetNote(from_chat_id, note_name)
-            Text = (
+            content, text, data_type = GetNote(from_chat_id, note_name)
+            text = (
                 f"**{note_name}:**\n\n"
                 f"{text}"
             ) 
@@ -33,111 +34,121 @@ async def SendNoteMessage(message, note_name, from_chat_id):
             if message.reply_to_message:
                 message_id = message.reply_to_message.message_id
             chat_id = message.chat.id 
-            Content, Text, DataType = GetNote(chat_id, note_name)
+            content, text, data_type = GetNote(chat_id, note_name)
     
     
-    Text, Buttons = button_markdown_parser(Text)
-    preview, Text = preview_text_replace(Text)
+    text, buttons = button_markdown_parser(text)
+    preview, text = preview_text_replace(text)
 
-    Text = NoteFillings(message, Text)
+    text = NoteFillings(message, text)
 
-    Text = html.escape(Text)
+    text = html.escape(text)
     
     # Check if string is empty or contain spaces only
     if (
-        not Text
-        or re.search("^\s*$", Text)
+        not text
+        or re.search("^\s*$", text)
     ):
-        Text = note_name
+        text = note_name
 
     reply_markup = None
-    if len(Buttons) > 0:
-        reply_markup = InlineKeyboardMarkup(Buttons)
+    if len(buttons) > 0:
+        reply_markup = InlineKeyboardMarkup(buttons)
     else:
         reply_markup = None
 
     if (
-        DataType == 'TEXT'
+        data_type == 1
     ):
         await StellaCli.send_message(
             chat_id=chat_id,
-            text=Text,
+            text=text,
             reply_to_message_id=message_id,
             reply_markup=reply_markup,
             disable_web_page_preview=preview
         )
     
     elif (
-        DataType == 'STICKER'
+        data_type == 2
     ):
         await StellaCli.send_sticker(
             chat_id=chat_id,
-            sticker=Content,
+            sticker=content,
+            reply_to_message_id=message_id,
+            reply_markup=reply_markup
+        )
+    
+    elif (
+        data_type == 3
+    ):
+        await StellaCli.send_animation(
+            chat_id=chat_id,
+            animation=content,
             reply_to_message_id=message_id,
             reply_markup=reply_markup
         )
 
     elif (
-        DataType == 'DOCUMENTS'
+        data_type == 4
     ):
         
         await StellaCli.send_document(
             chat_id=chat_id,
-            document=Content,
-            caption=Text,
+            document=content,
+            caption=text,
             reply_to_message_id=message_id,
             reply_markup=reply_markup
         )
 
     elif (
-        DataType == 'PHOTO'
+        data_type == 5
     ):
         await StellaCli.send_photo(
             chat_id=chat_id,
-            photo=Content,
-            caption=Text,
+            photo=content,
+            caption=text,
             reply_to_message_id=message_id,
             reply_markup=reply_markup
         )  
     
     elif (
-        DataType == 'AUDIO'
+        data_type == 6
     ):
         await StellaCli.send_audio(
             chat_id=chat_id,
-            audio=Content,
-            caption=Text,
+            audio=content,
+            caption=text,
             reply_to_message_id=message_id,
             reply_markup=reply_markup
         )
     elif (
-        DataType == 'VOICE'
+        data_type == 7
     ):
         await StellaCli.send_voice(
             chat_id=chat_id,
-            voice=Content,
-            caption=Text,
+            voice=content,
+            caption=text,
             reply_to_message_id=message_id,
             reply_markup=reply_markup
         )
     
     elif (
-        DataType == 'VIDEO'
+        data_type == 8
     ):
         await StellaCli.send_video(
             chat_id=chat_id,
-            video=Content,
-            caption=Text,
+            video=content,
+            caption=text,
             reply_to_message_id=message_id,
             reply_markup=reply_markup
         )
     
     elif (
-        DataType == 'VIDEO_NOTE'
+        data_type == 9
     ):
         await StellaCli.send_video_note(
             chat_id=chat_id,
-            video_note=Content,
+            video_note=content,
             reply_to_message_id=message_id,
             reply_markup=reply_markup
         )
@@ -148,11 +159,11 @@ async def SendNoteMessage(message, note_name, from_chat_id):
 async def exceNoteMessageSender(message, note_name, from_chat_id=None):
     try:
         await SendNoteMessage(message, note_name, from_chat_id)
-    except:
+    except Exception as e:
         await message.reply(
             (
                 "The notedata was incorrect, please update it. The buttons are most likely to be broken. If you are sure you aren't doing anything wrong and this was unexpected - please report it in my support chat.\n"
-                "**Error:** `invalid_url`"
+                f"**Error:** `{e}`"
             ),
             quote=True
         )

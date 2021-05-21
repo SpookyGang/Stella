@@ -1,49 +1,42 @@
+from pyrogram.types import Message
 from Stella.helper.chat_status import isUserAdmin
 
-async def private_note_and_admin_checker(message, Text):
-    PRIVATE_NOTE = True
-    if (
-        '{noprivate}' in Text
-    ):
-        PRIVATE_NOTE = False 
-
-    elif (
-        '{private}' in Text
-    ):
-        PRIVATE_NOTE = True 
-
+async def privateNote_and_admin_checker(message, text: str):
+    privateNote = True
+    if '{noprivate}' in text:
+        privateNote = False 
+    elif '{private}' in text:
+        privateNote = True 
     else:
-        PRIVATE_NOTE = None
+        privateNote = None
 
-    ALLOW = True
-    if (
-        '{admin}' in Text
-    ):
+    allow = True
+    if '{admin}' in text:
         if not await isUserAdmin(message, silent=True):
-            ALLOW = False 
+            allow = False 
         else:
-            ALLOW = True 
+            allow = True 
     
     return (
-        PRIVATE_NOTE,
-        ALLOW
+        privateNote,
+        allow
     )
 
-def preview_text_replace(Text):
-        if '{preview}' in Text:
-            Text = Text.replace('{preview}', '')
+def preview_text_replace(text):
+        if '{preview}' in text:
+            text = text.replace('{preview}', '')
             preview =  False
         else:
             preview = True
         
-        if '{admin}' in Text:
-            Text = Text.replace('{admin}', '')
+        if '{admin}' in text:
+            text = text.replace('{admin}', '')
         
-        if '{private}' in Text:
-            Text = Text.replace('{private}', '')
-        elif '{noprivate}' in Text:
-            Text = Text.replace('{noprivate}', '')
+        if '{private}' in text:
+            text = text.replace('{private}', '')
+        elif '{noprivate}' in text:
+            text = text.replace('{noprivate}', '')
         
         return (
-            preview, Text
+            preview, text
         )

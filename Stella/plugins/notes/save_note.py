@@ -28,7 +28,7 @@ async def saveNote(client, message):
         ):
             chat_title = 'local'
 
-    if not await CheckAdmins(message):
+    if not await CheckAdmins(message, silent=True):
         await message.reply(
             'You need to be an admin to do this.',
             quote=True

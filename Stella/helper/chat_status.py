@@ -75,6 +75,7 @@ async def isUserAdmin(message: Message, pm_mode: bool = False, user_id: int = No
     Returns:
         bool: True when user has chat status is admin | creator of the chat.
     """
+
     if user_id is None:
         user_id = message.from_user.id
 
@@ -85,7 +86,6 @@ async def isUserAdmin(message: Message, pm_mode: bool = False, user_id: int = No
         if message.chat.type == 'private':
             return True  
 
-    print(chat_id, user_id, silent)
     GetData = await StellaCli.get_chat_member(
         chat_id=chat_id,
         user_id=user_id
@@ -308,7 +308,7 @@ async def CheckAllAdminsStuffs(message: Message, permissions: Union[str, List[st
             return False
     return True
 
-async def CheckAdmins(message: Message) -> bool:
+async def CheckAdmins(message: Message, silent: bool = False) -> bool:
     """This function checks both bot & user chat status in the chat.
 
     Args:
@@ -340,10 +340,10 @@ async def CheckAdmins(message: Message) -> bool:
                 )
                 return
 
-    if not await isBotAdmin(message, chat_id=chat_id):
+    if not await isBotAdmin(message, chat_id=chat_id, silent=silent):
         return False
     
-    if not await isUserAdmin(message, chat_id=chat_id):
+    if not await isUserAdmin(message, chat_id=chat_id, silent=silent):
         return False
     
     return True

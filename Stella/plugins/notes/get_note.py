@@ -1,12 +1,14 @@
 from pyrogram import filters
+from pyrogram.types import Message
 from Stella import StellaCli
 from Stella.database.notes_mongo import GetNote, is_pnote_on, isNoteExist
 from Stella.helper import custom_filter
 from Stella.helper.note_helper.note_misc_helper import \
-    private_note_and_admin_checker
+    privateNote_and_admin_checker
 from Stella.helper.note_helper.note_send_message import exceNoteMessageSender
 from Stella.plugins.connection.connection import connection
-from Stella.plugins.notes.private_notes import PrivateNoteButton
+
+from .private_notes import PrivateNoteButton
 
 
 @StellaCli.on_message(custom_filter.command(commands=('get')))
@@ -21,59 +23,47 @@ async def getNote(client, message):
         )
         return  
 
-    NoteName = message.command[1]
-    if not isNoteExist(chat_id, NoteName):
+    note_name = message.command[1]
+    if not isNoteExist(chat_id, note_name):
         await message.reply(
             'Note not found!'
         )
         return
         
-    await send_note(message, NoteName)
+    await send_note(message, note_name)
     
 
 @StellaCli.on_message(filters.regex(pattern=(r"^#[^\s]+")))
 async def regex_get_note(client, message):
     chat_id = message.chat.id
     if message.from_user:
-        NoteName = message.text.split()[0].replace('#', '')
-        if isNoteExist(chat_id, NoteName):
-            await send_note(message, NoteName)
+        note_name = message.text.split()[0].replace('#', '')
+        if isNoteExist(chat_id, note_name):
+            await send_note(message, note_name)
 
 
-async def send_note(message, NoteName):
-    if await connection(message) is not None:
-        chat_id = await connection(message)
-        Content, Text, DataType = GetNote(chat_id, NoteName)
-        await exceNoteMessageSender(message, NoteName)
-        return
-
-    else:
-        chat_id = message.chat.id
-
-    Content, Text, DataType = GetNote(chat_id, NoteName)
+async def send_note(message: Message, note_name: str):
     
-    PRIVATE_NOTE, ALLOW = await private_note_and_admin_checker(message, Text)
+    chat_id = message.chat.id  
+    content, text, data_type = GetNote(chat_id, note_name)
+    privateNote, allow = await privateNote_and_admin_checker(message, text)
     
-    if ALLOW: 
-        if PRIVATE_NOTE == None:
+    if allow:
+        if privateNote == None:
             if is_pnote_on(chat_id):
-                await PrivateNoteButton(message, chat_id, NoteName)
+                await PrivateNoteButton(message, chat_id, note_name)
             else:
-                await exceNoteMessageSender(message, NoteName)
+                await exceNoteMessageSender(message, note_name)
             
-            return
-        
-        elif PRIVATE_NOTE is not None:
-            if (
-                is_pnote_on(chat_id)
-            ):
-                if PRIVATE_NOTE:
-                    await PrivateNoteButton(message, chat_id, NoteName)
+        elif privateNote is not None:
+            if is_pnote_on(chat_id):
+                if privateNote:
+                    await PrivateNoteButton(message, chat_id, note_name)
                 else:
-                    await exceNoteMessageSender(message, NoteName)
+                    await exceNoteMessageSender(message, note_name)
             else: 
-                if PRIVATE_NOTE:
-                    await PrivateNoteButton(message, chat_id, NoteName)
+                if privateNote:
+                    await PrivateNoteButton(message, chat_id, note_name)
                 else:
-                    await exceNoteMessageSender(message, NoteName)
+                    await exceNoteMessageSender(message, note_name)
 
