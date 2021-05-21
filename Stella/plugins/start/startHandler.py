@@ -7,6 +7,7 @@ from Stella.plugins.greeting.captcha.button_captcha import \
 from Stella.plugins.greeting.captcha.text_captcha import textCaptchaRedirect
 from Stella.plugins.notes.private_notes import note_redirect
 from Stella.plugins.rules.rules import rulesRedirect
+# from Stella.plugins.help.help import redirectHelp
 
 START_TEXT = (
     "Konnichiwa {mention}! I am Stella - the first telegram group management bot to be built in `Pyrogram` with the support of `MongoDB`, this also means I am faster than others in terms of processing and giving outputs. I have a large set of modular features to offer that'll help you manage your chats in an efficient way. \n\n"
@@ -42,6 +43,10 @@ async def start(client, message):
     if (
         len(message.command) > 1
     ):
+        # # help
+        # if startCheckQuery(message, StartQuery='help_'):
+        #     await redirectHelp(message)
+            
         # Captcha Redirect Implementation 
         if startCheckQuery(message, StartQuery='captcha'):
             await buttonCaptchaRedirect(message)

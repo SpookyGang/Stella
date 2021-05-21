@@ -36,7 +36,6 @@ for mode in ALL_MODULES:
     if hasattr(imported_module, "__user_info__"):
         USER_INFO.append(imported_module)
     
-    
 
 if __name__ == "__main__":
     scheduler.start()
