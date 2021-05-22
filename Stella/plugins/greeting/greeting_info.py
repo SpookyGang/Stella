@@ -18,6 +18,8 @@
 
 __mod_name__ = "Greetings"
 
+__sub_mod__ = ["CAPTCHA", "Formatting"]
+
 __help__ = """
 Give your members a warm welcome with the greetings module! Or a sad goodbye... Depends!
 

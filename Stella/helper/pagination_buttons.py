@@ -17,7 +17,7 @@
 
 
 from pyrogram.types import InlineKeyboardButton, Message
-
+from Stella.__main__ import HIDDEN_MOD
 
 class EqInlineKeyboardButton(InlineKeyboardButton):
     def __eq__(self, other):
@@ -41,15 +41,16 @@ def paginate_modules(_page_n, module_dict, prefix, chat=None):
             [EqInlineKeyboardButton(x.__mod_name__,
                                     callback_data="{}_module({},{})".format(prefix, chat, x.__mod_name__.lower())) for x
                                     in module_dict.values()])
-
+    
     pairs = []
     pair = []
 
     for module in modules:
-        pair.append(module)
-        if len(pair) > 2:
-            pairs.append(pair)
-            pair = []
+        if HIDDEN_MOD.get(module.text.lower()) is None:
+            pair.append(module)
+            if len(pair) > 2:
+                pairs.append(pair)
+                pair = []
 
     if pair:
         pairs.append(pair)

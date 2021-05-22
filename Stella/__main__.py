@@ -25,6 +25,9 @@ from Stella.plugins import ALL_MODULES
 
 IMPORTED = {}
 HELPABLE = {}
+SUB_MODE = {}
+HIDDEN_MOD = {}
+
 STATS = []
 USER_INFO = []
 
@@ -39,7 +42,7 @@ for mode in ALL_MODULES:
     imported_module = importlib.import_module('Stella' + module)
     if not hasattr(imported_module, "__mod_name__"):
         imported_module.__mod_name__ = imported_module.__name__
-    
+ 
     if not imported_module.__mod_name__.lower() in IMPORTED:
         IMPORTED[imported_module.__mod_name__.lower()] = imported_module
     else:
@@ -48,12 +51,19 @@ for mode in ALL_MODULES:
     if hasattr(imported_module, "__help__") and imported_module.__help__:
         HELPABLE[imported_module.__mod_name__.lower()] = imported_module
     
+    if hasattr(imported_module, "__sub_mod__") and imported_module.__sub_mod__:
+        SUB_MODE[imported_module.__mod_name__.lower()] = imported_module
+    
+    if hasattr(imported_module, "__hidden__") and imported_module.__hidden__:
+        HIDDEN_MOD[imported_module.__mod_name__.lower()] = imported_module.__hidden__
+
     if hasattr(imported_module, "__stats__"):
         STATS.append(imported_module)
 
     if hasattr(imported_module, "__user_info__"):
         USER_INFO.append(imported_module)
-    
+
+print(HIDDEN_MOD)
 
 if __name__ == "__main__":
     scheduler.start()

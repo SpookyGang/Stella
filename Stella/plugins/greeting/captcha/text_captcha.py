@@ -112,7 +112,6 @@ async def textCaptchaRedirect(message):
 
             elif _match == 'math':
                 answer_dict, CaptchaStringList = mathCaptchaGen()
-                print(answer_dict)
                 CaptchaString = f"{answer_dict.get('num01')} + {answer_dict.get('num02')} = ?"
             
 
