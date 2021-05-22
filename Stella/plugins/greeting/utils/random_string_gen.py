@@ -43,10 +43,10 @@ def mathCaptchaGen():
         'answer': answer
     }
 
-    for _ in range(12):
+    for _ in range(11):
         mathCaptchaList.append(
             random.randint(1, 130)
         )
-        mathCaptchaList.append(answer)
-        random.shuffle(mathCaptchaList)
+    mathCaptchaList.append(answer)
+    random.shuffle(mathCaptchaList)
     return answer_dict, mathCaptchaList
