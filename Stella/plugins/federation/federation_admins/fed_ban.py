@@ -46,7 +46,7 @@ async def fed_ban(client, message):
     
     if userID == BOT_ID:
         await message.reply(
-            "Oh you're a funny one aren't you! I am _not_ going to fedban myself."
+            "Hahahaha no. I am not going to fban myself."
         )
         return
     

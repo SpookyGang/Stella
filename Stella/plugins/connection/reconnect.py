@@ -32,7 +32,7 @@ async def reconnectC(client, message):
         message.chat.type == 'private'
     ):
         await message.reply(
-            "You need to be in pm to use this."
+            "You need to be in PM to use this."
         )
         return
     if GetConnectedChat(user_id) is not None:
@@ -42,7 +42,7 @@ async def reconnectC(client, message):
         if await connection(message) is not None:
             reconnectChat(user_id)
             await message.reply(
-                f"You are now reconnected to {chat_title}.",
+                f"You're now reconnected to {chat_title}.",
                 quote=True
             )
         

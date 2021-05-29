@@ -76,7 +76,7 @@ async def saveNote(client, message):
     SaveNote(chat_id, NoteName, Content, Text, DataType)
 
     await message.reply(
-        f"Saved note `{NoteName}` in {chat_title}.",
+        f"I've saved note `{NoteName}` in {chat_title}.",
         quote=True
     )
     

@@ -51,7 +51,7 @@ async def FedPromote(client, message):
         fed_id == None
     ):
         await message.reply(
-            "Only federation creators can promote people, and you don't seem to have a federation to promote to!"
+            "Only federation creators can promote people, and you don't even seem to have a federation to promote to!"
         )
         return
     
@@ -59,7 +59,7 @@ async def FedPromote(client, message):
         is_user_fban(fed_id, user_id)
     ):
         await message.reply(
-            f"User {user.mention} is fbanned in {fed_name}. You should unfban them before promoting."
+            f"User {user.mention} is fbanned in {fed_name}. You have to unfban them before promoting."
         )
         return
 
@@ -73,7 +73,7 @@ async def FedPromote(client, message):
         )
 
     await message.reply(
-        f"please get {user.mention} to confirm that they would like to be fed admin for {fed_name}",
+        f"Please get {user.mention} to confirm that they would like to be fed admin for {fed_name}.",
         reply_markup=keyboard
     )
 
@@ -104,7 +104,7 @@ async def fedpromote_callback(client: StellaCli, callback_query: CallbackQuery):
         else:
             await callback_query.answer(
                 text=(
-                    "You are not the user being promoted."
+                    "You aren't the user being promoted."
                 )
             )
 
@@ -125,7 +125,7 @@ async def fedpromote_callback(client: StellaCli, callback_query: CallbackQuery):
         else:
             await callback_query.answer(
                 text=(
-                    "You are not the user being promoted."
+                    "You aren't the user being promoted."
                 )
             )
         

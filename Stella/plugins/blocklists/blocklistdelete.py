@@ -46,7 +46,7 @@ async def blocklistdelete(client, message):
         ):
             blocklistMessageDelete(chat_id, True)
             await message.reply(
-                "Blocklist deletes have been **enabled**. I will now delete all blocklisted messages."
+                "Blocklist deletes have now been **enabled**. I will be deleting all blocklisted messages from now on."
             )
         
         elif (
@@ -54,12 +54,12 @@ async def blocklistdelete(client, message):
         ):
             blocklistMessageDelete(chat_id, False)
             await message.reply(
-                "Blocklist deletes have been **disabled**. I will no longer delete any blocklisted messages. However, I will still apply actions; such as warnings, or bans."
+                "Blocklist deletes have now been **disabled**. I will no longer be deleting any blocklisted messages. However, I will still take actions; such as warnings, or bans."
             )
         
         else:
             await message.reply(
-                "Your input was not recognised as one of: yes/no/on/off"
+                "Your input was not recognised as one of: `yes/no/on/off`"
             )
     else:
         if getblocklistMessageDelete:

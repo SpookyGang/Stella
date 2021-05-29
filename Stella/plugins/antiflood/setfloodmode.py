@@ -46,7 +46,7 @@ async def setfloodmode(client, message):
         len(message.command) >= 2
     ):
         await message.reply(
-            "You need to specify an action to take upon flooding. Current modes are: ban/kick/mute/tban/tmute"
+            "You're gonns need to specify an action to take upon flooding. Supported modes are: `ban/kick/mute/tban/tmute`"
         )
         return 
     
@@ -57,7 +57,7 @@ async def setfloodmode(client, message):
         mode_id = FloodModeMap.ban.value
         set_antiflood_mode(chat_id, mode_id)
         await message.reply(
-            f"Updated antiflood reaction in {html.escape(chat_title)} to: banned"
+            f"I've updated antiflood action in {html.escape(chat_title)} to: `banned`"
         )
     
     elif (
@@ -66,7 +66,7 @@ async def setfloodmode(client, message):
         mode_id = FloodModeMap.mute.value
         set_antiflood_mode(chat_id, mode_id)
         await message.reply(
-            f"Updated antiflood reaction in {html.escape(chat_title)} to: muted"
+            f"I've updated antiflood action in {html.escape(chat_title)} to: `muted`"
         )
     
     elif (
@@ -75,7 +75,7 @@ async def setfloodmode(client, message):
         mode_id = FloodModeMap.kick.value
         set_antiflood_mode(chat_id, mode_id)
         await message.reply(
-            f"Updated antiflood reaction in {html.escape(chat_title)} to: kicked"
+            f" I've updated antiflood action in {html.escape(chat_title)} to: `kicked`"
         )
     
     elif (
@@ -86,7 +86,7 @@ async def setfloodmode(client, message):
         time_limit, time_format = time_string_helper(time_args)
         set_antiflood_mode(chat_id, mode_id, time_args)
         await message.reply(
-            f"Updated antiflood reaction in {html.escape(chat_title)} to: temporarily banned for {time_limit} {time_format}"
+            f"I've updated antiflood action in {html.escape(chat_title)} to: `temporarily banned for {time_limit} {time_format}`"
         )
     
     elif (
@@ -97,10 +97,10 @@ async def setfloodmode(client, message):
         time_limit, time_format = time_string_helper(time_args)
         set_antiflood_mode(chat_id, mode_id, time_args)
         await message.reply(
-            f"Updated antiflood reaction in {html.escape(chat_title)} to: temporarily muted for {time_limit} {time_format}"
+            f"I've updated antiflood action in {html.escape(chat_title)} to: `temporarily muted for {time_limit} {time_format}`"
         )
     
     else:
         await message.reply(
-            f"Unknown type '{arg}'. Please use one of: ban/kick/mute/tban/tmute"
+            f"I don't recognize this argument '{arg}'. Please use one of: `ban/kick/mute/tban/tmute`"
         )

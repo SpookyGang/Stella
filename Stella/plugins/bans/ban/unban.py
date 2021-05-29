@@ -43,7 +43,7 @@ async def ban(client, message):
     
     if not await isUserBanned(chat_id, user_id):
         await message.reply(
-            "This person hasn't been banned... how am I meant to unban them?"
+            "So you're trying to unban someone who has never been banned? Good use of brain!"
         )
         return
 
@@ -53,5 +53,5 @@ async def ban(client, message):
         )
     
     await message.reply(
-        "Fine, they can join again."
+        "Alright, they can join again."
     )

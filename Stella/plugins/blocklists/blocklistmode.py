@@ -55,35 +55,35 @@ async def blocklistmode(client, message):
             blocklist_mode = BlocklistModeMap.nothing.value
             setblocklistmode(chat_id, blocklist_mode)
             await message.reply(
-                f"Updated blocklist reaction in {html.escape(chat_title)} to: nothing. Users who say any blocklisted words will now have their message deleted, and then be nothing"
+                f"I've updated blocklist action in {html.escape(chat_title)} to: nothing. Users who say any blocklisted words will now have their message deleted, and then be nothing"
             )
         
         elif args == 'ban':
             blocklist_mode = BlocklistModeMap.ban.value
             setblocklistmode(chat_id, blocklist_mode)
             await message.reply(
-                f"Updated blocklist reaction in {html.escape(chat_title)} to: ban. Users who say any blocklisted words will now have their message deleted, and then be banned"
+                f"I've updated blocklist action in {html.escape(chat_title)} to: ban. Users who say any blocklisted words will now have their message deleted, and then be banned"
             )
         
         elif args == 'mute':
             blocklist_mode = BlocklistModeMap.mute.value
             setblocklistmode(chat_id, blocklist_mode)
             await message.reply(
-                f"Updated blocklist reaction in {html.escape(chat_title)} to: mute. Users who say any blocklisted words will now have their message deleted, and then be muted"
+                f"I've updated blocklist aaction in {html.escape(chat_title)} to: mute. Users who say any blocklisted words will now have their message deleted, and then be muted"
             )
         
         elif args == 'kick':
             blocklist_mode = BlocklistModeMap.kick.value
             setblocklistmode(chat_id, blocklist_mode)
             await message.reply(
-                f"Updated blocklist reaction in {html.escape(chat_title)} to: kick. Users who say any blocklisted words will now have their message deleted, and then be kicked"
+                f"I've updated blocklist action in {html.escape(chat_title)} to: kick. Users who say any blocklisted words will now have their message deleted, and then be kicked"
             )
         
         elif args == 'warn':
             blocklist_mode = BlocklistModeMap.warn.value
             setblocklistmode(chat_id, blocklist_mode)
             await message.reply(
-                f"Updated blocklist reaction in {html.escape(chat_title)} to: warn. Users who say any blocklisted words will now have their message deleted, and then be warned"
+                f"I've updated blocklist action in {html.escape(chat_title)} to: warn. Users who say any blocklisted words will now have their message deleted, and then be warned"
             )
         
         elif args == 'tban':
@@ -93,7 +93,7 @@ async def blocklistmode(client, message):
             time_limit, time_format = time_string_helper(time_args)
             setblocklistmode(chat_id, blocklist_mode, blocklist_time=cal_time)
             await message.reply(
-                f"Updated blocklist reaction in {html.escape(chat_title)} to: tban for {time_limit} {time_format}. Users who say any blocklisted words will now have their message deleted, and then be temporarily banned for {time_limit} {time_format}")
+                f"I've updated blocklist action in {html.escape(chat_title)} to: tban for {time_limit} {time_format}. Users who say any blocklisted words will now have their message deleted, and then be temporarily banned for {time_limit} {time_format}")
         
         elif args == 'tmute':
             blocklist_mode = BlocklistModeMap.tmute.value
@@ -102,11 +102,11 @@ async def blocklistmode(client, message):
             time_limit, time_format = time_string_helper(time_args)
             setblocklistmode(chat_id, blocklist_mode, blocklist_time=cal_time)
             await message.reply(
-                f"Updated blocklist reaction in {html.escape(chat_title)} to: tmute for {time_limit} {time_format}. Users who say any blocklisted words will now have their message deleted, and then be temporarily muted for {time_limit} {time_format}")
+                f"I've updated blocklist action in {html.escape(chat_title)} to: tmute for {time_limit} {time_format}. Users who say any blocklisted words will now have their message deleted, and then be temporarily muted for {time_limit} {time_format}")
         
         else:
             await message.reply(
-                f"Unknown type {args}. Please use one of: nothing/ban/mute/kick/warn/tban/tmute"
+                f"I son't recognize this argument: `{args}``. Please use one of: nothing/ban/mute/kick/warn/tban/tmute"
             )
     else:
         blocklist_mode, blocklist_time, blocklist_default_reason = getblocklistmode(chat_id)

@@ -56,12 +56,12 @@ async def Clear_Note(client, message):
         ClearNote(chat_id, note_name)
 
         await message.reply(
-            f"Note {note_name} has been removed.",
+            f"I've removed the note `{note_name}`!.",
             quote=True
         )
     else:
         await message.reply(
-            "You haven't saved any notes with this name yet!",
+            "You haven't saved a note with this name yet!",
             quote=True
         )
 
@@ -101,7 +101,7 @@ async def ClearAll_Note(client, message):
         ]]
     )
     await message.reply(
-        f"Are you sure you would like to clear **ALL** notes in {chat_title}? This action cannot be undone.",
+        f"Are you sure you want to clear **ALL** notes in {chat_title}? This action is irreversible.",
         reply_markup=keyboard,
         quote=True
     )
@@ -123,7 +123,7 @@ async def ClearAllCallback(client: StellaCli, callback_query: CallbackQuery):
             
         elif query_data == 'cancel':
             await callback_query.edit_message_text(
-                "Clearing of all notes has been cancelled."
+                "Cancelled."
             )
     else:
         await callback_query.answer(

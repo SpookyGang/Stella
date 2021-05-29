@@ -38,7 +38,7 @@ async def AntiFLoodModeAction(message: Message):
             user_id
         )
         await message.reply(
-            f"Yeah, I don't like your flooding. {user_mention} has been banned!"
+            f"Yeah, I ain't gonna leave your flooding be! \n{user_mention} has been banned!"
         )
     
     elif FloodMode == 2:
@@ -50,7 +50,7 @@ async def AntiFLoodModeAction(message: Message):
             )
         )
         await message.reply(
-            f"Yeah, I don't like your flooding. Quiet now {user_mention}!"
+            f"Yeah, I ain't gonna leave your flooding be! \nQuiet now {user_mention}!"
         )
     
     elif FloodMode == 3:
@@ -60,7 +60,7 @@ async def AntiFLoodModeAction(message: Message):
             int(time.time()) + 60 # wait 60 seconds in case of server goes down at unbanning time
         )
         await message.reply(
-            f"Yeah, I don't like your flooding. {user_mention} has been kicked!"
+            f"Yeah, I ain't gonna leave your flooding be! \n{user_mention} has been kicked!"
         )
 
         # Unbanning proceess and wait 5 sec to give server to kick user first
@@ -77,7 +77,7 @@ async def AntiFLoodModeAction(message: Message):
         )
         
         await message.reply(
-                f"Yeah, I don't like your flooding. {user_mention} has been banned for {time_limit} {time_format}!"
+                f"Yeah, I ain't gonna leave your flooding be! \n{user_mention} has been banned for {time_limit} {time_format}!"
         )
     
     elif FloodMode == 5:
@@ -92,5 +92,5 @@ async def AntiFLoodModeAction(message: Message):
             until_date=int(time.time()) + int(until_time)
         )
         await message.reply(
-                f"Yeah, I don't like your flooding. {user_mention} has been muted for {time_limit} {time_format}!"
+                f"Yeah, I ain't gonna leave your flooding be! \n{user_mention} has been muted for {time_limit} {time_format}!"
         )

@@ -43,13 +43,13 @@ async def tban(client, message):
     
     if user_id == BOT_ID:
         await message.reply(
-            "You know what I'm not going to do? Ban myself."
+            "I don't plan to ban myself. NO."
         )
         return
 
     if not await can_restrict_member(message, user_id):
         await message.reply(
-            "Why would I ban an admin? That sounds like a pretty dumb idea."
+            "I'm not gonna ban an admin. Thanks."
         )
         return
     

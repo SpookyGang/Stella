@@ -40,7 +40,7 @@ async def kick(client, message):
 
     if not await can_restrict_member(message, user_id):
         await message.reply(
-            "Why would I mute an admin? That sounds like a pretty dumb idea."
+            "Hahahaha. I'm not willing to ban myself."
         )
         return
     
@@ -50,8 +50,7 @@ async def kick(client, message):
         int(time.time()) + 60 # wait 60 seconds in case of server goes down at unbanning time
         )
         
-    text = "okay byee!\n"
-    
+    text = "Ara Ara! Sayonara (´；v；`)
     reason = get_text(message)
     if reason:
         text += f"Given reason: {reason}"

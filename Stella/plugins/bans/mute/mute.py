@@ -44,7 +44,7 @@ async def mute(client, message):
     
     if user_id == BOT_ID:
         await message.reply(
-            "You know what I'm not going to do? mute myself."
+            "Yup! Let me just ban myself. Yay!"
         )
         return
 
@@ -53,7 +53,7 @@ async def mute(client, message):
 
     if not await can_restrict_member(message, user_id):
         await message.reply(
-            "Why would I mute an admin? That sounds like a pretty dumb idea."
+            "Surely I don't plan to ban an admin."
         )
         return
     
@@ -73,7 +73,7 @@ async def mute(client, message):
     
     
     if not message.command[0].find('smute') >= 0:
-        text = f"{user_info.mention} is mute now in {html.escape(chat_title)}.\n"
+        text = f"{user_info.mention} is muted now in {html.escape(chat_title)}.\n"
         
         reason = get_text(message)
         if reason:

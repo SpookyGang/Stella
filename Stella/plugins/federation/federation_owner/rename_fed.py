@@ -48,7 +48,7 @@ async def Rename_fed(client, message):
         len(' '.join(message.command[1:])) > 60
     ):
         await message.reply(
-            "you fed must be smaller than 60 words."
+            "Your fed must be smaller than 60 words."
         )
         return
 
@@ -65,7 +65,7 @@ async def Rename_fed(client, message):
 
     fed_rename_db(owner_id, fed_name)
     await message.reply(
-        f"Tada! I've renamed your federation from '{old_fed_name}' to '{fed_name}'. ( FedID: `{fed_id}`.)"
+        f"I've renamed your federation from '{old_fed_name}' to '{fed_name}'. ( FedID: `{fed_id}`.)"
     )
 
     # Send notification of Rename Fed to the all connected chat

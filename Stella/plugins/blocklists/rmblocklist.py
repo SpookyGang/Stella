@@ -40,5 +40,5 @@ async def add_blocklist(client, message):
         )
     else:
         await message.reply(
-            f"`{blocklist_word}` has not been blocklisted, and so could not be stopped. Use the /blocklist command to see the current blocklist."
+            f"`{blocklist_word}` hasn't been blocklisted, and so couldn't be stopped. Use the /blocklist command to see the current blocklist."
         )

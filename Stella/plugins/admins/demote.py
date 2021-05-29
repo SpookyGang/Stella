@@ -38,13 +38,13 @@ async def promote(client, message):
     
     if user_id == BOT_ID:
         await message.reply(
-            "I'm not gonna demote myself."
+            "I'm not going to demote myself."
         )
         return
     
     if not await isUserAdmin(message, user_id=user_id, silent=True):
         await message.reply(
-            "Are you like crazy? How am I supposed to demote someone who was never promoted?"
+            "This person isn't an admin. How am I supposed to demote them?"
         )
         return
 

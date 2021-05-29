@@ -57,5 +57,5 @@ async def ban(client, message):
         )
     
     await message.reply(
-        "Fine, they can speak again."
+        "Alright, they can speak again."
     )

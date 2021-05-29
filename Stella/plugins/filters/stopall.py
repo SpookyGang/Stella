@@ -37,7 +37,7 @@ async def stopall(client, message):
         chat_title = 'local'
     if not await isUserCreator(message):
         await message.reply(
-            'You\'re not creator of this chat.' 
+            'You\'re not the creator of this chat.' 
         )
         return
 
@@ -48,7 +48,7 @@ async def stopall(client, message):
 
     await message.reply(
         text=(
-            f'Are you sure you would like to stop **ALL** filters in {html.escape(chat_title)}? This action cannot be undone.'
+            f'Are you sure you want to stop **ALL** filters in {html.escape(chat_title)}? This action is irreversible.'
         ),
         reply_markup=KEYBOARD
     )
@@ -69,10 +69,10 @@ async def stopall_callback(client: StellaCli, callback_query: CallbackQuery):
     if query_data == 'stopall':
         stop_all_db(chat_id)
         await callback_query.edit_message_text(
-            text='Deleted all chat filters.'
+            text='I\'ve deleted all chat filters.'
         )
     
     elif query_data == 'cancel':
         await callback_query.edit_message_text(
-            text='Stopping of all filters has been cancelled.'
+            text='Cancelled.'
         )

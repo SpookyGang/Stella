@@ -55,7 +55,7 @@ async def NewFed(client, message):
         len(' '.join(message.command[1:])) > 60
     ):
         await message.reply(
-            "you fed must be smaller than 60 words."
+            "Your fed must be smaller than 60 words."
         )
         return
 

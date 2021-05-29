@@ -29,7 +29,7 @@ async def flood(client, message):
     chat_id = message.chat.id
     if not get_flood(chat_id):
         await message.reply(
-            "This chat is not currently enforcing flood control."
+            "This chat isn't currently enforcing flood control."
         )
         return 
     
@@ -39,17 +39,17 @@ async def flood(client, message):
         f"This chat is currently enforcing flood control after {FLOOD_LIMIT} messages. "
     )
     if FLOOD_MODE == 1:
-        text += "Any users sending more than that amount of messages will be banned."
+        text += "Any user that sends more than that amount of messages will be banned."
     elif FLOOD_MODE == 2:
-        text += "Any users sending more than that amount of messages will be muted."
+        text += "Any user that sends more than that amount of messages will be muted."
     elif FLOOD_MODE == 3:
-        text += "Any users sending more than that amount of messages will be kicked."
+        text += "Any user that sends more than that amount of messages will be kicked."
     elif FLOOD_MODE == 4:
         time_limit, time_format = time_string_helper(FLOOD_TIME)
-        text += f"Any users sending more than that amount of messages will be temporarily banned for {time_limit} {time_format}."
+        text += f"Any user that sends more than that amount of messages will be temporarily banned for {time_limit} {time_format}."
     elif FLOOD_MODE == 5:
         time_limit, time_format = time_string_helper(FLOOD_TIME)
-        text += f"Any users sending more than that amount of messages will be temporarily muted for {time_limit} {time_format}."
+        text += f"Any user that sends more than that amount of messages will be temporarily muted for {time_limit} {time_format}."
 
     await message.reply(
         text

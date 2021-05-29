@@ -38,7 +38,7 @@ async def blocklist(client, message):
         or len(BLOCKLIST_DATA) == 0
     ):
         await message.reply(
-            f"No blocklist filters active in {html.escape(chat_title)}!"
+            f"No blocklist filters are active in {html.escape(chat_title)}!"
         )
         return
 

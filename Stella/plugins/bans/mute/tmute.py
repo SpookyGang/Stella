@@ -48,13 +48,13 @@ async def tmute(client, message):
     
     if user_id == BOT_ID:
         await message.reply(
-            "You know what I'm not going to do? mute myself."
+            "Haha no. I'm not planning to ban myself."
         )
         return
 
     if not await can_restrict_member(message, user_id):
         await message.reply(
-            "Why would I mute an admin? That sounds like a pretty dumb idea."
+            "What makes you think I'm gonna ban an admin?"
         )
         return
     
@@ -74,7 +74,7 @@ async def tmute(client, message):
         )
         
 
-        text = f"{user_info.mention} was mute for {time_limit} {time_format}.\n"
+        text = f"{user_info.mention} was muted for {time_limit} {time_format}.\n"
         raw_reason = get_text(message)
         reason = ' '.join(raw_reason.split()[1:])
         if reason:

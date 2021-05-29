@@ -45,7 +45,7 @@ async def unfed_ban(client, message):
     
     if userID == BOT_ID:
         await message.reply(
-            "Oh you're a funny one aren't you! How do you think I would have fbanned myself hm?."
+             "How do you think I would've fbanned myself that you are trying to unfban me? Never seen such retardedness ever before."
         )
         return
     

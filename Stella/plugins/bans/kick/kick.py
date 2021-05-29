@@ -43,7 +43,7 @@ async def kick(client, message):
     
     if user_id == BOT_ID:
         await message.reply(
-            "You know what I'm not going to do? kick myself."
+            "NOt gonna kick myself. Thanks."
         )
         return
 
@@ -52,7 +52,7 @@ async def kick(client, message):
 
     if not await can_restrict_member(message, user_id):
         await message.reply(
-            "Why would I kick an admin? That sounds like a pretty dumb idea."
+            "Yeah bro, let's kick an admin. No? I'm gonna hack the api and then we'll bang this person!"
         )
         return
     

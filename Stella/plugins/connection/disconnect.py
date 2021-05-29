@@ -29,7 +29,7 @@ async def diconnectChat(client, message):
         message.chat.type == 'private'
     ):
         await message.reply(
-            "You need to be in pm to use this."
+            "You need to be in PM to use this."
         )
         return
     if await connection(message) is not None:
@@ -40,6 +40,6 @@ async def diconnectChat(client, message):
         )
     else:
         await message.reply(
-            "You aren't connected to any chats! Anything you save here is for your eyes only :)",
+            "You aren't connected to any chats :)",
             quote=True
         )

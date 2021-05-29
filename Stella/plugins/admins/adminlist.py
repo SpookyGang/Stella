@@ -48,7 +48,7 @@ async def admin_list(client, message):
     await message.reply(
         (
             f"{admin_header}\n\n"
-            "__These are updated values.__"
+            "__These are the updated values.__"
         ),
         quote=True
     )

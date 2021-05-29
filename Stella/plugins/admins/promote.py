@@ -36,14 +36,14 @@ async def promote(client, message):
 
     if user_id == BOT_ID:
         await message.reply(
-            "Pffff, I wish I could just promote myself."
+            "Damn, I wish I could promote myself."
         )
         return
 
     print(user_id)
     if await isUserAdmin(message, user_id=user_id, silent=True):
         await message.reply(
-            "What are you trying to do? Promote someone who's already an admin?"
+            "So you're tellimg me you wanna promote someone who's already an admin? How big brain of you!"
         )
         return
 

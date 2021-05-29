@@ -49,5 +49,5 @@ async def stop(client, message):
     
     stop_db(chat_id, filter_name)
     await message.reply(
-        f'Stopped `{filter_name}`.'
+        f'I\'ve stopped `{filter_name}`.'
     )

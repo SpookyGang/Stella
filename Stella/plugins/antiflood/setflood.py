@@ -32,7 +32,7 @@ async def setflood(client, message):
 
     if not await isBotAdmin(message):
         await message.reply(
-            f"I am not admin in {html.escape(chat_title)}! if you want me to enforce antiflood, you need to give me message deleting and ban permissions."
+            f"I don't have admin rights in {html.escape(chat_title)}! if you want me to enforce antiflood, you need to give me message deleting and banning permissions."
         )
         return
 
@@ -43,7 +43,7 @@ async def setflood(client, message):
         len(message.command) >= 2
     ):
         await message.reply(
-            'I expected some arguments! Either off, or an integer. eg: `/setflood 5`, or `/setflood off`'
+            'I was expecting some arguments but turned out you\'re an exception to people that have a functioning brain! \nEither off, or an integer. eg: `/setflood 5`, or `/setflood off` will work'
         )
         return
     
@@ -58,16 +58,16 @@ async def setflood(client, message):
     ):
         setflood_db(chat_id, False)
         await message.reply(
-            "Antiflood has been disabled."
+            "I've disable antiflood."
         )
         return
     
     elif (
         arg.isdigit()
     ):
-        if int(arg) > 100:
+        if int(arg) > 75:
             await message.reply(
-                "The flood limit is 100. You can set a value between 0 and 100."
+                "The flood limit is 75. You can set a value between 0 and 75."
             )
         else:
             setflood_db(chat_id, int(arg))

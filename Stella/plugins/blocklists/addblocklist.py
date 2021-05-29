@@ -35,7 +35,7 @@ async def add_blocklist(client, message):
     ):
         await message.reply(
             (
-                "You need to provide a blocklist trigger and reason!\n"
+                "You're gonna need to provide a blocklist trigger and reason!\n"
                 "eg: `/addblocklist \"the admins suck\" Respect your admins!`"
             )
         )
@@ -44,7 +44,7 @@ async def add_blocklist(client, message):
     text, reason = get_text_reason(message)
     add_blocklist_db(chat_id, text, reason)
     await message.reply(
-        f"Added blocklist filter '`{text}`'!",
+        f"I have added blocklist filter '`{text}`'!",
         quote=True
     )
 

@@ -86,7 +86,7 @@ async def blocklist_action(message, blocklist_word):
         )
         await message.reply(
             (
-                f"User {message.from_user.mention} is kicked.\n"
+                f"User {message.from_user.mention} has been kicked.\n"
                 f"**Reason:**\n{reason}"
             )
         )

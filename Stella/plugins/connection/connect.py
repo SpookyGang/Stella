@@ -42,7 +42,7 @@ async def Connect(client, message):
             chat_id.startswith('-100')
         ):
             await message.reply(
-                "I expected a chat id, but this isn't a valid integer",
+                "I was expecting a chat id, but this isn't a valid integer",
                 quote=True 
             )
             return 
@@ -50,7 +50,7 @@ async def Connect(client, message):
         chat_title = await GetChat(int(chat_id))
         if chat_title == None:
             await message.reply(
-                "failed to connect to chat: failed to get chat: unable to getChat: Bad Request: chat not found",
+                "failed to connect to chat!\nError: `chat not found`",
                 quote=True 
             )
         else:
@@ -86,7 +86,7 @@ async def connect_button(message, chat_id):
     chat_title = await GetChat(chat_id)
 
     reply_markup = None
-    text = f"Users are not allow to connect in {html.escape(chat_title)}."
+    text = f"Users are **not** allowed to connect in {html.escape(chat_title)}."
     if len(keyboard) > 0:
         connectDB(user_id, chat_id)
         reply_markup = InlineKeyboardMarkup(keyboard)

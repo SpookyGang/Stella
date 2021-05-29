@@ -34,7 +34,7 @@ async def anon_admin(client, message):
 
     if not await isUserCreator(message):
         await message.reply(
-            "Only the group creator can use this command"
+            "Only the group creator can execute this command"
         )
         return
     

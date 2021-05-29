@@ -51,7 +51,7 @@ async def allow_connection(client, message):
         ):
             allow_collection(chat_id, chat_title, allow_collection=True)
             await message.reply(
-                "Allow all user in connection.",
+                "Allow all users in connection.",
                 quote=True
             )
         elif (
@@ -59,7 +59,7 @@ async def allow_connection(client, message):
         ):
             allow_collection(chat_id, chat_title, allow_collection=False)
             await message.reply(
-                "Disallow all user in connection.",
+                "Disallow all users in connection.",
                 quote=True
             )
         else:
@@ -69,11 +69,11 @@ async def allow_connection(client, message):
     else:
         if get_allow_connection(chat_id):
             t_message = (
-                "users are allowed to connect chat in PM"
+                "Users are allowed to connect chat to PM."
             )
         else:
             t_message = (
-                "users are not allowed to connect chat in PM"
+                "users are ** allowed to connect chat to PM."
             )
         
         await message.reply(
