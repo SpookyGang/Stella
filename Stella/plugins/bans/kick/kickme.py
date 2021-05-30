@@ -50,7 +50,7 @@ async def kick(client, message):
         int(time.time()) + 60 # wait 60 seconds in case of server goes down at unbanning time
         )
         
-    text = "Ara Ara! Sayonara (´；v；`)
+    text = "Ara Ara! Sayonara (´；v；`)"
     reason = get_text(message)
     if reason:
         text += f"Given reason: {reason}"
