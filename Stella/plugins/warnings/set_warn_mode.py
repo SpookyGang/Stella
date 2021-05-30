@@ -63,7 +63,7 @@ async def set_warn_mode(client, message):
             warn_mode_map = WarnModeMap.Ban.value
             set_warn_mode_db(chat_id, warn_mode_map, time=None)
             await message.reply(
-                "Updated warning mode to: banned"
+                "Updated warning mode to: `banned`"
             )
 
         elif (
@@ -72,7 +72,7 @@ async def set_warn_mode(client, message):
             warn_mode_map = WarnModeMap.Kick.value
             set_warn_mode_db(chat_id, warn_mode_map, time=None)
             await message.reply(
-                "Updated warning mode to: kicked"
+                "Updated warning mode to: `kicked`"
             )
         
         elif (
@@ -81,7 +81,7 @@ async def set_warn_mode(client, message):
             warn_mode_map = WarnModeMap.Mute.value
             set_warn_mode_db(chat_id, warn_mode_map, time=None)
             await message.reply(
-                "Updated warning mode to: muted"
+                "Updated warning mode to: `muted`"
             )
         
         elif (
@@ -93,7 +93,7 @@ async def set_warn_mode(client, message):
             time_limit, time_format = time_string_helper(time_args)
             set_warn_mode_db(chat_id, warn_mode_map, time=cal_time)
             await message.reply(
-                f"Updated warning mode to: temporarily banned for {time_limit} {time_format}"
+                f"Updated warning mode to: `temporarily banned for {time_limit} {time_format}`"
             )
         
         elif (
@@ -105,11 +105,11 @@ async def set_warn_mode(client, message):
             time_limit, time_format = time_string_helper(time_args)
             set_warn_mode_db(chat_id, warn_mode_map, time=cal_time)
             await message.reply(
-                f"Updated warning mode to: temporarily muted for {time_limit} {time_format}"
+                f"Updated warning mode to: `temporarily muted for {time_limit} {time_format}`"
             )
         else:
             await message.reply(
-                f"Unknown type '{args}'. Please use one of: ban/kick/mute/tban/tmute"
+                f"i don't recognize this argument: '{args}'. Please use one of: ban/kick/mute/tban/tmute"
             )
     else:
         await message.reply(

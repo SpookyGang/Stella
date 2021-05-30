@@ -33,13 +33,13 @@ async def warn(message, reason, silent=False, warn_user=None):
         user_id = user_info.id
         if user_id == BOT_ID:
             await message.reply(
-                "I'm not gonna warn myself!"
+                "Bold of you to think I'm gonna warn myself!"
             )
             return
 
         if not await can_restrict_member(message, user_id):
             await message.reply(
-                "I'm not going to warn an admin!"
+                "Wish I could warn an admin but sadly enough that isn't technically possible!"
             )
             return
 
@@ -59,7 +59,7 @@ async def warn(message, reason, silent=False, warn_user=None):
     countuser_warn = count_user_warn(chat_id, user_id)
     warnlimit = warn_limit(chat_id)
 
-    warn_text = f"User {user_info.mention} has {countuser_warn}/{warnlimit} warnings; be careful!\n"
+    warn_text = f"User {user_info.mention} has {countuser_warn}/{warnlimit} warnings; gotta be be careful from now on!\n"
     if reason:
         warn_text += f"**Reason:**\n{reason}"
 

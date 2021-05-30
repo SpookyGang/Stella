@@ -44,7 +44,7 @@ async def reset_all_warns(client, message):
     )
     await message.reply(
         text=(
-            f"Are you sure you would like to reset ALL warnings in {html.escape(chat_title)}? This action cannot be undone."
+            f"Are you sure you want to reset **ALL** warnings in {html.escape(chat_title)}? This action cannot be undone."
         ),
         reply_markup=buttons,
         quote=True
@@ -56,7 +56,7 @@ async def resetwarns_callback(client: StellaCli, callback_query: CallbackQuery):
     query_data = callback_query.data.split('_')[1]  
     if not await isUserCreator(callback_query, chat_id=callback_query.message.chat.id, user_id=callback_query.from_user.id):
         await callback_query.answer(
-            text='You\'re not owner of this chat.'
+            text='You\'re not the owner of this chat.'
         )
         return
 

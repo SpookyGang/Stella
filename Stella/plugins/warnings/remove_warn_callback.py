@@ -32,7 +32,7 @@ async def warn_remove_callback(client: StellaCli, callback_query: CallbackQuery)
 
     if not await isUserAdmin(message=callback_query.message, user_id=from_user, chat_id=chat_id, silent=True):
         await callback_query.answer(
-            text='You are not admin to do this.'
+            text='You\'re not an admin.'
         )
         return
     

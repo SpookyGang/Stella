@@ -37,7 +37,7 @@ async def reset_warn(client, message):
     
     if warn_num is None:
         await message.reply(
-            f"User {user_info.mention} has no warnings to delete!"
+            f"User {user_info.mention} has no warnings to delete! What are you trying to acheive?"
         )
         return
 
