@@ -1,7 +1,7 @@
-from EmceeBot import pbot as app
-from EmceeBot.pyrogramee.errors import capture_err
-from EmceeBot.pyrogramee.json_prettify import json_prettify
-from EmceeBot.pyrogramee.fetch import fetch
+from Stella import pbot as app
+from Stella.pyrogramee.errors import capture_err
+from Stella.pyrogramee.json_prettify import json_prettify
+from Stella.pyrogramee.fetch import fetch
 from pyrogram import filters
 
 
