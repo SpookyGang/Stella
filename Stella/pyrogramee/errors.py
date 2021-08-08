@@ -1,7 +1,7 @@
 import sys
 import traceback
 from functools import wraps
-from EmceeBot import pbot, SUPPORT_CHAT
+from Stella import pbot, LOG_CHANNEL
 
 def split_limits(text):
     if len(text) < 2048:
@@ -41,7 +41,7 @@ def capture_err(func):
             )
             for x in error_feedback:
                 await pbot.send_message(
-                    SUPPORT_CHAT,
+                    LOG_CHANNEL,
                     x
                 )
             raise err
