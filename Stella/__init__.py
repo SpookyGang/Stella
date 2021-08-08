@@ -50,6 +50,7 @@ StellaCli = Client(
     bot_token=BOT_TOKEN
 )
 
+pbot = Client
 
 StellaAPI = StellaClient(api_key=StellaGbanAPI)
 
