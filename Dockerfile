@@ -7,4 +7,4 @@ RUN pip3 install --no-cache-dir -U -r requirements.txt
 
 #fuck I'm noob in docker 
 
-CMD ["python3", "-m", "wbb"]
+CMD ["python3", "-m", "Stella"]
