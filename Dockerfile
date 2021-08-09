@@ -4,4 +4,7 @@ RUN sudo apt install python3-pip
 RUN git clone https://github.com/SpookyGang/Stella.git
 RUN cd Stella
 RUN pip3 install --no-cache-dir -U -r requirements.txt
-RUN python3 -m Stella
+
+#fuck I'm noob in docker 
+
+CMD ["python3", "-m", "wbb"]
