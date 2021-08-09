@@ -9,3 +9,46 @@
          "Stella"
       ],   
    "repository": "https://github.com/satyanandatripathi/Stella",
+
+   "env": {
+    "OWNER_ID": {
+      "description": "Telegram UID of owner account",
+      "required": true
+    },
+    "BOT_TOKEN": {
+      "description": "A bot token from @BotFather",
+      "required": true
+    },
+    "BOT_USERNAME": {
+      "description": "Your bot's username without @",
+      "required": true
+    },
+    "BOT_ID": {
+      "description": "Telegram UID of your bot",
+      "required": false,
+      "value": ""
+    },
+    "PREFIX": {
+      "description": "command handler of your bot",
+      "required": false,
+      "value": "/"
+    },
+    "DATABASE_URI": {
+      "description": "MongoDB uri",
+      "required": false,
+    },
+    "BACKUP_CHAT": {
+      "description": "Chat id of backup chat",
+      "required": true
+    },
+    "LOG_CHANNEL": {
+      "description": "Chat id of log channel of ur bot",
+      "required": false,
+    },    
+    "SUDO_USERS": {
+      "description": "Telegram UID of users you wanna gib sudo access to your bot (seperate by space )",
+      "required": false,   
+    
+    }
+  }
+}
