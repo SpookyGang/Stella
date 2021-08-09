@@ -15,3 +15,4 @@ pyromod
 pykeyboard 
 captcha
 apscheduler
+ffmpeg
