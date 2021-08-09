@@ -1,3 +1,9 @@
+WORKDIR /rikudo
+
+RUN chmod 777 /rikudo
+
+#sorry for noob dockerfile
+
 RUN sudo apt-get update
 RUN sudo apt install upgrade 
 RUN sudo apt install python3-pip
