@@ -13,20 +13,19 @@
    "env": {
     "OWNER_ID": {
       "description": "Telegram UID of owner account",
-      "required": true
+      "required": true,
     },
     "BOT_TOKEN": {
       "description": "A bot token from @BotFather",
-      "required": true
+      "required": true,
     },
     "BOT_USERNAME": {
       "description": "Your bot's username without @",
-      "required": true
+      "required": true,
     },
     "BOT_ID": {
       "description": "Telegram UID of your bot",
-      "required": false,
-      "value": ""
+      "required": true,
     },
     "PREFIX": {
       "description": "command handler of your bot",
@@ -35,7 +34,7 @@
     },
     "DATABASE_URI": {
       "description": "MongoDB uri",
-      "required": false,
+      "required": true,
     },
     "BACKUP_CHAT": {
       "description": "Chat id of backup chat",
@@ -43,7 +42,7 @@
     },
     "LOG_CHANNEL": {
       "description": "Chat id of log channel of ur bot",
-      "required": false,
+      "required": true,
     },    
     "SUDO_USERS": {
       "description": "Telegram UID of users you wanna gib sudo access to your bot (seperate by space )",
