@@ -1,3 +1,5 @@
+FROM python:3.9.1
+
 WORKDIR /rikudo
 
 RUN chmod 777 /rikudo
