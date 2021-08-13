@@ -26,7 +26,7 @@
          "value": ""
       },    
       "BOT_NAME": {
-         "description": "Your postgres sql db, empty this field if you dont have one.",
+         "description": "Username of your bot",
          "required": false,
          "value": "sqldbtype://username:pw@hostname:port/db_name"
       },      
@@ -41,24 +41,24 @@
          "value": ""
       },
       "PREFIX": {
-        "description": "Your Heroku API key, get it from 'https://dashboard.heroku.com/account'",
+        "description": "command handler of your bot",
         "value": ""
       },
       "DATABASE_URI": {
-        "description": "Enter the Heroku app name here (Must an exact same name with your input above).",
+        "description": "MONGODB URI",
         "required": false
       },
       "LOG_CHANNEL": {
-         "description": "Your username without the @",
+         "description": "id of log grp you wanna set",
          "value": ""
       },
       "BACKUP_CHAT": {
-         "description": "Your Telegram support group chat username where your users will go and bother you with shit But be like: MyGroupChatUsernameBlah. If this ever points to masha support than consider you made an enemy.",
+         "description": "Your Telegram backup group chat user-id ",
          "required": true,
          "value": ""
       },
       "SUDO_USERS": {
-         "description": "Required for database connections.",
+         "description": "sudo users of your bot",
          "required": false,
          "value": ""
       
