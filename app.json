@@ -46,6 +46,6 @@
     "SUDO_USERS": {
       "description": "Telegram UID of users you wanna gib sudo access to your bot (seperate by space )",
       "required": false,   
-    
-  MmMmm}
+    }   
+  }
 }
