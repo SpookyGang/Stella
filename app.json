@@ -1,22 +1,14 @@
 {
-      "name": "EMCEE",
+      "name": "Stella",
       "description": "Telegram group management bot.",
       "keywords": [
          "telegram",
          "anime",
          "group",
          "manager",
-         "Emcee"
-      ],   
-   "repository": "https://github.com/Aquila-14/EMCEE",
-   "addons": [
-      {
-         "options": {
-            "version": "12"
-         },
-         "plan": "heroku-postgresql"
-      }
-   ],
+         "Stella"
+      ],  
+ 
    "env": {
       "TOKEN": {
          "description": "Your bot token. Get one from @BotFather duh",
