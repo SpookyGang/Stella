@@ -1,6 +1,7 @@
 # Pyrogram implimantion 
 pyrogram 
 tgcrypto 
+aiohttp
 
 # Database implimantion
 pymongo
