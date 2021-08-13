@@ -1,14 +1,14 @@
 {
-"name": "Stella"
-"description": "TG grp manager bot based on pyrogram",
-"keywords": [
+  "name": "Stella"
+  "description": "TG grp manager bot based on pyrogram",
+  "keywords": [
          "telegram",
          "anime",
          "group",
-         "manager",
-         "Stella"
-      ],   
- "repository": "https://github.com/satyanandatripathi/Stella",
+         "manager"
+     
+  ],   
+  "repository": "https://github.com/satyanandatripathi/Stella",
 
   "env": {
     "OWNER_ID": {
