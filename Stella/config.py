@@ -43,5 +43,5 @@ class Config:
     SUDO_USERS = list(map(int, getenv("SUDO_USERS").split()))
 
     # APIs 
-    StellaGbanAPI = none
+    StellaGbanAPI = getenv("StellaGbanAPI", None)
     
