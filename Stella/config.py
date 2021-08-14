@@ -22,7 +22,7 @@ from dotenv import load_dotenv
 
 if os.path.exists("stella.env"):
     load_dotenv("stella.env")
-else
+else:
     load_dotenv()
 
 class Config:
