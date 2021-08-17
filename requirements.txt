@@ -2,6 +2,7 @@
 pyrogram 
 tgcrypto 
 aiohttp
+requests
 
 # Database implimantion
 pymongo
