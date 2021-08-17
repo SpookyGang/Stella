@@ -20,3 +20,4 @@ apscheduler
 ffmpeg
 youtube_dl
 python-dotenv
+youtube_search
