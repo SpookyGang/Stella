@@ -17,4 +17,5 @@ pykeyboard
 captcha
 apscheduler
 ffmpeg
+youtube_dl
 python-dotenv
