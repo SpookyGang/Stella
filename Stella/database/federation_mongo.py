@@ -122,8 +122,7 @@ def is_user_fban(fed_id, user_id) -> bool:
                 user_ids_list.append(banned_user)
             return user_id in user_ids_list
         return False 
-    else:
-        return False 
+    return False 
 
 def update_reason(fed_id, user_id, new_reason):
     federation.update_one(
