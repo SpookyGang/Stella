@@ -185,9 +185,8 @@ async def locks_checker(client, message):
         ):
             await lock_action(message, action=15)
     
-    if 16 in LOCKS_LIST:
-        if message.game:
-            await lock_action(message, action=16)
+    if 16 in LOCKS_LIST and message.game:
+        await lock_action(message, action=16)
     
     if 17 in LOCKS_LIST:
         if message.animation:
@@ -210,26 +209,28 @@ async def locks_checker(client, message):
             else:
                 await lock_action(message, action=18)
     
-    if 19 in LOCKS_LIST:
-        if (
+    if (
+        19 in LOCKS_LIST
+        and (
+        message.text
+        or message.caption
+    )
+    ):
+        text = (
             message.text
             or message.caption
+        )
+        extractor = URLExtract()
+        URL_LIST = extractor.find_urls(text)
+        if (
+            len(URL_LIST) == 0
         ):
-            text = (
-                message.text
-                or message.caption
-            )
-            extractor = URLExtract()
-            URL_LIST = extractor.find_urls(text)
-            if (
-                len(URL_LIST) == 0
-            ):
-                return
-            
-            TG_INVITELINK = 't.me/joinchat/'
-            for link in URL_LIST:
-                if TG_INVITELINK in link:
-                    await lock_action(message, action=19)
+            return
+        
+        TG_INVITELINK = 't.me/joinchat/'
+        for link in URL_LIST:
+            if TG_INVITELINK in link:
+                await lock_action(message, action=19)
     
     if 20 in LOCKS_LIST:
         if message.location:
