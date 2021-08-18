@@ -67,7 +67,7 @@ def button_markdown_parser(text):
         else:
             text_data += markdown_note[prev:to_check]
             prev = match.start(1) - 1
-    else:
-        text_data += markdown_note[prev:]
+        
+    text_data += markdown_note[prev:]
 
     return text_data, buttons
