@@ -56,10 +56,7 @@ async def getData(chat_id, message_id, GetWord, CurrentPage):
         PageLen
         )
 
-    except (
-        IndexError
-        or KeyError
-    ):
+    except (IndexError, KeyError):
         CNMessage = await StellaCli.send_message(
             chat_id=chat_id,
             reply_to_message_id=message_id,
