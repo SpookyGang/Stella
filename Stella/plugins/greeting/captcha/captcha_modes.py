@@ -79,7 +79,7 @@ async def CaptchaMode(client, message):
     else:
         captcha_mode, captcha_text, captcha_kick_time = GetCaptchaSettings(chat_id)
 
-        if captcha_mode == None:
+        if captcha_mode is None:
             captcha_mode = 'button'
         
         await message.reply(

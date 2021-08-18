@@ -82,13 +82,13 @@ async def welcomeformat(message, chat_id, noformat=True):
     if isGetCaptcha(chat_id):
         captcha_mode, captcha_text, captcha_kick_time = GetCaptchaSettings(chat_id)
 
-        if captcha_mode == None:
+        if captcha_mode is None:
             captcha_mode = 'button'
         
-        if captcha_text == None:
+        if captcha_text is None:
             captcha_text = "Click here to prove you're human"
         
-        if captcha_kick_time == None:
+        if captcha_kick_time is None:
             captcha_kick_time = "disabled"
         
         captcha = (

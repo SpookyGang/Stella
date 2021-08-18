@@ -161,7 +161,7 @@ async def locks_checker(client, message):
             ):
                 from_channel_user = message.forward_from_chat.username
                 from_channel_id = message.forward_from_chat.id
-                if from_channel_user == None:
+                if from_channel_user is None:
                     CHECKER_IN_LIST = (
                         from_channel_id in ALLOW_LIST
                     )

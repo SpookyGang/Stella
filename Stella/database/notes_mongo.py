@@ -29,7 +29,7 @@ def SaveNote(chat_id, note_name, content, text, data_type):
     totalNote = notes.count_documents({})
     NotesIDs = totalNote + 1
 
-    if GetNotes == None:
+    if GetNotes is None:
         NoteData = {
             '_id': NotesIDs,
             'chat_id': chat_id,
@@ -121,7 +121,7 @@ def GetNote(chat_id, note_name):
         }
     )
 
-    if not GetNoteData == None:
+    if not GetNoteData is None:
         Getnotes = GetNoteData['notes']
         for note in Getnotes:
             GetNote = note['note_name']
@@ -165,7 +165,7 @@ def NoteList(chat_id) -> list:
             'chat_id': chat_id
         }
     )
-    if not GetNoteData == None:
+    if not GetNoteData is None:
         if 'notes' in GetNoteData:
             Getnotes = GetNoteData['notes']
             for note in Getnotes:
@@ -214,7 +214,7 @@ def is_pnote_on(chat_id) -> bool:
                 'chat_id': chat_id
             }
         )
-    if not GetNoteData == None:
+    if not GetNoteData is None:
         if 'private_note' in GetNoteData:
             private_note = GetNoteData['private_note']
             return private_note

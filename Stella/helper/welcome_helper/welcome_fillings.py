@@ -19,11 +19,11 @@
 import html
 
 def Welcomefillings(message, message_text, NewUserJson):
-  if not NewUserJson == None:
+  if not NewUserJson is None:
     user_id = NewUserJson.id 
     first_name = NewUserJson.first_name 
     last_name = NewUserJson.last_name
-    if last_name == None:
+    if last_name is None:
       last_name = ''
     full_name = f'{first_name} {last_name}'
     username = NewUserJson.username

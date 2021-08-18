@@ -14,7 +14,7 @@ def add_user(user_id, username=None, chat_id=None, chat_title=None, Forwared=Fal
         }
     )
 
-    if UserData == None:
+    if UserData is None:
         UsersNums = users.count_documents({})
         UsersIDs = UsersNums + 1
         
@@ -95,7 +95,7 @@ def add_chat(chat_id, chat_title):
         }
     )
 
-    if ChatData == None:
+    if ChatData is None:
         ChatsNums = chats.count_documents({})
         ChatsIDs = ChatsNums + 1
 

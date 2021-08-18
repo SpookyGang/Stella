@@ -221,7 +221,7 @@ async def isBotCan(message: Message, chat_id: int = None, permissions: str = 'ca
     if GetData[permissions]:
         return True
     else:
-        if silent == False:
+        if silent is False:
             await message.reply(
                 BOT_PERMISSIONS_STRINGS[permissions]
             )
@@ -264,7 +264,7 @@ async def isUserCan(message, user_id: int = None, chat_id: int = None, permissio
     ):
         return True
     else:
-        if silent == False:
+        if silent is False:
             await message.reply(
                 USERS_PERMISSIONS_STRINGS[permissions]
             )

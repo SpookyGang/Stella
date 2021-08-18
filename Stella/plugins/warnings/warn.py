@@ -51,8 +51,8 @@ async def warn(message, reason, silent=False, warn_user=None):
     warnchecker = await warn_checker(message, user_id, silent)
     
     if (
-        warnchecker == True
-        or warnchecker == None
+        warnchecker is True
+        or warnchecker is None
     ):
         return False
 

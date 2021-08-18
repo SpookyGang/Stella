@@ -17,11 +17,11 @@
 
 
 def NoteFillings(message, message_text):
-  if not message == None:
+  if not message is None:
     user_id = message.from_user.id 
     first_name = message.from_user.first_name 
     last_name = message.from_user.last_name
-    if last_name == None:
+    if last_name is None:
       last_name = ''
     full_name = f'{first_name} {last_name}'
     username = message.from_user.username

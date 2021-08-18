@@ -58,7 +58,7 @@ async def NewMemeber(client, message):
         
     if GetCleanWelcome(chat_id):
         CleanWelcomeMessageID = GetCleanWelcomeMessage(chat_id)
-        if not CleanWelcomeMessageID == None:
+        if not CleanWelcomeMessageID is None:
             await StellaCli.delete_messages(
                     chat_id=chat_id,
                     message_ids=CleanWelcomeMessageID
@@ -153,7 +153,7 @@ async def NewMemeber(client, message):
             # Captcha modes button/text/math
             captcha_mode, captcha_text, captcha_kick_time = GetCaptchaSettings(chat_id)
             if (
-                captcha_mode == None
+                captcha_mode is None
                 or captcha_mode == 'button'
             ):
                 CaptchaButton = await button_captcha.CaptchaButton(chat_id, user_id)
@@ -174,12 +174,12 @@ async def NewMemeber(client, message):
                 Content, Text, DataType = GetWelcome(chat_id)
                 Text, buttons = button_markdown_parser(Text)
 
-                if CaptchaButton == None:
+                if CaptchaButton is None:
                     reply_markup = None
 
                 # If welcome message has button greater than 0
                 if len(buttons) > 0:
-                    if not CaptchaButton == None:
+                    if not CaptchaButton is None:
                         reply_markup = InlineKeyboardMarkup(buttons + CaptchaButton)
                         # Already Verified users
                         if not isReCaptcha(chat_id):
@@ -193,7 +193,7 @@ async def NewMemeber(client, message):
                         reply_markup = InlineKeyboardMarkup(buttons)
                 else:
                     reply_markup = None
-                    if not CaptchaButton == None:
+                    if not CaptchaButton is None:
                         reply_markup = InlineKeyboardMarkup(CaptchaButton)
                         # Already Verified users
                         if not isReCaptcha(chat_id):
@@ -215,7 +215,7 @@ async def NewMemeber(client, message):
             # If welcome has No any messages set 
             Text = Welcomefillings(message, DEFAUT_WELCOME, NewUserJson)
 
-            if CaptchaButton == None:
+            if CaptchaButton is None:
                 reply_markup = None
             else:
                 reply_markup = InlineKeyboardMarkup(CaptchaButton)
