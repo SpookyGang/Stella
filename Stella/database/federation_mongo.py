@@ -49,14 +49,12 @@ def is_fed_exist(fed_id=None, owner_id=None) -> bool:
         )
 
         return GetFed is not None
-    
-    else:
-        GetFed = federation.find_one(
-            {
-                'fed_id': fed_id
-            }
-        )
-        return GetFed is not None
+    GetFed = federation.find_one(
+        {
+            'fed_id': fed_id
+        }
+    )
+    return GetFed is not None
 
 def join_fed_db(chat_id, chat_title, fed_id):
     federation.update_one(
@@ -123,8 +121,7 @@ def is_user_fban(fed_id, user_id) -> bool:
                 banned_user = users['user_id']
                 user_ids_list.append(banned_user)
             return user_id in user_ids_list
-        else:
-            return False 
+        return False 
     else:
         return False 
 
