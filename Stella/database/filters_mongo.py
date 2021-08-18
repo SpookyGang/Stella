@@ -135,7 +135,6 @@ def get_filters_list(chat_id: int):
    if filter_data is not None:
       FILTERS_NAME = list()
       for filter_name in filter_data['filters']:
-         FILTERS_NAME.append(filter_name['filter_name'])
+          FILTERS_NAME.append(filter_name['filter_name'])
       return FILTERS_NAME
-   else:
-      return []
+   return []

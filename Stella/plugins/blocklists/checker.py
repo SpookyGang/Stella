@@ -44,8 +44,8 @@ async def blocklist_action(message, blocklist_word):
         if getblocklistMessageDelete(chat_id):
             await message.delete()
         return
-    
-    elif blocklist_mode == 2:
+
+    if blocklist_mode == 2:
         await StellaCli.kick_chat_member(
             chat_id,
             user_id
@@ -97,7 +97,7 @@ async def blocklist_action(message, blocklist_word):
         # Unbanning proceess and wait 5 sec to give server to kick user first
         await asyncio.sleep(5) 
         await StellaCli.unban_chat_member(chat_id, user_id)
-    
+
     elif blocklist_mode == 5:
         await warn(message, reason, warn_user=message)
 

@@ -66,14 +66,14 @@ async def check_time(message, args) -> bool:
         )
         return False
 
-    elif len(args) > 1:
+    if len(args) > 1:
         if not args[-2].isdigit():
             await message.reply(
                 f"failed to get specified time: '{args[-2]}' is not a valid number"
             )
             return False
 
-        elif args[-1] in ['w', 'd', 'h', 'm']:
+        if args[-1] in ['w', 'd', 'h', 'm']:
             check_time_limit = convert_time(int(args[:-1]), args[-1])
             if check_time_limit >= 31622400: #  31622400 ( seconds ) is 366 days 
                 await message.reply(
@@ -81,11 +81,10 @@ async def check_time(message, args) -> bool:
                 )
                 return False
             return True
-        else:
-            await message.reply(
-                    f"failed to get specified time: '{args[-1]}' is not a valid time char; expected one of w/d/h/m (weeks, days, hours, minutes)"
-                )
-            return False
+        await message.reply(
+                f"failed to get specified time: '{args[-1]}' is not a valid time char; expected one of w/d/h/m (weeks, days, hours, minutes)"
+            )
+        return False
 
 def time_string_helper(time_args):
     time_limit = int(time_args[:-1])

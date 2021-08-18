@@ -197,8 +197,7 @@ def getblocklistMessageDelete(chat_id) -> bool:
     )
     if blocklist_data is not None:
         return blocklist_data['blocklistdelete']
-    else:
-        return True
+    return True
 
 def setblocklistmode(chat_id, blocklist_mode, blocklist_time=None):
     blocklist_data = blocklists.find_one(
@@ -250,23 +249,21 @@ def getblocklistmode(chat_id):
         blocklist_mode = blocklist_data['blocklist_mode']['blocklist_mode']
         blocklist_time = blocklist_data['blocklist_mode']['blocklist_time']
         blocklist_default_reason = blocklist_data['blocklist_default_reason']
-        
+    
         return (
             blocklist_mode,
             blocklist_time,
             blocklist_default_reason
         )
+    blocklist_mode = 1
+    blocklist_time = None
+    blocklist_default_reason = None
 
-    else:
-        blocklist_mode = 1
-        blocklist_time = None
-        blocklist_default_reason = None
-
-        return (
-            blocklist_mode,
-            blocklist_time,
-            blocklist_default_reason
-        )
+    return (
+        blocklist_mode,
+        blocklist_time,
+        blocklist_default_reason
+    )
 
 def setblocklistreason_db(chat_id, reason):
     blocklist_data = blocklists.find_one(

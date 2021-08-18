@@ -141,5 +141,4 @@ def GetChatName(chat_id):
     if ChatData is not None:
         chat_title = ChatData['chat_title']
         return chat_title
-    else:
-        return None 
+    return None 

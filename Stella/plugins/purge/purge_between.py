@@ -52,7 +52,7 @@ async def PurgeBetween(client, message):
             )
         return
 
-    elif command == 'purgeto':
+    if command == 'purgeto':
 
         if not message.reply_to_message:
             await message.reply(
@@ -76,10 +76,10 @@ async def PurgeBetween(client, message):
 
             for MessageID in range(purge_from, purge_to):
                 MessagesIDs.append(MessageID)
-            
+        
             for MessageID in ExtraMessageIDs:
                 MessagesIDs.append(MessageID)
-            
+        
             try:
                 await StellaCli.delete_messages(
                     chat_id=chat_id,

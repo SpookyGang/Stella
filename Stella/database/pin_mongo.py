@@ -41,8 +41,7 @@ def get_cleanlinked(chat_id: int) -> bool:
 
     if pin_data is not None:
         return pin_data['cleanlinked']
-    else:
-        return False
+    return False
 
 def antichannelpin_db(chat_id: int, antichannelpin: bool) -> None:
     pin_data = pin.find_one(
@@ -81,5 +80,4 @@ def get_antichannelpin(chat_id: int) -> bool:
     )
     if pin_data is not None:
         return pin_data['antichannelpin']
-    else:
-        return False
+    return False

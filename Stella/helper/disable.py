@@ -36,8 +36,7 @@ def disable(func):
                         return
                     await message.delete()
                     return
-                else:
-                    return
+                return
             else:
                 await func(client, message)
         else:

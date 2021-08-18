@@ -43,8 +43,7 @@ def get_rules(chat_id: int):
     if rule_data is not None:
         rules_text = rule_data['rules']
         return rules_text
-    else:
-        return None
+    return None
 
 def set_private_rule(chat_id, private_note):
     rule_data = rules.find_one(
@@ -85,8 +84,7 @@ def get_private_note(chat_id) -> bool:
 
     if rule_data is not None:
         return rule_data['private_note']
-    else:
-        return True
+    return True
 
 def set_rule_button(chat_id, rule_button):
     rule_data = rules.find_one(
@@ -126,6 +124,5 @@ def get_rules_button(chat_id):
     )
     if rule_data is not None:
         return rule_data['button_text']
-    else:
-        return 'Rules'
+    return 'Rules'
 

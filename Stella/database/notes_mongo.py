@@ -154,8 +154,7 @@ def isNoteExist(chat_id, note_name) -> bool:
             notes_list.append(n_name)
         if note_name in notes_list: 
             return True 
-        else:
-            return False
+        return False
     return False
 
 def NoteList(chat_id) -> list:
@@ -175,8 +174,7 @@ def NoteList(chat_id) -> list:
                         NoteNames = NoteNames + ' ' + '__{admin}__'
                 NotesNamesList.append(NoteNames)
             return NotesNamesList
-        else:
-            return NotesNamesList
+        return NotesNamesList
     else:
         return NotesNamesList
 
@@ -218,8 +216,7 @@ def is_pnote_on(chat_id) -> bool:
         if 'private_note' in GetNoteData:
             private_note = GetNoteData['private_note']
             return private_note
-        else:
-            return False 
+        return False 
     else: 
         return False 
 

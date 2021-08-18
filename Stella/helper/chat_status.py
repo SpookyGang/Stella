@@ -72,15 +72,14 @@ async def isBotAdmin(message: Message, chat_id=None, silent=False) -> bool:
         chat_id=chat_id,
         user_id=BOT_ID
     )
-    
+
     if GetData.status not in ADMIN_STRINGS:
         if not silent:
             await message.reply(
             "I'm not admin here to do that."
             )
         return False
-    else:
-        return True
+    return True
 
 async def isUserAdmin(message: Message, pm_mode: bool = False, user_id: int = None, chat_id: int = None, silent: bool = False) -> bool:
     """ This function returns users chat status in the chat.
@@ -108,17 +107,16 @@ async def isUserAdmin(message: Message, pm_mode: bool = False, user_id: int = No
         chat_id=chat_id,
         user_id=user_id
     )
-    
+
     if (
         GetData.status in ADMIN_STRINGS
     ):
         return True
-    else:
-        if not silent:
-            await message.reply(
-                "Only admins can execute this command!"
-            )
-        return False
+    if not silent:
+        await message.reply(
+            "Only admins can execute this command!"
+        )
+    return False
 
 async def anon_admin_checker(chat_id: int, user_id: int) -> bool:
     """ This function returns user_id chat status
@@ -132,8 +130,7 @@ async def anon_admin_checker(chat_id: int, user_id: int) -> bool:
     )
     if GetData.status not in ADMIN_STRINGS:
         return False
-    else:
-        return True
+    return True
 
 
 async def can_restrict_member(message: Message, user_id: int, chat_id: int = None) -> bool:
@@ -158,8 +155,7 @@ async def can_restrict_member(message: Message, user_id: int, chat_id: int = Non
         or user_id in SUDO_USERS
     ):
         return False
-    else:
-        return True
+    return True
 
 async def isUserCreator(message: Message, chat_id: int = None, user_id: int = None) -> bool:
     """ This function returns the creator status of the given chat.
@@ -196,8 +192,7 @@ async def isUserCreator(message: Message, chat_id: int = None, user_id: int = No
 
     if GetData.status == 'creator':
         return True
-    else:
-        return False
+    return False
 
 async def isBotCan(message: Message, chat_id: int = None, permissions: str = 'can_change_info', silent: bool = False) -> bool:
     """This function returns permissions of the bot in the  given chat.
@@ -220,12 +215,11 @@ async def isBotCan(message: Message, chat_id: int = None, permissions: str = 'ca
     )
     if GetData[permissions]:
         return True
-    else:
-        if silent == False:
-            await message.reply(
-                BOT_PERMISSIONS_STRINGS[permissions]
-            )
-        return False
+    if silent == False:
+        await message.reply(
+            BOT_PERMISSIONS_STRINGS[permissions]
+        )
+    return False
 
 async def isUserCan(message, user_id: int = None, chat_id: int = None, permissions: str = None, silent: bool = False) -> bool:
     """This function returns permissions of the user in the chat.
@@ -237,11 +231,10 @@ async def isUserCan(message, user_id: int = None, chat_id: int = None, permissio
         if message.sender_chat:
             user_id = message.sender_chat.id
             chat_id = message.chat.id
-            
+
             if user_id == chat_id:
                 return True
-            else:
-                return False   
+            return False   
 
         user_id = message.from_user.id
 
@@ -263,12 +256,11 @@ async def isUserCan(message, user_id: int = None, chat_id: int = None, permissio
         or user_id in SUDO_USERS
     ):
         return True
-    else:
-        if silent == False:
-            await message.reply(
-                USERS_PERMISSIONS_STRINGS[permissions]
-            )
-        return False
+    if silent == False:
+        await message.reply(
+            USERS_PERMISSIONS_STRINGS[permissions]
+        )
+    return False
 
 async def CheckAllAdminsStuffs(message: Message, permissions: Union[str, List[str]] = 'can_change_info', silent=False) -> bool:
     """This function checks both bot & user permissions and chat status is the chat.
@@ -284,11 +276,10 @@ async def CheckAllAdminsStuffs(message: Message, permissions: Union[str, List[st
     if message.sender_chat:
         user_id = message.sender_chat.id
         chat_id = message.chat.id
-        
+
         if user_id == chat_id:
             return True
-        else:
-            return False   
+        return False   
 
     user_id = message.from_user.id 
     if GetConnectedChat(user_id) is not None:
@@ -338,12 +329,10 @@ async def CheckAdmins(message: Message, silent: bool = False) -> bool:
     if message.sender_chat:
         user_id = message.sender_chat.id
         chat_id = message.chat.id
-        
+
         if user_id == chat_id:
             return True
-        else:
-            return False   
-            
+        return False   
     user_id = message.from_user.id 
     if GetConnectedChat(user_id) is not None:
         chat_id = GetConnectedChat(user_id)

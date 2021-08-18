@@ -65,8 +65,7 @@ def GetConnectedChat(user_id):
     if connectionData is not None:
         chat_id = connectionData['connected_chat']
         return chat_id 
-    else:
-        return None
+    return None
 
 def isChatConnected(user_id) -> bool:
     connectionData = connection.find_one(
@@ -76,8 +75,7 @@ def isChatConnected(user_id) -> bool:
     )
     if connectionData is not None:
         return connectionData['connection']
-    else:
-        return False
+    return False
 
 def disconnectChat(user_id):
     connection.update_one(
@@ -146,6 +144,5 @@ def get_allow_connection(chat_id)-> bool:
     if chat_data is not None:
         if 'allow_collection' in chat_data:
             return chat_data['allow_collection']
-        else:
-            return False
+        return False
     return False

@@ -41,9 +41,8 @@ async def get_user_id(message):
                     user_ids=args
                 )
                 return user_info
-            else:
-                user_info = message.reply_to_message.from_user
-                return user_info
+            user_info = message.reply_to_message.from_user
+            return user_info
         else:
             user_info = message.reply_to_message.from_user
             return user_info 

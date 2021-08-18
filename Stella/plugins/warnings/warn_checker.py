@@ -33,13 +33,13 @@ async def warn_checker(message, user_id, silent=False):
     
     if  countuser_warn >= warnlimit:
         warn_mode, warn_mode_time = get_warn_mode(chat_id)
-        
+
         if warn_mode == 1:
             await StellaCli.kick_chat_member(
                 chat_id,
                 user_id
             )
-            
+    
             if not silent:
                 user_info = await StellaCli.get_users(
                     user_ids=user_id
@@ -54,14 +54,14 @@ async def warn_checker(message, user_id, silent=False):
                 )
                 reset_user_warns(chat_id, user_id)
             return True
-        
-        elif warn_mode == 2:
+
+        if warn_mode == 2:
             await StellaCli.kick_chat_member(
                 chat_id,
                 user_id,
                 int(time.time()) + 60 # wait 60 seconds in case of server goes down at unbanning time
             )
-            
+    
             if not silent:
                 user_info = await StellaCli.get_users(
                     user_ids=user_id
@@ -81,8 +81,8 @@ async def warn_checker(message, user_id, silent=False):
             await StellaCli.unban_chat_member(chat_id, user_id)
 
             return True
-        
-        elif warn_mode == 3:
+
+        if warn_mode == 3:
             await StellaCli.restrict_chat_member(
                 chat_id,
                 user_id,
@@ -106,14 +106,14 @@ async def warn_checker(message, user_id, silent=False):
                 reset_user_warns(chat_id, user_id)
             return True
 
-        elif warn_mode == 4:
+        if warn_mode == 4:
             until_time = int(time.time() + int(warn_mode_time))
             await StellaCli.restrict_chat_member(
                 chat_id,
                 user_id,
                 until_date=until_time
             )
-            
+    
             if not silent:
                 user_info = await StellaCli.get_users(
                     user_ids=user_id
@@ -129,7 +129,7 @@ async def warn_checker(message, user_id, silent=False):
                 reset_user_warns(chat_id, user_id)
             return True
 
-        elif warn_mode == 5:
+        if warn_mode == 5:
             until_time = int(time.time() + int(warn_mode_time))
             await StellaCli.restrict_chat_member(
                 chat_id,

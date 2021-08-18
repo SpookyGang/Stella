@@ -73,11 +73,10 @@ class StellaClient:
                 status, 
                 operation
             )
-        else:
-            return (
-                'Server is currently down!',
-                False
-            )
+        return (
+            'Server is currently down!',
+            False
+        )
     
     def banned_list(self) -> list:
         URL = f'{self.host}/admin/users/'
@@ -120,11 +119,10 @@ class StellaClient:
                 operation,
                 api_key
             )
-        else:
-            return (
-                'Server is currently down!',
-                False
-            )
+        return (
+            'Server is currently down!',
+            False
+        )
     
     def promote_api(self, user_id):
         URL = f'{self.host}/admin/promote/'
@@ -147,8 +145,7 @@ class StellaClient:
                 status, 
                 operation
             )
-        else:
-            return (
-                'Server is currently down!',
-                False
-            )
+        return (
+            'Server is currently down!',
+            False
+        )

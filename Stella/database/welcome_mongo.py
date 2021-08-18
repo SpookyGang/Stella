@@ -114,8 +114,7 @@ def GetWelcomemessageOnOff(chat_id) -> bool:
     if not GetWelcomeData == None:
         if 'welcome' in GetWelcomeData:
             return GetWelcomeData['welcome']
-        else:
-            return True 
+        return True 
     else:
         return True
 
@@ -133,8 +132,7 @@ def isWelcome(chat_id) -> bool:
         )
     ):
         return False    
-    else:
-        return True
+    return True
 
 def SetGoodBye(chat_id, Content, Text, DataType):
     
@@ -244,8 +242,7 @@ def GetGoodbyemessageOnOff(chat_id) -> bool:
     if not GetWelcomeData == None:
         if 'goodbye' in GetWelcomeData:
             return GetWelcomeData['goodbye']
-        else:
-            return True 
+        return True 
     else:
         return True
 
@@ -264,8 +261,7 @@ def isGoodbye(chat_id) -> bool:
         )
     ):
         return False    
-    else:
-        return True
+    return True
 
 def SetCleanService(chat_id, clean_service):
     
@@ -310,8 +306,7 @@ def GetCleanService(chat_id) -> bool:
     if not GetWelcomeData == None:
         if 'clean_service' in GetWelcomeData:
             return GetWelcomeData['clean_service']
-        else:
-            return False
+        return False
     else:
         return False
 
@@ -375,8 +370,7 @@ def GetCleanWelcome(chat_id) -> bool:
     if not GetWelcomeData == None:
         if 'clean_welcome' in GetWelcomeData:
             return GetWelcomeData['clean_welcome']
-        else:
-            return True
+        return True
     else:
         return True
 
@@ -390,8 +384,7 @@ def GetCleanWelcomeMessage(chat_id):
         if 'clean_welcome_message' in GetWelcomeData:
             clean_message = GetWelcomeData['clean_welcome_message']
             return clean_message
-        else:
-            return None
+        return None
     return None
 
 def SetCaptcha(chat_id, captcha):
@@ -450,8 +443,7 @@ def isGetCaptcha(chat_id) -> bool:
         if 'captcha' in GetCaptchaData:
             return GetCaptchaData['captcha']['_captcha']
         return False
-    else:
-        return False
+    return False
 
 def GetCaptchaSettings(chat_id):
     GetCaptchaData = welcome.find_one(
@@ -467,24 +459,23 @@ def GetCaptchaSettings(chat_id):
             captcha_mode = GetCaptchaData['captcha']['captcha_mode']
             captcha_text = GetCaptchaData['captcha']['captcha_text']
             captcha_kick_time = GetCaptchaData['captcha']['captcha_kick_time']
-            
+    
             if captcha_text is None:
                 captcha_text = captcha_text_de
 
             if captcha_mode is None:
                 captcha_mode = 'button'
-                
+        
             return (
                 captcha_mode,
                 captcha_text,
                 captcha_kick_time
             )
-        else:
-            return (
-                'button',
-                captcha_text_de,
-                None
-            )
+        return (
+            'button',
+            captcha_text_de,
+            None
+        )
     else:
         return (
             'button',
@@ -755,8 +746,7 @@ def isUserVerified(chat_id, user_id) -> bool:
     )
     if user_id in GetData['captcha']['verified_users']:
         return True 
-    else:
-        return False
+    return False
 
 def setReCaptcha(chat_id: int, reCaptcha: bool):
     getWelcomeData = welcome.find_one(
@@ -799,8 +789,7 @@ def isReCaptcha(chat_id: int) -> bool:
         and 'reCaptcha' in getWelcomeData
     ):
         return getWelcomeData['reCaptcha']
-    else:
-        return False
+    return False
     
 def setRuleCaptcha(chat_id: int, rule_captcha: bool):
     getWelcomeData = welcome.find_one(
@@ -843,5 +832,4 @@ def isRuleCaptcha(chat_id: int) -> bool:
         and 'rule_captcha' in getWelcomeData
     ):
         return getWelcomeData['rule_captcha']
-    else:
-        return False
+    return False

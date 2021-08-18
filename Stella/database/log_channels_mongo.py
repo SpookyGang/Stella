@@ -92,5 +92,4 @@ def get_set_channel(chat_id):
     if get_data is not None:
         channel_title = get_data['channel_title']
         return channel_title
-    else:
-        return None
+    return None

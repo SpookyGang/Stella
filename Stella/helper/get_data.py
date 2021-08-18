@@ -34,14 +34,13 @@ async def GetChat(chat_id: int):
     if GetChatName(chat_id) is not None:
         chat_title = GetChatName(chat_id)
         return chat_title
-    else:
-        await StellaCli.send_message(
-            chat_id=chat_id,
-            text=(
-                "I couldn't find the `{chat_title}` in my database. Please execute /forcecachechat here to make me be able to store your chat's data!"
-            )
+    await StellaCli.send_message(
+        chat_id=chat_id,
+        text=(
+            "I couldn't find the `{chat_title}` in my database. Please execute /forcecachechat here to make me be able to store your chat's data!"
         )
-        return
+    )
+    return
 
 def get_text_reason(message: Message) -> str:
     """This function returns text, and the reason of the user's arguments
