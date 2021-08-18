@@ -84,10 +84,7 @@ async def start(client, message):
     
 
 def startCheckQuery(message, StartQuery=None) -> bool:
-    if (
+    return bool((
         StartQuery in message.command[1].split('_')[0]
         and message.command[1].split('_')[0] == StartQuery
-    ):
-        return True
-    else: 
-        return False 
+    ))

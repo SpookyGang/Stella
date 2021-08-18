@@ -152,10 +152,7 @@ def isNoteExist(chat_id, note_name) -> bool:
         for Getnotes in gnotes:
             n_name = Getnotes['note_name']
             notes_list.append(n_name)
-        if note_name in notes_list: 
-            return True 
-        else:
-            return False
+        return note_name in notes_list
     return False
 
 def NoteList(chat_id) -> list:
