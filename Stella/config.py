@@ -15,29 +15,35 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+import os
+from os import getenv
+
+from dotenv import load_dotenv
+
+if os.path.exists("stella.env"):
+    load_dotenv("stella.env")
+else:
+    load_dotenv()
+
 class Config:
-    API_ID =  1234
-    API_HASH = None
+    API_ID =  int(getenv("API_ID"))
+    API_HASH = getenv("API_HASH")
 
-    OWNER_ID = (
-        []
-    )
+    OWNER_ID = int(getenv("OWNER_ID"))
     
-    BOT_TOKEN = None
-    BOT_NAME = ''
-    BOT_USERNAME= 'mikoRobot'
-    BOT_ID = 1302770491
-    PREFIX = ['/', '!']
+    BOT_TOKEN = getenv("BOT_TOKEN")
+    BOT_NAME = getenv("BOT_NAME")
+    BOT_USERNAME= getenv("BOT_USERNAME")
+    BOT_ID = getenv("BOT_ID")
+    PREFIX = getenv("PRRFIX")
 
-    DATABASE_URI = ''
-    BACKUP_CHAT = -100
+    DATABASE_URI = getenv("DATABASE_URI")
+    BACKUP_CHAT = getenv("BACKUP_CHAT")
 
-    LOG_CHANNEL = -100
+    LOG_CHANNEL = getenv("LOG_CHANNEL", None)
 
-    SUDO_USERS = (
-        []
-    )
+    SUDO_USERS = list(map(int, getenv("SUDO_USERS").split()))
 
     # APIs 
-    StellaGbanAPI = None
+    StellaGbanAPI = getenv("StellaGbanAPI", None)
     

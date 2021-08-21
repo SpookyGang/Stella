@@ -1,6 +1,8 @@
 # Pyrogram implimantion 
 pyrogram 
 tgcrypto 
+aiohttp
+requests
 
 # Database implimantion
 pymongo
@@ -15,3 +17,7 @@ pyromod
 pykeyboard 
 captcha
 apscheduler
+ffmpeg
+youtube_dl
+python-dotenv
+youtube_search

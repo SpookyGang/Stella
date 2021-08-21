@@ -100,7 +100,7 @@ def command(
 
     prefixes = [] if prefixes is None else prefixes
     prefixes = prefixes if isinstance(prefixes, list) else [prefixes]
-    prefixes = set(prefixes) if prefixes else {""}
+    prefixes = set(prefixes) if prefixes else {"/"}
 
     return create(
         func,

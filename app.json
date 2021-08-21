@@ -1,0 +1,68 @@
+{
+      "name": "Stella",
+      "description": "Telegram group management bot.",
+      "keywords": [
+         "telegram",
+         "anime",
+         "group",
+         "manager",
+         "Stella"
+      ],  
+ 
+   "env": {
+      "BOT_TOKEN": {
+         "description": "Your bot token. Get one from @BotFather duh",
+         "required": true,
+         "value": ""
+      },
+      "API_ID": {
+         "description": "Get API_ID from my.telegram.org, used for telethon based modules.",
+         "required": true,
+         "value": ""
+      },
+      "API_HASH": {
+         "description": "Get API_HASH from my.telegram.org, used for telethon based modules.",
+         "required": true,
+         "value": ""
+      },    
+      "BOT_NAME": {
+         "description": "Username of your bot",
+         "required": false,
+         "value": "sqldbtype://username:pw@hostname:port/db_name"
+      },      
+      "OWNER_ID": {
+         "description": "Your user ID as an integer.",
+         "required": true,
+         "value": ""
+      },
+      "BOT_ID": {
+         "description": "Your bot ID.. Use any other bot to get it.",
+         "required": true,
+         "value": ""
+      },
+      "PREFIX": {
+        "description": "command handler of your bot",
+        "value": ""
+      },
+      "DATABASE_URI": {
+        "description": "MONGODB URI",
+        "required": false
+      },
+      "LOG_CHANNEL": {
+         "description": "id of log grp you wanna set",
+         "value": ""
+      },
+      "BACKUP_CHAT": {
+         "description": "Your Telegram backup group chat user-id ",
+         "required": true,
+         "value": ""
+      },
+      "SUDO_USERS": {
+         "description": "sudo users of your bot",
+         "required": false,
+         "value": ""
+      
+      }
+      
+   }
+}
