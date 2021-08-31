@@ -23,7 +23,7 @@ $ git clone https://github.com/SpookyGang/Stella.git
 $ cd Stella
 $ pip3 install -U requirements.txt
 ```
-Rename `Stella/sample_config.py` to `Stella/config.py`. Put all the variables and finally run
+Rename `config.example.toml` to `config.toml`. Put all the variables and finally run
 ```
 python3 -m Stella
 ```
@@ -50,7 +50,7 @@ python3 -m Stella
   
 ### Kudos to these chads!
 
-**The Creator(s)** - Neel, Anii (@meanii)
+**The Creator(s)** - Neel, anii (t.me/meanii)
 
 ### Contributors
 
