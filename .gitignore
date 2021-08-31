@@ -135,3 +135,6 @@ Stella/StellaSession.session
 test.py
 Stella/config.py 
 Stella/plugins/StellaGban.py
+# Ignore dynaconf secret files
+.secrets.*
+config.toml

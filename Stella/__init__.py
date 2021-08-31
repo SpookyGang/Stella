@@ -16,50 +16,48 @@
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import sys
+import dns.resolver
 
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from pymongo import MongoClient
 from pyrogram import Client
 from pyromod import listen
 
-from Stella.config import Config
+from config import config
 from Stella.StellaGban import StellaClient
 
 #from stellagban import StellaClient
 
-
-APP_ID = Config.API_ID
-API_HASH = Config.API_HASH
-OWNER_ID = Config.OWNER_ID
-BOT_TOKEN = Config.BOT_TOKEN
-BOT_ID = Config.BOT_ID
-BOT_NAME = Config.BOT_NAME
-BOT_USERNAME = Config.BOT_USERNAME
-LOG_CHANNEL = Config.LOG_CHANNEL
-SUDO_USERS = Config.SUDO_USERS
-PREFIX = Config.PREFIX
-DATABASE_URI = Config.DATABASE_URI
-BACKUP_CHAT = Config.BACKUP_CHAT
-StellaGbanAPI = Config.StellaGbanAPI
-
+OWNER_ID = config.settings.owner
+BOT_ID = config.telegram.bot.id
+BOT_NAME = config.telegram.bot.name
+BOT_USERNAME = config.telegram.bot.username
+LOG_CHANNEL = config.settings.log.chat_id
+SUDO_USERS = config.settings.sudo_users
+PREFIX = config.settings.commands.prefix
+BACKUP_CHAT = config.settings.backup.chat_id
 
 StellaCli = Client(
     session_name='StellaSession',
-    api_id=APP_ID,
-    api_hash=API_HASH,
-    bot_token=BOT_TOKEN
+    api_id=config.telegram.api_id,
+    api_hash=config.telegram.api_hash,
+    bot_token=config.telegram.bot.token
 )
 
+# MongoDatabase dns configurations
+dns.resolver.default_resolver=dns.resolver.Resolver(configure=False)
+dns.resolver.default_resolver.nameservers=['8.8.8.8'] 
 
-StellaAPI = StellaClient(api_key=StellaGbanAPI)
+StellaAPI = StellaClient(api_key=config.api.stella.api_key)
 
+# Async scheduler
 scheduler = AsyncIOScheduler()
 
 try:
-    StellaMongoClient = MongoClient(DATABASE_URI)
-    StellaDB = StellaMongoClient.stella_mongo
+  StellaMongoClient = MongoClient(config.database.database_url)
+  StellaDB = StellaMongoClient.stella_mongo
 except:
-    sys.exit(f"{BOT_NAME}'s database is not running!")
+  sys.exit(f"{BOT_NAME}'s database is not running!")
 
 TELEGRAM_SERVICES_IDs = (
     [
