@@ -1,28 +1,28 @@
 [telegram]
-api_id = None
-api_hash = None
+api_id = 0
+api_hash = ""
 
 [tekegram.bot]
-bot_token = None
-name = None
-username = None
-user_id = None
+bot_token = ""
+name = ""
+username = ""
+user_id = 0
 
 [database]
-database_url = None
+database_url = ""
 
 [settings]
-owner = None
+owner = 0
 sudo_users = []
 
 [settings.commands]
 prefix = ['!', '/']
 
 [settings.log]
-chat_id = None
+chat_id = 0
 
 [settings.backup]
-chat_id = None
+chat_id = 0
 
 [api.stella]
-api_key = None
+api_key = ""
