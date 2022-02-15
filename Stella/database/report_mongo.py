@@ -38,5 +38,4 @@ def get_report(chat_id: int) -> bool:
     )
     if report_data is not None:
         return report_data['reports']
-    else:
-        return True
+    return True

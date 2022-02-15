@@ -155,12 +155,10 @@ async def textCaptchaRedirect(message):
                     quote=True
                 )
                 return
-
-            else:
-                await message.reply(
-                    "This wasn't for you.",
-                    quote=True
-                )
+            await message.reply(
+                "This wasn't for you.",
+                quote=True
+            )
             
 
 @StellaCli.on_callback_query(filters.create(lambda _,__, query: 'textc_' in query.data))

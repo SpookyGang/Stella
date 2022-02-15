@@ -88,8 +88,7 @@ def get_flood(chat_id: int) -> bool:
     )
     if antiflood_data is not None:
         return antiflood_data['flood']
-    else:
-        return False
+    return False
 
 def set_antiflood_mode(chat_id, flood_mode, until_time=None):
     antiflood_data = antiflood.find_one(
@@ -140,10 +139,9 @@ def get_antiflood_mode(chat_id):
             FloodMode,
             Flood_until_time
         )
-    else:
-        FloodMode = 1
-        Flood_until_time = None
-        return (
-            FloodMode,
-            Flood_until_time
-        )
+    FloodMode = 1
+    Flood_until_time = None
+    return (
+        FloodMode,
+        Flood_until_time
+    )

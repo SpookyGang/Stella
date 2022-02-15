@@ -80,8 +80,7 @@ def get_disabled(chat_id) -> list:
 
     if disable_data is not None:
         return disable_data['disabled_items']
-    else:
-        return []
+    return []
 
 def disabledel_db(chat_id, disabledel):
     disable_data = disable.find_one(
@@ -120,5 +119,4 @@ def get_disabledel(chat_id) -> bool:
     )
     if disable_data is not None:
         return disable_data['disabledel']
-    else:
-        return False
+    return False

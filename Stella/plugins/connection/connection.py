@@ -59,12 +59,11 @@ async def connection(message):
             if get_allow_connection(connected_chat):
                 if not await isUserBanned(connected_chat, user_id):
                     return connected_chat
-                else:
-                    await message.reply(
-                        f"You are banned user of {chat_title}",
-                        quote=True
-                    )
-                    return None
+                await message.reply(
+                    f"You are banned user of {chat_title}",
+                    quote=True
+                )
+                return None
             else:
                 return None
         else:

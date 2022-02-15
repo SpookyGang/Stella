@@ -120,8 +120,8 @@ async def ClearAllCallback(client: StellaCli, callback_query: CallbackQuery):
                 "Deleted all chat notes."
             ) 
             return
-            
-        elif query_data == 'cancel':
+    
+        if query_data == 'cancel':
             await callback_query.edit_message_text(
                 "Cancelled."
             )

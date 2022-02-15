@@ -89,5 +89,4 @@ def startCheckQuery(message, StartQuery=None) -> bool:
         and message.command[1].split('_')[0] == StartQuery
     ):
         return True
-    else: 
-        return False 
+    return False 

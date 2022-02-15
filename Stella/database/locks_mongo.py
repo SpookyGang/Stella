@@ -59,8 +59,7 @@ def get_locks(chat_id) -> list:
 
     if locks_data is not None:
         return locks_data['locked']
-    else:
-        return []
+    return []
 
 def unlock_db(chat_id, locked_item):
     locks_data = locks.find_one(
@@ -89,8 +88,7 @@ def lockwarns_db(chat_id) -> bool:
 
     if locks_data is not None:
         return locks_data['lockwarns']
-    else:
-        return True
+    return True
 
 def set_lockwarn_db(chat_id, warn_args):
     locks_data = locks.find_one(
@@ -197,5 +195,4 @@ def get_allowlist(chat_id) -> list:
     )
     if locks_data is not None:
         return locks_data['allow_list']
-    else:
-        return []
+    return []

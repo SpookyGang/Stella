@@ -62,7 +62,6 @@ def get_anon_setting(chat_id) -> bool:
     if chat_data is not None:
         if 'anon_admin' in chat_data:
             return chat_data['anon_admin']
-        else:
-            return False
+        return False
     else:
         return False

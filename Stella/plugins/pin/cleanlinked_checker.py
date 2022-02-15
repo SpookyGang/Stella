@@ -48,5 +48,4 @@ async def GetLinkedChannel(chat_id: int) -> str:
     )
     if chat_data.linked_chat:
         return chat_data.linked_chat.id
-    else:
-        return None
+    return None

@@ -61,8 +61,8 @@ async def setflood(client, message):
             "I've disable antiflood."
         )
         return
-    
-    elif (
+
+    if (
         arg.isdigit()
     ):
         if int(arg) > 75:
