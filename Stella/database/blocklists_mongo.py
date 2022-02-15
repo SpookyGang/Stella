@@ -149,8 +149,8 @@ def get_blocklist_reason(chat_id, blocklist_text):
             if bl_text == blocklist_text:
                 blocklist_reason = bl_data['blocklist_reason']
                 return blocklist_reason
-        else:
-            return None
+            
+        return None
     else:
         return Nones
 
