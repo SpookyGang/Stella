@@ -48,7 +48,7 @@ async def FedPromote(client, message):
         return
     
     if (
-        fed_id == None
+        fed_id is None
     ):
         await message.reply(
             "Only federation creators can promote people, and you don't even seem to have a federation to promote to!"

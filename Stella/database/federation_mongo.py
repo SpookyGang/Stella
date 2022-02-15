@@ -27,7 +27,7 @@ def new_fed_db(new_fed, fed_id, created_time, owner_id):
         }
     )
 
-    if GetFed == None:
+    if GetFed is None:
         FedNums = federation.count_documents({})
         FedIDs = FedNums + 1
         federation.insert_one(
@@ -41,7 +41,7 @@ def new_fed_db(new_fed, fed_id, created_time, owner_id):
         )
 
 def is_fed_exist(fed_id=None, owner_id=None) -> bool:
-    if fed_id == None:
+    if fed_id is None:
         GetFed = federation.find_one(
             {
                 'owner_id': owner_id
@@ -174,7 +174,7 @@ def get_fed_from_ownerid(owner_id):
             'owner_id': owner_id
         }
     )   
-    if not fedData == None:
+    if not fedData is None:
         fed_id = fedData['fed_id']
         return fed_id
     else:
@@ -209,7 +209,7 @@ def get_connected_chats(fed_id) -> list:
         return None
 
 def get_fed_name(fed_id=None, owner_id=None):
-    if fed_id == None:
+    if fed_id is None:
         GetFed = federation.find_one(
             {
                 'owner_id': owner_id

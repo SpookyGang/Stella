@@ -18,7 +18,7 @@
 
 def PurgeDictDataUpdater(chat_id, purge_from=None, purge_to=None, first_messageID=None, purge_from_messageID=None):
     PurgeData = PurgeDictData.PurgeDict
-    if purge_to == None:
+    if purge_to is None:
         PurgeData.update(
             {
                 chat_id: {
@@ -28,7 +28,7 @@ def PurgeDictDataUpdater(chat_id, purge_from=None, purge_to=None, first_messageI
                 }
             }
         )
-    elif purge_from == None:
+    elif purge_from is None:
         PurgeData[chat_id].update(
             {
                 "purge_to": purge_to

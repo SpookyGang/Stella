@@ -109,7 +109,7 @@ def allow_collection(chat_id, chat_title, allow_collection):
             'chat_id': chat_id
         }
     )
-    if chat_data == None:
+    if chat_data is None:
         ChatsNums = chats.count_documents({})
         ChatsIDs = ChatsNums + 1
 

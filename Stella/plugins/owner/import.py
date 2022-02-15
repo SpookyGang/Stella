@@ -71,7 +71,7 @@ async def StellaImport(client, message):
     for collection in COLLECTIONS_NAMES:
         for exportData in data['exports_data']:
             get_col = exportData.get(collection)
-            if not get_col == None:
+            if not get_col is None:
                 for doc in get_col:
                     collection_lists.append(doc)
                 StellaDB[collection].insert_many(collection_lists)

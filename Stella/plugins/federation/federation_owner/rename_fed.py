@@ -53,7 +53,7 @@ async def Rename_fed(client, message):
         return
 
     fed_id = get_fed_from_ownerid(owner_id)
-    if fed_id == None:
+    if fed_id is None:
         await message.reply(
             "It doesn't look like you have a federation yet!"
         )

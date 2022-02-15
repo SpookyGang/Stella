@@ -17,7 +17,7 @@ def SetWelcome(chat_id, Content, Text, DataType):
     WelcomeDataCount = welcome.count_documents({})
     WelcomeIDs = WelcomeDataCount + 1
 
-    if WelcomeData == None:
+    if WelcomeData is None:
         WelcomeSetData = {
             '_id': WelcomeIDs,
             'welcome': True,
@@ -54,7 +54,7 @@ def UnSetWelcome(chat_id):
             'chat_id': chat_id
         }
     )
-    if not WelcomeData == None:
+    if not WelcomeData is None:
         if 'text' in WelcomeData['welcome_message']:
             welcome.update_one(
                 {
@@ -78,7 +78,7 @@ def GetWelcome(chat_id):
     )
 
     if not (
-        GetWelcomeData == None
+        GetWelcomeData is None
     ):
         if 'text' in GetWelcomeData['welcome_message']:
             Content = GetWelcomeData['welcome_message']['content']
@@ -111,7 +111,7 @@ def GetWelcomemessageOnOff(chat_id) -> bool:
         }
     )
 
-    if not GetWelcomeData == None:
+    if not GetWelcomeData is None:
         if 'welcome' in GetWelcomeData:
             return GetWelcomeData['welcome']
         else:
@@ -126,7 +126,7 @@ def isWelcome(chat_id) -> bool:
         }
     )
     if (
-        GetWelcomeData == None
+        GetWelcomeData is None
         or not (
             'welcome_message' in GetWelcomeData
             and 'text' in GetWelcomeData['welcome_message']
@@ -147,7 +147,7 @@ def SetGoodBye(chat_id, Content, Text, DataType):
     WelcomeDataCount = welcome.count_documents({})
     WelcomeIDs = WelcomeDataCount + 1
 
-    if WelcomeData == None:
+    if WelcomeData is None:
         WelcomeSetData = {
             '_id': WelcomeIDs,
             'welcome': True,
@@ -184,7 +184,7 @@ def UnSetGoodbye(chat_id):
             'chat_id': chat_id
         }
     )
-    if not WelcomeData == None:
+    if not WelcomeData is None:
         if 'text' in WelcomeData['goodbye_message']:
             welcome.update_one(
                 {
@@ -208,7 +208,7 @@ def GetGoobye(chat_id):
     )
 
     if not (
-        GetWelcomeData == None
+        GetWelcomeData is None
     ):
         if 'text' in GetWelcomeData['goodbye_message']:
             Content = GetWelcomeData['goodbye_message']['content']
@@ -241,7 +241,7 @@ def GetGoodbyemessageOnOff(chat_id) -> bool:
         }
     )
 
-    if not GetWelcomeData == None:
+    if not GetWelcomeData is None:
         if 'goodbye' in GetWelcomeData:
             return GetWelcomeData['goodbye']
         else:
@@ -257,7 +257,7 @@ def isGoodbye(chat_id) -> bool:
         }
     )
     if (
-        GetWelcomeData == None
+        GetWelcomeData is None
         or not (
             'goodbye_message' in GetWelcomeData
             and 'text' in GetWelcomeData['goodbye_message']
@@ -279,7 +279,7 @@ def SetCleanService(chat_id, clean_service):
     WelcomeIDs = WelcomeDataCount + 1
 
     if not (
-        WelcomeData == None
+        WelcomeData is None
     ):
         welcome.update_one(
                 {
@@ -307,7 +307,7 @@ def GetCleanService(chat_id) -> bool:
         }
     )
 
-    if not GetWelcomeData == None:
+    if not GetWelcomeData is None:
         if 'clean_service' in GetWelcomeData:
             return GetWelcomeData['clean_service']
         else:
@@ -325,7 +325,7 @@ def SetCleanWelcome(chat_id, clean_welcome):
         }
     )
 
-    if not GetWelcomeData == None:
+    if not GetWelcomeData is None:
         welcome.update_one(
                 {
                     'chat_id': chat_id
@@ -353,7 +353,7 @@ def SetCleanWelcomeMessage(chat_id, message_id):
             'chat_id': chat_id
         }
     )
-    if not GetWelcomeData == None:
+    if not GetWelcomeData is None:
         if 'clean_welcome_message' in GetWelcomeData:
             welcome.update_one(
                 {
@@ -372,7 +372,7 @@ def GetCleanWelcome(chat_id) -> bool:
             'chat_id': chat_id
         }
     )
-    if not GetWelcomeData == None:
+    if not GetWelcomeData is None:
         if 'clean_welcome' in GetWelcomeData:
             return GetWelcomeData['clean_welcome']
         else:
@@ -386,7 +386,7 @@ def GetCleanWelcomeMessage(chat_id):
             'chat_id': chat_id
         }
     )
-    if not GetWelcomeData == None:
+    if not GetWelcomeData is None:
         if 'clean_welcome_message' in GetWelcomeData:
             clean_message = GetWelcomeData['clean_welcome_message']
             return clean_message
@@ -403,7 +403,7 @@ def SetCaptcha(chat_id, captcha):
             'chat_id': chat_id
         }
     )
-    if not GetCaptchaData == None:
+    if not GetCaptchaData is None:
         welcome.update_one(
                     {
                         'chat_id': chat_id
@@ -446,7 +446,7 @@ def isGetCaptcha(chat_id) -> bool:
         }
     )
 
-    if not GetCaptchaData == None:
+    if not GetCaptchaData is None:
         if 'captcha' in GetCaptchaData:
             return GetCaptchaData['captcha']['_captcha']
         return False
@@ -462,7 +462,7 @@ def GetCaptchaSettings(chat_id):
 
     captcha_text_de = "Click here to prove you're human" 
 
-    if not GetCaptchaData == None:
+    if not GetCaptchaData is None:
         if 'captcha' in GetCaptchaData:
             captcha_mode = GetCaptchaData['captcha']['captcha_mode']
             captcha_text = GetCaptchaData['captcha']['captcha_text']
@@ -501,7 +501,7 @@ def SetCaptchaText(chat_id, captcha_text):
             'chat_id': chat_id
         }
     )
-    if not GetCaptchaData == None:
+    if not GetCaptchaData is None:
         if 'captcha' in GetCaptchaData:
             welcome.update_one(
                 {
@@ -559,7 +559,7 @@ def SetCaptchaMode(chat_id, captcha_mode):
         }
     )
 
-    if not GetCaptchaData == None:
+    if not GetCaptchaData is None:
         if 'captcha' in GetCaptchaData:
             welcome.update_one(
                 {

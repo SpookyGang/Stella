@@ -34,7 +34,7 @@ async def fed_checker(client, message):
     user_id = message.from_user.id 
     fed_id = get_fed_from_chat(chat_id)
     
-    if not fed_id == None:
+    if not fed_id is None:
         if is_user_fban(fed_id, user_id):
             fed_reason = get_fed_reason(fed_id, user_id)
             text = (

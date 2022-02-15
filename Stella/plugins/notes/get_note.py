@@ -66,7 +66,7 @@ async def send_note(message: Message, note_name: str):
     privateNote, allow = await privateNote_and_admin_checker(message, text)
     
     if allow:
-        if privateNote == None:
+        if privateNote is None:
             if is_pnote_on(chat_id):
                 await PrivateNoteButton(message, chat_id, note_name)
             else:

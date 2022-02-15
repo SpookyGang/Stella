@@ -48,7 +48,7 @@ async def Connect(client, message):
             return 
 
         chat_title = await GetChat(int(chat_id))
-        if chat_title == None:
+        if chat_title is None:
             await message.reply(
                 "failed to connect to chat!\nError: `chat not found`",
                 quote=True 
