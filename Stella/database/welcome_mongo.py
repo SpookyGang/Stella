@@ -753,10 +753,7 @@ def isUserVerified(chat_id, user_id) -> bool:
             'chat_id': chat_id
         }
     )
-    if user_id in GetData['captcha']['verified_users']:
-        return True 
-    else:
-        return False
+    return user_id in GetData['captcha']['verified_users']
 
 def setReCaptcha(chat_id: int, reCaptcha: bool):
     getWelcomeData = welcome.find_one(

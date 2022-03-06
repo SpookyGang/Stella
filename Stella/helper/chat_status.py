@@ -194,10 +194,7 @@ async def isUserCreator(message: Message, chat_id: int = None, user_id: int = No
         user_id=user_id
     )
 
-    if GetData.status == 'creator':
-        return True
-    else:
-        return False
+    return GetData.status == 'creator'
 
 async def isBotCan(message: Message, chat_id: int = None, permissions: str = 'can_change_info', silent: bool = False) -> bool:
     """This function returns permissions of the bot in the  given chat.
@@ -238,10 +235,7 @@ async def isUserCan(message, user_id: int = None, chat_id: int = None, permissio
             user_id = message.sender_chat.id
             chat_id = message.chat.id
             
-            if user_id == chat_id:
-                return True
-            else:
-                return False   
+            return user_id == chat_id
 
         user_id = message.from_user.id
 
@@ -285,10 +279,7 @@ async def CheckAllAdminsStuffs(message: Message, permissions: Union[str, List[st
         user_id = message.sender_chat.id
         chat_id = message.chat.id
         
-        if user_id == chat_id:
-            return True
-        else:
-            return False   
+        return user_id == chat_id
 
     user_id = message.from_user.id 
     if GetConnectedChat(user_id) is not None:
@@ -339,11 +330,7 @@ async def CheckAdmins(message: Message, silent: bool = False) -> bool:
         user_id = message.sender_chat.id
         chat_id = message.chat.id
         
-        if user_id == chat_id:
-            return True
-        else:
-            return False   
-            
+        return user_id == chat_id
     user_id = message.from_user.id 
     if GetConnectedChat(user_id) is not None:
         chat_id = GetConnectedChat(user_id)
