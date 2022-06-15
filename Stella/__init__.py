@@ -29,7 +29,7 @@ from Stella.StellaGban import StellaClient
 #from stellagban import StellaClient
 
 OWNER_ID = config.settings.owner
-BOT_ID = config.telegram.bot.id
+BOT_ID = config.telegram.bot.user_id
 BOT_NAME = config.telegram.bot.name
 BOT_USERNAME = config.telegram.bot.username
 LOG_CHANNEL = config.settings.log.chat_id
@@ -41,7 +41,7 @@ StellaCli = Client(
     session_name='StellaSession',
     api_id=config.telegram.api_id,
     api_hash=config.telegram.api_hash,
-    bot_token=config.telegram.bot.token
+    bot_token=config.telegram.bot.bot_token
 )
 
 # MongoDatabase dns configurations

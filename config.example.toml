@@ -2,7 +2,7 @@
 api_id = 0
 api_hash = ""
 
-[tekegram.bot]
+[telegram.bot]
 bot_token = ""
 name = ""
 username = ""
